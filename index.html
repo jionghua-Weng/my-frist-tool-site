@@ -229,21 +229,44 @@ img { max-width: 100%; height: auto; display: block; }
 /* ========== 分区通用 ========== */
 .section { padding-top: 50px; }
 
+.section-head {
+    position: relative;
+    padding-bottom: 24px;
+    margin-bottom: 4px;
+}
+.section-head::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+}
 .section-head h2 {
     font-family: var(--font-heading);
-    font-size: 32px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     color: var(--text-dark);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     margin-bottom: 10px;
+    letter-spacing: 1px;
 }
-.section-head h2 .icon { font-size: 28px; }
+.section-head h2 .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
 .section-head p {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--text-gray);
-    line-height: 1.7;
+    line-height: 1.8;
     max-width: 700px;
 }
 
@@ -447,7 +470,7 @@ img { max-width: 100%; height: auto; display: block; }
     <!-- 语法 -->
     <section class="section">
         <div class="section-head">
-            <h2><span class="icon">&#128214;</span> 语法精讲</h2>
+            <h2><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#39375b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 6c-3 0-5 3.5-5 10s2 10 5 10"/><path d="M21 6c3 0 5 3.5 5 10s-2 10-5 10"/><circle cx="16" cy="16" r="2" fill="#3498db" stroke="none"/></svg></span> 语法精讲</h2>
             <p>拒绝死记硬背，从实际语用出发拆解英语语法。搭配精选例句，帮你把规则变成直觉，不用翻书也能出口成章。</p>
         </div>
         <div class="card-grid">
@@ -500,7 +523,7 @@ img { max-width: 100%; height: auto; display: block; }
     <!-- 词汇 -->
     <section class="section">
         <div class="section-head">
-            <h2><span class="icon">&#128218;</span> 词汇辨析</h2>
+            <h2><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#39375b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h15a2 2 0 012 2v18a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/><path d="M20 11h7l-2 5h-5"/><circle cx="11" cy="14" r="4"/><path d="M14 17l3 3"/></svg></span> 词汇辨析</h2>
             <p>聚焦高频易混词，帮你搞清楚它们之间的微妙差别。从此告别"用错词、表错意"的尴尬，表达精准到位。</p>
         </div>
         <div class="card-grid">
@@ -560,7 +583,7 @@ img { max-width: 100%; height: auto; display: block; }
     <!-- 句型 -->
     <section class="section">
         <div class="section-head">
-            <h2><span class="icon">&#128172;</span> 实用句型</h2>
+            <h2><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#39375b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22V9a3 3 0 013-3h12a3 3 0 013 3v9a3 3 0 01-3 3h-3l-4 4"/><circle cx="12" cy="13" r="1.5" fill="#3498db" stroke="none"/><circle cx="17" cy="13" r="1.5" fill="#3498db" stroke="none"/></svg></span> 实用句型</h2>
             <p>掌握母语者最常用的表达框架。有了这些句型模板，你可以灵活套用，让口语表达更加地道自然，不再逐字翻译。</p>
         </div>
         <div class="card-grid">
@@ -613,7 +636,7 @@ img { max-width: 100%; height: auto; display: block; }
     <!-- 场景口语 -->
     <section class="section">
         <div class="section-head">
-            <h2><span class="icon">&#127758;</span> 场景口语</h2>
+            <h2><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#39375b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="11" r="7"/><path d="M14 4V2"/><path d="M14 18v1"/><path d="M7 8c-3.5 2-3.5 8 0 10"/><path d="M21 8c3.5 2 3.5 8 0 10"/><line x1="7" y1="21" x2="21" y2="21"/><line x1="11" y1="24" x2="17" y2="24"/></svg></span> 场景口语</h2>
             <p>覆盖点餐、电话、表达情绪等真实场景。学会即用，让你在每一个日常场合都能自如应对，跟外国朋友聊天不再冷场。</p>
         </div>
         <div class="card-grid">
