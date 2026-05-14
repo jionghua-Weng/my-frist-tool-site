@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>关于我们 — 英语研习社</title>
+<meta name="description" content="了解英语研习社的创办初衷，我们致力于提供免费、实用的英语学习内容。">
+<style>
+:root {
+    --navy: #39375b;
+    --accent: #3498db;
+    --accent-hover: #1464cc;
+    --text-dark: #111827;
+    --text-gray: #6b7280;
+    --text-medium: #4b5563;
+    --white: #ffffff;
+    --bg-light: #f8f9fa;
+    --max-width: 1200px;
+    --font-heading: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-body: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);font-size:18px;line-height:1.7;color:var(--text-medium);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+.site-header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--max-width);margin:0 auto;padding:0 20px}
+.logo a{display:flex;align-items:center;gap:10px;color:var(--white);font-size:21px;font-weight:700;letter-spacing:.5px;text-decoration:none}
+.logo-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:18px;font-weight:800;flex-shrink:0}
+.main-nav{display:flex;align-items:center;gap:2px}
+.main-nav a{color:var(--white);padding:8px 13px;border-radius:6px;font-size:14.5px;font-weight:500;white-space:nowrap;transition:background .2s;text-decoration:none}
+.main-nav a:hover{background:rgba(255,255,255,0.12)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200}
+.mobile-panel{display:none;position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--navy);z-index:201;padding:20px;overflow-y:auto}
+.mobile-panel.active,.mobile-overlay.active{display:block}
+.mobile-panel .close-btn{background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;float:right;padding:4px 8px}
+.mobile-panel a{display:block;color:#e0e0e0;padding:12px 10px;font-size:16px;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;clear:both}
+.mobile-panel a:hover{color:var(--white)}
+.page-content{max-width:800px;margin:60px auto;padding:0 20px}
+.page-content h1{font-family:var(--font-heading);font-size:36px;font-weight:700;color:var(--text-dark);margin-bottom:24px}
+.page-content h2{font-family:var(--font-heading);font-size:24px;font-weight:700;color:var(--text-dark);margin:32px 0 12px}
+.page-content p{margin-bottom:16px;line-height:1.9}
+.page-content ul{margin:12px 0 20px 24px}
+.page-content li{margin-bottom:8px}
+.ad-slot{width:100%;max-width:728px;margin:20px auto;text-align:center}
+.ad-slot .ad-label{color:#999;font-size:12px}
+.site-footer{background:var(--navy);color:#c0c0d0;text-align:center;padding:30px 20px;font-size:14px;margin-top:60px}
+.site-footer a{color:#c0c0d0}
+@media(max-width:959px){.main-nav{display:none}.hamburger{display:flex}.page-content h1{font-size:28px}}
+@media(max-width:640px){.page-content{margin:40px auto}.page-content h1{font-size:24px}.page-content h2{font-size:20px}}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6082621192201664" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo"><a href="index.html"><span class="logo-icon">E</span>英语研习社</a></div>
+        <nav class="main-nav">
+            <a href="index.html">首页</a>
+            <a href="grammar-tenses.html">语法精讲</a>
+            <a href="vocabulary-see-look-watch.html">词汇辨析</a>
+            <a href="patterns-wondering-if.html">实用句型</a>
+            <a href="daily-coffee.html">场景口语</a>
+            <a href="about.html">关于</a>
+        </nav>
+        <button class="hamburger" id="hamburgerBtn" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel">
+    <button class="close-btn" id="closeMobileMenu">&times;</button>
+    <div style="padding-top:20px">
+        <a href="index.html">首页</a>
+        <a href="grammar-tenses.html">语法精讲</a>
+        <a href="vocabulary-see-look-watch.html">词汇辨析</a>
+        <a href="patterns-wondering-if.html">实用句型</a>
+        <a href="daily-coffee.html">场景口语</a>
+        <a href="about.html">关于</a>
+    </div>
+</div>
+
+<div class="ad-slot"><div id="ad-top"><p class="ad-label">广告位-顶部</p></div></div>
+
+<main class="page-content">
+    <h1>关于英语研习社</h1>
+
+    <p>英语研习社创建于 2025 年，是一个完全免费的英语学习平台。我们的目标是让每一个想学好英语的人，都能找到真正实用的学习资源——不需要付费，不需要注册，打开就能学。</p>
+
+    <h2>我们为什么做这件事</h2>
+    <p>市面上的英语学习资料太多了，但大多数要么理论堆砌、脱离实际，要么隐藏在付费墙后面。我们相信，好的学习内容应该是：<strong>免费、实用、直接</strong>。所以我们决定自己来做。</p>
+
+    <h2>我们的内容理念</h2>
+    <ul>
+        <li><strong>不讲废话</strong> — 每篇文章聚焦一个具体问题，来了就能解决一个困惑</li>
+        <li><strong>用例子说话</strong> — 每个语法点、每个词汇辨析都配有真实场景例句</li>
+        <li><strong>从中文出发</strong> — 针对中文母语者最容易出错的地方，用你最熟悉的语言讲清楚</li>
+        <li><strong>循序渐进</strong> — 从基础语法到高级表达，内容按难度分级，跟着学就行</li>
+    </ul>
+
+    <h2>适合谁看</h2>
+    <p>无论你是学生、上班族，还是纯粹对英语感兴趣的自学者，只要你想用英语更自信地表达自己，这里的文章都适合你。我们的内容覆盖从初级到中高级的学习需求。</p>
+
+    <h2>联系我们</h2>
+    <p>如果你有任何问题、建议，或者发现了文章中的错误，欢迎通过以下方式联系我们：</p>
+    <p>邮箱：<a href="mailto:wengjionghua@gmail.com">wengjionghua@gmail.com</a></p>
+    <p>我们通常会在 48 小时内回复。</p>
+</main>
+
+<!-- 广告位：底部 -->
+<div class="ad-slot"><div id="ad-bottom"><p class="ad-label">广告位-底部</p></div></div>
+
+<footer class="site-footer">
+    <div style="margin-bottom:12px"><a href="about.html">关于我们</a> &nbsp;|&nbsp; <a href="privacy.html">隐私政策</a> &nbsp;|&nbsp; <a href="contact.html">联系方式</a></div>
+    <div>Copyright &copy; 2026 英语研习社 — All Rights Reserved</div>
+</footer>
+
+<script>
+(function(){var o=document.getElementById('mobileOverlay'),p=document.getElementById('mobilePanel');function op(){o.classList.add('active');p.classList.add('active');document.body.style.overflow='hidden'}function cl(){o.classList.remove('active');p.classList.remove('active');document.body.style.overflow=''}document.getElementById('hamburgerBtn').addEventListener('click',op);document.getElementById('closeMobileMenu').addEventListener('click',cl);o.addEventListener('click',cl)})();
+</script>
+
+</body>
+</html>

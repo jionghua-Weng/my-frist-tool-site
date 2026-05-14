@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英语研习社 — 免费英语学习，从实用出发</title>
+<meta name="description" content="英语研习社提供免费实用的英语学习内容，涵盖语法、词汇、句型和场景口语，帮你用最短时间掌握最地道的英文表达。">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"英语研习社","url":"https://yingyu.example.com","description":"免费英语学习平台"}]}</script>
+<style>
+/* ========== 变量与重置 ========== */
+:root {
+    --navy: #39375b;
+    --accent: #3498db;
+    --accent-hover: #1464cc;
+    --text-dark: #111827;
+    --text-gray: #6b7280;
+    --text-medium: #4b5563;
+    --white: #ffffff;
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-card-hover: 0 12px 36px rgba(0,0,0,0.12);
+    --radius: 10px;
+    --max-width: 1200px;
+    --font-heading: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-body: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text-medium);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+img { max-width: 100%; height: auto; display: block; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+/* ========== 顶部导航 ========== */
+.site-header {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--white);
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.main-nav { display: flex; align-items: center; gap: 2px; }
+
+.main-nav a {
+    color: var(--white);
+    padding: 8px 13px;
+    border-radius: 6px;
+    font-size: 14.5px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+.main-nav a:hover { background: rgba(255,255,255,0.12); }
+
+/* 汉堡菜单 */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    gap: 5px;
+}
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* 移动端面板 */
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+}
+.mobile-panel {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--navy);
+    z-index: 201;
+    padding: 20px;
+    overflow-y: auto;
+}
+.mobile-panel.active,
+.mobile-overlay.active { display: block; }
+.mobile-panel .close-btn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+    float: right;
+    padding: 4px 8px;
+}
+.mobile-panel a {
+    display: block;
+    color: #e0e0e0;
+    padding: 12px 10px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    clear: both;
+}
+.mobile-panel a:hover { color: var(--white); }
+
+/* ========== 广告位统一样式 ========== */
+.ad-slot {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+.ad-slot-top { max-width: 728px; }
+.ad-slot-mid { max-width: 300px; }
+.ad-slot-bottom { max-width: 728px; }
+.ad-slot .ad-label {
+    color: #999;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+/* ========== Hero 区域 — 手绘风格 ========== */
+.hero-sketch {
+    background: #fffef9;
+    padding: 56px 20px 44px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid #222;
+}
+
+/* 纸张点阵纹理 */
+.hero-sketch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, #e8e4d8 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title-cn {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 52px;
+    font-weight: 900;
+    color: #2d6fe0;
+    letter-spacing: 4px;
+    margin-bottom: 6px;
+    text-shadow:
+        2px 2px 0 #fff,
+        -2px -2px 0 #fff,
+        2px -2px 0 #fff,
+        -2px 2px 0 #fff,
+        3px 3px 0 rgba(45,111,224,0.12);
+    display: inline-block;
+    position: relative;
+}
+
+/* 标题下方手绘波浪线 */
+.hero-title-cn::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 10%;
+    width: 80%;
+    height: 6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 6'%3E%3Cpath d='M0 3 Q10 0,20 3 T40 3 T60 3 T80 3 T100 3 T120 3 T140 3 T160 3 T180 3 T200 3' fill='none' stroke='%23f5a623' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
+    background-size: 200px 6px;
+}
+
+.hero-sub {
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 3px;
+    margin-bottom: 24px;
+}
+
+.hero-desc {
+    font-size: 17px;
+    color: var(--text-gray);
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.hero-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 20px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    background: #fff;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+}
+.hero-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 2px 2px 0 rgba(52,152,219,0.15);
+}
+
+/* ===== SVG 涂鸦 ===== */
+.doodle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ===== 分类标签 ===== */
+.tag-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.tag-bubble {
+    padding: 10px 22px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: 2.5px solid #222;
+    background: #fff;
+    position: relative;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.06);
+    z-index: 1;
+}
+
+/* ========== 分区通用 ========== */
+.section { padding-top: 50px; }
+
+.section-head h2 {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.section-head h2 .icon { font-size: 28px; }
+.section-head p {
+    font-size: 16px;
+    color: var(--text-gray);
+    line-height: 1.7;
+    max-width: 700px;
+}
+
+/* ========== 卡片网格 ========== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 28px;
+}
+.card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+}
+.card-thumb {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+}
+.card-body { padding: 24px; }
+
+.card-body h3 {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+.card-body h3 a { color: var(--text-dark); transition: color 0.2s; }
+.card-body h3 a:hover { color: var(--accent); }
+
+.card-tag {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card-tag a { color: var(--accent); }
+
+/* ========== CTA 按钮 ========== */
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--white) !important;
+    padding: 12px 26px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s;
+}
+.cta-btn:hover { background: var(--accent-hover); }
+
+/* ========== 页脚 ========== */
+.site-footer {
+    background: var(--navy);
+    color: #c0c0d0;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 14px;
+    margin-top: 60px;
+}
+.site-footer a { color: #c0c0d0; }
+
+/* ========== 回到顶部 ========== */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+    background: #e5e7eb;
+    color: #6b7280;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, background 0.2s;
+    z-index: 50;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: var(--accent); color: var(--white); }
+
+/* ========== 响应式 ========== */
+@media (max-width: 959px) {
+    .main-nav { display: none; }
+    .hamburger { display: flex; }
+    .hero-title-cn { font-size: 34px; }
+    .hero-sub { font-size: 14px; }
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .hero-sketch { padding: 40px 20px 30px; }
+    .hero-title-cn { font-size: 30px; }
+    .section-head h2 { font-size: 24px; }
+    .section { padding-top: 36px; }
+}
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6082621192201664" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo">
+            <a href="index.html"><span class="logo-icon">E</span>英语研习社</a>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">首页</a>
+            <a href="grammar-tenses.html">语法精讲</a>
+            <a href="vocabulary-see-look-watch.html">词汇辨析</a>
+            <a href="patterns-wondering-if.html">实用句型</a>
+            <a href="daily-coffee.html">场景口语</a>
+            <a href="about.html">关于</a>
+        </nav>
+        <button class="hamburger" id="hamburgerBtn" aria-label="菜单">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- 移动端菜单 -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel">
+    <button class="close-btn" id="closeMobileMenu">&times;</button>
+    <div style="padding-top: 20px;">
+        <a href="index.html">首页</a>
+        <a href="grammar-tenses.html">语法精讲</a>
+        <a href="vocabulary-see-look-watch.html">词汇辨析</a>
+        <a href="patterns-wondering-if.html">实用句型</a>
+        <a href="daily-coffee.html">场景口语</a>
+        <a href="about.html">关于</a>
+    </div>
+</div>
+
+<!-- ===== 广告位：顶部 ===== -->
+<div class="ad-slot ad-slot-top">
+    <div id="ad-top">
+        <p class="ad-label">广告位-顶部</p>
+    </div>
+</div>
+
+<!-- ===== Hero — 手绘风格 ===== -->
+<section class="hero-sketch">
+    <!-- 涂鸦装饰 -->
+    <svg class="doodle" style="top:12px;left:5%;width:50px;height:50px;opacity:0.5;" viewBox="0 0 50 50">
+        <circle cx="25" cy="25" r="18" fill="none" stroke="#f5a623" stroke-width="2"/>
+        <circle cx="13" cy="13" r="3" fill="#f5a623"/>
+    </svg>
+    <svg class="doodle" style="top:24px;right:8%;width:36px;height:36px;opacity:0.6;" viewBox="0 0 36 36">
+        <polygon points="18,2 22,14 34,14 24,22 28,34 18,26 8,34 12,22 2,14 14,14" fill="none" stroke="#6c5ce7" stroke-width="1.8"/>
+    </svg>
+    <svg class="doodle" style="bottom:70px;left:3%;width:44px;height:44px;opacity:0.5;" viewBox="0 0 44 44">
+        <rect x="6" y="6" width="32" height="32" rx="6" fill="none" stroke="#2ed573" stroke-width="2" stroke-dasharray="4 3"/>
+    </svg>
+
+    <div class="hero-inner">
+        <div class="hero-title-cn">英语研习社</div>
+        <p class="hero-sub">MASTER REAL ENGLISH, SPEAK WITH CONFIDENCE</p>
+
+        <!-- SVG 插画：男孩在路口 + 时态箭头 -->
+        <div style="max-width:560px;margin:0 auto 20px;">
+            <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;">
+                <!-- 背景涂鸦 -->
+                <rect x="40" y="70" width="50" height="40" rx="2" fill="none" stroke="#ddd" stroke-width="1.5"/>
+                <polygon points="35,70 65,45 95,70" fill="none" stroke="#ddd" stroke-width="1.5"/>
+                <rect x="52" y="88" width="14" height="22" fill="none" stroke="#ddd" stroke-width="1"/>
+
+                <circle cx="480" cy="50" r="22" fill="none" stroke="#e8e4d8" stroke-width="2"/>
+                <circle cx="480" cy="50" r="10" fill="none" stroke="#e8e4d8" stroke-width="1.5"/>
+                <circle cx="480" cy="50" r="4" fill="#e8e4d8"/>
+
+                <circle cx="490" cy="230" r="28" fill="#fffef5" stroke="#e0dcc8" stroke-width="2"/>
+                <circle cx="490" cy="230" r="2" fill="#e0dcc8"/>
+                <line x1="490" y1="230" x2="490" y2="214" stroke="#e0dcc8" stroke-width="2" stroke-linecap="round"/>
+                <line x1="490" y1="230" x2="502" y2="230" stroke="#e0dcc8" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- 十字路口 -->
+                <line x1="100" y1="150" x2="460" y2="150" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="280" y1="30" x2="280" y2="270" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- 方向箭头 -->
+                <polygon points="280,30 268,55 292,55" fill="#2d6fe0"/>
+                <text x="280" y="22" text-anchor="middle" fill="#2d6fe0" font-size="15" font-weight="700">现在</text>
+
+                <polygon points="460,150 435,140 435,160" fill="#2ed573"/>
+                <text x="480" y="142" text-anchor="start" fill="#2ed573" font-size="15" font-weight="700">Future</text>
+
+                <polygon points="280,270 268,245 292,245" fill="#f5a623"/>
+                <text x="280" y="290" text-anchor="middle" fill="#f5a623" font-size="15" font-weight="700">过去</text>
+
+                <polygon points="100,150 125,140 125,160" fill="#6c5ce7"/>
+                <text x="30" y="142" text-anchor="start" fill="#6c5ce7" font-size="15" font-weight="700">Perfect</text>
+
+                <!-- 卡通男孩 -->
+                <g transform="translate(260,118)">
+                    <rect x="-14" y="10" width="28" height="30" rx="6" fill="#2d6fe0"/>
+                    <rect x="10" y="10" width="14" height="20" rx="5" fill="#f5a623"/>
+                    <circle cx="0" cy="0" r="16" fill="#ffe0bd" stroke="#333" stroke-width="1.8"/>
+                    <circle cx="-6" cy="-3" r="3" fill="#333"/>
+                    <circle cx="6" cy="-3" r="3" fill="#333"/>
+                    <path d="M-5 5 Q0 11,5 5" fill="none" stroke="#333" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="-10" cy="2" r="3" fill="#ffb3b3" opacity="0.5"/>
+                    <circle cx="10" cy="2" r="3" fill="#ffb3b3" opacity="0.5"/>
+                    <path d="M-16 -8 Q-14 -18, 0 -20 Q14 -18, 16 -8" fill="#333"/>
+                    <line x1="-6" y1="40" x2="-8" y2="56" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="6" y1="40" x2="8" y2="56" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                    <ellipse cx="-9" cy="58" rx="6" ry="3" fill="#333"/>
+                    <ellipse cx="7" cy="58" rx="6" ry="3" fill="#333"/>
+                    <path d="M14 18 Q24 8,28 2" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="28" cy="0" r="4" fill="#ffe0bd" stroke="#333" stroke-width="1.2"/>
+                </g>
+
+                <!-- 例句 -->
+                <rect x="310" y="10" width="140" height="26" rx="13" fill="#fff" stroke="#2d6fe0" stroke-width="1.8"/>
+                <text x="380" y="27" text-anchor="middle" fill="#2d6fe0" font-size="11" font-weight="600">He reads books.</text>
+
+                <rect x="340" y="195" width="140" height="26" rx="13" fill="#fff" stroke="#2ed573" stroke-width="1.8"/>
+                <text x="410" y="212" text-anchor="middle" fill="#2ed573" font-size="11" font-weight="600">He will read it.</text>
+
+                <rect x="180" y="235" width="130" height="26" rx="13" fill="#fff" stroke="#f5a623" stroke-width="1.8"/>
+                <text x="245" y="252" text-anchor="middle" fill="#f5a623" font-size="11" font-weight="600">He read books.</text>
+
+                <rect x="20" y="170" width="140" height="26" rx="13" fill="#fff" stroke="#6c5ce7" stroke-width="1.8"/>
+                <text x="90" y="187" text-anchor="middle" fill="#6c5ce7" font-size="11" font-weight="600">He has read it.</text>
+            </svg>
+        </div>
+
+        <p class="hero-desc">英语研习社为你整理最实用的英语学习资源。从语法基础到场景对话，我们用最接地气的方式，帮你告别"哑巴英语"，让每一次开口都自然流畅。</p>
+
+        <div class="hero-links">
+            <a href="daily-coffee.html" class="hero-link">场景口语：从点咖啡开始，搞定日常对话</a>
+            <a href="grammar-tenses.html" class="hero-link">语法精讲：一张图搞懂英语时态</a>
+        </div>
+
+        <div class="tag-row">
+            <span class="tag-bubble" style="border-color:#2d6fe0;color:#2d6fe0;">语法精讲</span>
+            <span class="tag-bubble" style="border-color:#2ed573;color:#2ed573;">词汇辨析</span>
+            <span class="tag-bubble" style="border-color:#f5a623;color:#f5a623;">实用句型</span>
+            <span class="tag-bubble" style="border-color:#6c5ce7;color:#6c5ce7;">场景口语</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 主内容 ===== -->
+<main class="container">
+
+    <!-- 语法 -->
+    <section class="section">
+        <div class="section-head">
+            <h2><span class="icon">&#128214;</span> 语法精讲</h2>
+            <p>拒绝死记硬背，从实际语用出发拆解英语语法。搭配精选例句，帮你把规则变成直觉，不用翻书也能出口成章。</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-thumb" style="overflow:hidden;">
+                    <img src="file:///D:/2024-5-7/17-Google/下载.jpg" alt="英语时态" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div class="card-body">
+                    <h3><a href="grammar-tenses.html">英语时态到底怎么用？一张图讲清楚</a></h3>
+                    <div class="card-tag"><a href="grammar-tenses.html">语法精讲</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">&#128220;</div>
+                <div class="card-body">
+                    <h3><a href="grammar-passive-voice.html">被动语态：不止是"被"字那么简单</a></h3>
+                    <div class="card-tag"><a href="grammar-passive-voice.html">语法精讲</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">&#127744;</div>
+                <div class="card-body">
+                    <h3><a href="grammar-conditionals.html">条件句的三个层级：从真实假设到虚拟语气</a></h3>
+                    <div class="card-tag"><a href="grammar-conditionals.html">语法精讲</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">&#9889;</div>
+                <div class="card-body">
+                    <h3><a href="grammar-modals.html">情态动词一次搞懂：can / could / may / might / must / should</a></h3>
+                    <div class="card-tag"><a href="grammar-modals.html">语法精讲</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">&#128205;</div>
+                <div class="card-body">
+                    <h3><a href="grammar-prepositions.html">in / on / at 时间与空间规律：再也不搞混</a></h3>
+                    <div class="card-tag"><a href="grammar-prepositions.html">语法精讲</a></div>
+                </div>
+            </div>
+        </div>
+        <a href="grammar-tenses.html" class="cta-btn">&#10132; 浏览全部语法文章</a>
+    </section>
+
+    <!-- 词汇 -->
+    <section class="section">
+        <div class="section-head">
+            <h2><span class="icon">&#128218;</span> 词汇辨析</h2>
+            <p>聚焦高频易混词，帮你搞清楚它们之间的微妙差别。从此告别"用错词、表错意"的尴尬，表达精准到位。</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">&#128064;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-see-look-watch.html">"看"的十种英文说法：see、look、watch 怎么分？</a></h3>
+                    <div class="card-tag"><a href="vocabulary-see-look-watch.html">词汇辨析</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">&#128293;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-upgrade-expressions.html">别再说"very good"了：升级你的表达词汇库</a></h3>
+                    <div class="card-tag"><a href="vocabulary-upgrade-expressions.html">词汇辨析</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">&#9878;&#65039;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-confusing-pairs.html">最容易用错的五组近义词，你用对了吗？</a></h3>
+                    <div class="card-tag"><a href="vocabulary-confusing-pairs.html">词汇辨析</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">&#128640;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-phrasal-verbs.html">高频动词短语20个：让你的英语瞬间地道</a></h3>
+                    <div class="card-tag"><a href="vocabulary-phrasal-verbs.html">词汇辨析</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);">&#9997;&#65039;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-email.html">职场邮件必备表达：开场、请求、拒绝、收尾的公式</a></h3>
+                    <div class="card-tag"><a href="vocabulary-email.html">词汇辨析</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">&#128151;</div>
+                <div class="card-body">
+                    <h3><a href="vocabulary-emotions.html">精准表达情绪的20个词：不止是happy和sad</a></h3>
+                    <div class="card-tag"><a href="vocabulary-emotions.html">词汇辨析</a></div>
+                </div>
+            </div>
+        </div>
+        <a href="vocabulary-see-look-watch.html" class="cta-btn">&#10132; 浏览全部词汇文章</a>
+    </section>
+
+    <!-- ===== 广告位：中间 ===== -->
+    <div class="ad-slot ad-slot-mid">
+        <div id="ad-middle">
+            <p class="ad-label">广告位-中间</p>
+        </div>
+    </div>
+
+    <!-- 句型 -->
+    <section class="section">
+        <div class="section-head">
+            <h2><span class="icon">&#128172;</span> 实用句型</h2>
+            <p>掌握母语者最常用的表达框架。有了这些句型模板，你可以灵活套用，让口语表达更加地道自然，不再逐字翻译。</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);">&#128227;</div>
+                <div class="card-body">
+                    <h3><a href="patterns-wondering-if.html">"I was wondering if…" — 比"Can I…"更礼貌的请求方式</a></h3>
+                    <div class="card-tag"><a href="patterns-wondering-if.html">实用句型</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">&#128172;</div>
+                <div class="card-body">
+                    <h3><a href="patterns-the-thing-is.html">"The thing is…" — 开口就自然的万能过渡句</a></h3>
+                    <div class="card-tag"><a href="patterns-the-thing-is.html">实用句型</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #d4a5a5 0%, #7b6c8e 100%);">&#128260;</div>
+                <div class="card-body">
+                    <h3><a href="patterns-not-that-just-that.html">"It's not that… it's just that…" — 委婉否定的高级说法</a></h3>
+                    <div class="card-tag"><a href="patterns-not-that-just-that.html">实用句型</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #ee9ca7 0%, #ffdde1 100%);">&#127775;</div>
+                <div class="card-body">
+                    <h3><a href="patterns-i-wish.html">I wish / If only：用英语表达愿望和遗憾</a></h3>
+                    <div class="card-tag"><a href="patterns-i-wish.html">实用句型</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">&#129309;</div>
+                <div class="card-body">
+                    <h3><a href="patterns-polite.html">让沟通更委婉的三个句型</a></h3>
+                    <div class="card-tag"><a href="patterns-polite.html">实用句型</a></div>
+                </div>
+            </div>
+        </div>
+        <a href="patterns-wondering-if.html" class="cta-btn">&#10132; 浏览全部句型文章</a>
+    </section>
+
+    <!-- 场景口语 -->
+    <section class="section">
+        <div class="section-head">
+            <h2><span class="icon">&#127758;</span> 场景口语</h2>
+            <p>覆盖点餐、电话、表达情绪等真实场景。学会即用，让你在每一个日常场合都能自如应对，跟外国朋友聊天不再冷场。</p>
+        </div>
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">&#9749;</div>
+                <div class="card-body">
+                    <h3><a href="daily-coffee.html">用英文点咖啡：不只是"Coffee, please"</a></h3>
+                    <div class="card-tag"><a href="daily-coffee.html">场景口语</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #ffb347 0%, #ffcc33 100%);">&#128222;</div>
+                <div class="card-body">
+                    <h3><a href="daily-phone-calls.html">接电话不再慌：职场电话英语必备话术</a></h3>
+                    <div class="card-tag"><a href="daily-phone-calls.html">场景口语</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #43e97b 0%, #38f990 100%);">&#128548;</div>
+                <div class="card-body">
+                    <h3><a href="daily-expressing-anger.html">用英文表达"不爽"：从 annoyed 到 pissed off 的分级指南</a></h3>
+                    <div class="card-tag"><a href="daily-expressing-anger.html">场景口语</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);">&#127860;</div>
+                <div class="card-body">
+                    <h3><a href="daily-restaurant.html">餐厅英语全流程：从预订到结账</a></h3>
+                    <div class="card-tag"><a href="daily-restaurant.html">场景口语</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">&#9992;&#65039;</div>
+                <div class="card-body">
+                    <h3><a href="daily-airport.html">机场和登机必备英语：从值机到落地</a></h3>
+                    <div class="card-tag"><a href="daily-airport.html">场景口语</a></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-thumb" style="background: linear-gradient(135deg, #f53844 0%, #42378f 100%);">&#127973;</div>
+                <div class="card-body">
+                    <h3><a href="daily-doctor.html">看病就医英语：从挂号到取药</a></h3>
+                    <div class="card-tag"><a href="daily-doctor.html">场景口语</a></div>
+                </div>
+            </div>
+        </div>
+        <a href="daily-coffee.html" class="cta-btn">&#10132; 浏览全部口语文章</a>
+    </section>
+
+</main>
+
+<!-- ===== 广告位：底部 ===== -->
+<div class="ad-slot ad-slot-bottom">
+    <div id="ad-bottom">
+        <p class="ad-label">广告位-底部</p>
+    </div>
+</div>
+
+<!-- ===== 页脚 ===== -->
+<footer class="site-footer">
+    <div style="margin-bottom:12px">
+        <a href="about.html">关于我们</a> &nbsp;|&nbsp;
+        <a href="privacy.html">隐私政策</a> &nbsp;|&nbsp;
+        <a href="contact.html">联系方式</a>
+    </div>
+    <div>Copyright &copy; 2026 英语研习社 — All Rights Reserved</div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="回到顶部">&#9650;</button>
+
+<script>
+(function() {
+    var overlay = document.getElementById('mobileOverlay');
+    var panel = document.getElementById('mobilePanel');
+    function open() { overlay.classList.add('active'); panel.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function close() { overlay.classList.remove('active'); panel.classList.remove('active'); document.body.style.overflow = ''; }
+    document.getElementById('hamburgerBtn').addEventListener('click', open);
+    document.getElementById('closeMobileMenu').addEventListener('click', close);
+    overlay.addEventListener('click', close);
+})();
+
+(function() {
+    var btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        btn.classList.toggle('visible', window.scrollY > 300);
+    });
+    btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+</script>
+
+</body>
+</html>
