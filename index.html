@@ -343,16 +343,28 @@ img { max-width: 100%; height: auto; display: block; }
 .cta-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: var(--white) !important;
-    padding: 12px 26px;
-    border-radius: 6px;
+    gap: 10px;
+    background: transparent;
+    color: var(--accent) !important;
+    padding: 11px 27px;
+    border-radius: 8px;
+    border: 1.5px solid var(--accent);
     font-weight: 600;
     font-size: 15px;
-    transition: background 0.2s;
+    transition: background 0.25s, color 0.25s, gap 0.3s ease, border-color 0.25s;
 }
-.cta-btn:hover { background: var(--accent-hover); }
+.cta-btn:hover {
+    background: var(--accent);
+    color: var(--white) !important;
+    border-color: var(--accent);
+    gap: 14px;
+}
+.cta-btn .arrow {
+    transition: transform 0.3s ease;
+}
+.cta-btn:hover .arrow {
+    transform: translateX(4px);
+}
 
 /* ========== 页脚 ========== */
 .site-footer {
@@ -517,7 +529,7 @@ img { max-width: 100%; height: auto; display: block; }
                 </div>
             </div>
         </div>
-        <a href="grammar.html" class="cta-btn">&#10132; 浏览全部语法文章</a>
+        <a href="grammar.html" class="cta-btn"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>浏览全部语法文章</a>
     </section>
 
     <!-- 词汇 -->
@@ -570,7 +582,7 @@ img { max-width: 100%; height: auto; display: block; }
                 </div>
             </div>
         </div>
-        <a href="vocabulary.html" class="cta-btn">&#10132; 浏览全部词汇文章</a>
+        <a href="vocabulary.html" class="cta-btn"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>浏览全部词汇文章</a>
     </section>
 
     <!-- ===== 广告位：中间 ===== -->
@@ -630,7 +642,7 @@ img { max-width: 100%; height: auto; display: block; }
                 </div>
             </div>
         </div>
-        <a href="patterns.html" class="cta-btn">&#10132; 浏览全部句型文章</a>
+        <a href="patterns.html" class="cta-btn"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>浏览全部句型文章</a>
     </section>
 
     <!-- 场景口语 -->
@@ -683,7 +695,7 @@ img { max-width: 100%; height: auto; display: block; }
                 </div>
             </div>
         </div>
-        <a href="daily.html" class="cta-btn">&#10132; 浏览全部口语文章</a>
+        <a href="daily.html" class="cta-btn"><svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>浏览全部口语文章</a>
     </section>
 
 </main>
