@@ -192,18 +192,39 @@ img { max-width: 100%; height: auto; display: block; }
 .card-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 28px;
 }
 .card {
     background: var(--white);
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow-card);
-    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+    position: relative;
+    will-change: transform;
+}
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-card-hover);
+    box-shadow: 0 28px 56px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.1);
+}
+.card:hover::after {
+    opacity: 1;
+}
+.card-thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    transform: translateZ(20px);
 }
 .card-thumb {
     aspect-ratio: 16 / 9;
@@ -394,6 +415,30 @@ img { max-width: 100%; height: auto; display: block; }
     document.getElementById('hamburgerBtn').addEventListener('click', open);
     document.getElementById('closeMobileMenu').addEventListener('click', close);
     overlay.addEventListener('click', close);
+})();
+
+// 3D卡片倾斜
+(function() {
+    var cards = document.querySelectorAll('.card');
+    cards.forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var cx = rect.width / 2;
+            var cy = rect.height / 2;
+            var rx = ((y - cy) / cy * -12).toFixed(2);
+            var ry = ((x - cx) / cx * 12).toFixed(2);
+            card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateZ(16px)';
+            card.style.setProperty('--mx', ((x / rect.width) * 100).toFixed(1) + '%');
+            card.style.setProperty('--my', ((y / rect.height) * 100).toFixed(1) + '%');
+        });
+        card.addEventListener('mouseleave', function() {
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+            card.style.setProperty('--mx', '50%');
+            card.style.setProperty('--my', '50%');
+        });
+    });
 })();
 </script>
 
