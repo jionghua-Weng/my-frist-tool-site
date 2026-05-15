@@ -26,7 +26,7 @@ a:hover{color:var(--accent-hover)}
 .site-header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--max-width);margin:0 auto;padding:0 20px}
 .logo a{display:flex;align-items:center;gap:10px;color:var(--white);font-size:21px;font-weight:700;letter-spacing:.5px;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:18px;font-weight:800;flex-shrink:0}
+.logo-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.logo-icon svg{width:100%;height:100%;display:block}
 .main-nav{display:flex;align-items:center;gap:2px}
 .main-nav a{color:var(--white);padding:8px 13px;border-radius:6px;font-size:14.5px;font-weight:500;white-space:nowrap;transition:background .2s;text-decoration:none}
 .main-nav a:hover{background:rgba(255,255,255,0.12)}
@@ -36,7 +36,7 @@ a:hover{color:var(--accent-hover)}
 .mobile-panel{display:none;position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--navy);z-index:201;padding:20px;overflow-y:auto}
 .mobile-panel.active,.mobile-overlay.active{display:block}
 .mobile-panel .close-btn{background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;float:right;padding:4px 8px}
-.mobile-panel a{display:block;color:#e0e0e0;padding:12px 10px;font-size:16px;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;clear:both}
+.mobile-panel a{display:block;color:#e0e0e0;padding:14px 16px;font-size:17px;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;clear:both}
 .mobile-panel a:hover{color:var(--white)}
 .page-content{max-width:800px;margin:60px auto;padding:0 20px}
 .page-content h1{font-family:var(--font-heading);font-size:36px;font-weight:700;color:var(--text-dark);margin-bottom:24px}
@@ -52,13 +52,14 @@ a:hover{color:var(--accent-hover)}
 @media(max-width:959px){.main-nav{display:none}.hamburger{display:flex}.page-content h1{font-size:28px}}
 @media(max-width:640px){.page-content{margin:40px auto}.page-content h1{font-size:24px}.page-content h2{font-size:20px}}
 </style>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6082621192201664" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <header class="site-header">
     <div class="header-inner">
-        <div class="logo"><a href="index.html"><span class="logo-icon">E</span>英语研习社</a></div>
+        <div class="logo"><a href="index.html"><span class="logo-icon"><svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#39375b"/><path d="M16 16 Q20 12 22 16 Q24 20 20 22 Q14 24 12 18 Q10 12 16 8 Q24 6 26 14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="26" cy="20" r="1.5" fill="#3498db"/></svg></span>英语研习社</a></div>
         <nav class="main-nav">
             <a href="index.html">首页</a>
             <a href="grammar-tenses.html">语法精讲</a>
