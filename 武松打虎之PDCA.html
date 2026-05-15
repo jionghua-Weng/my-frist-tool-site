@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>武松打虎之PDCA — 八大步骤解决问题</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   CSS 自定义属性 (创意电压主题)
+   =========================================== */
+:root {
+  --blue: #0066ff;
+  --dark: #1a1a2e;
+  --neon: #d4ff00;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.6);
+  --text-muted: rgba(255,255,255,0.35);
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --title-size: clamp(1.5rem, 5vw, 4rem);
+  --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+  --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+  --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+  --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+  --slide-padding: clamp(1rem, 4vw, 4rem);
+  --content-gap: clamp(0.5rem, 2vw, 2rem);
+  --element-gap: clamp(0.25rem, 1vw, 1rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration: 0.6s;
+}
+
+/* ===========================================
+   基础样式 (含 viewport-base.css 全部内容)
+   =========================================== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+
+.slide {
+  width: 100vw; height: 100vh; height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex; flex-direction: column;
+  position: relative;
+  background: var(--dark);
+}
+
+.slide-content {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  max-height: 100%; overflow: hidden;
+  padding: var(--slide-padding);
+}
+
+/* 排版 */
+h1 { font-family: var(--font-display); font-weight: 800; font-size: var(--title-size); color: var(--text-primary); line-height: 1.1; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--h2-size); color: var(--text-primary); line-height: 1.2; }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--h3-size); color: var(--text-primary); }
+p, li { font-family: var(--font-mono); font-size: var(--body-size); color: var(--text-secondary); line-height: 1.6; }
+
+/* ===========================================
+   封面样式
+   =========================================== */
+.title-slide {
+  flex-direction: row;
+  background: var(--dark);
+}
+.title-slide .panel-left {
+  flex: 1; background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.title-slide .panel-left::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 70%, rgba(212,255,0,0.15), transparent 60%);
+}
+.title-slide .panel-right {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.title-slide .panel-right::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.title-slide .accent-bar {
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 3px; background: var(--neon); z-index: 3;
+}
+.title-slide .center-content {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  pointer-events: none;
+}
+
+.badge {
+  display: inline-block; background: var(--neon); color: var(--dark);
+  font-family: var(--font-mono); font-size: var(--small-size);
+  padding: 0.3em 1em; letter-spacing: 0.1em;
+}
+.title-slide .accent-word { color: var(--neon); }
+.title-slide .sub {
+  font-family: var(--font-mono); color: rgba(255,255,255,0.5);
+  font-size: var(--small-size); margin-top: var(--content-gap);
+  letter-spacing: 0.05em;
+}
+
+/* ===========================================
+   内容页通用样式
+   =========================================== */
+.content-slide {
+  background: var(--dark);
+  flex-direction: row;
+  align-items: stretch;
+}
+.content-slide .step-number {
+  flex: 0 0 clamp(120px, 25vw, 280px);
+  background: var(--blue);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.content-slide .step-number::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 80%, rgba(212,255,0,0.12), transparent 60%);
+}
+.content-slide .step-num {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: rgba(255,255,255,0.15);
+  line-height: 0.8;
+  position: relative; z-index: 1;
+}
+.content-slide .step-num-label {
+  font-family: var(--font-mono); font-size: var(--small-size);
+  color: var(--neon); letter-spacing: 0.15em;
+  position: relative; z-index: 1;
+  margin-top: 0.5em;
+}
+.content-slide .step-body {
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: var(--slide-padding);
+  overflow: hidden;
+}
+.content-slide .step-title {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: var(--h2-size); color: var(--text-primary);
+  margin-bottom: var(--element-gap);
+}
+.content-slide .core-action {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  font-family: var(--font-mono); font-size: var(--small-size);
+  color: var(--neon); margin-bottom: var(--content-gap);
+}
+.content-slide .core-action::before {
+  content: "▸"; font-size: 0.8em;
+}
+.content-slide .story-block {
+  border-left: 2px solid rgba(255,255,255,0.1);
+  padding-left: var(--content-gap);
+}
+.content-slide .story-label {
+  font-family: var(--font-mono); font-size: var(--small-size);
+  color: var(--text-muted); letter-spacing: 0.1em;
+  margin-bottom: var(--element-gap);
+}
+.content-slide .story-text {
+  font-family: var(--font-mono); font-size: var(--body-size);
+  color: var(--text-secondary); line-height: 1.7;
+}
+
+/* ===========================================
+   背景故事页
+   =========================================== */
+.intro-slide {
+  background: var(--dark); flex-direction: row;
+}
+.intro-slide .intro-left {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: var(--slide-padding);
+}
+.intro-slide .intro-right {
+  flex: 1; background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--slide-padding);
+  position: relative; overflow: hidden;
+}
+.intro-slide .intro-right::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(212,255,0,0.1), transparent 50%);
+}
+.intro-slide .intro-quote {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--text-primary); line-height: 1.5;
+  position: relative; z-index: 1;
+}
+.intro-slide .step-list {
+  list-style: none; position: relative; z-index: 1;
+}
+.intro-slide .step-list li {
+  font-family: var(--font-mono); font-size: var(--body-size);
+  color: rgba(255,255,255,0.8); padding: 0.4em 0;
+  counter-increment: steps;
+}
+.intro-slide .step-list li::before {
+  content: "0" counter(steps);
+  font-weight: 700; color: var(--neon); margin-right: 0.75em;
+  font-size: 0.85em;
+}
+
+/* ===========================================
+   总结页
+   =========================================== */
+.summary-slide {
+  background: var(--blue);
+  flex-direction: row; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.summary-slide::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(212,255,0,0.1), transparent 60%);
+}
+.summary-slide .summary-content {
+  text-align: center; position: relative; z-index: 1;
+  max-width: 70vw;
+}
+.summary-slide h2 {
+  font-size: var(--title-size); margin-bottom: var(--content-gap);
+}
+.summary-slide .highlight-box {
+  display: inline-block; background: var(--neon); color: var(--dark);
+  font-family: var(--font-mono); font-size: var(--body-size);
+  padding: 0.4em 1.2em; margin-top: var(--content-gap);
+}
+
+/* ===========================================
+   动画
+   =========================================== */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity var(--duration) var(--ease-out-expo),
+              transform var(--duration) var(--ease-out-expo);
+}
+.slide.visible .reveal { opacity: 1; transform: translateY(0); }
+.reveal:nth-child(1) { transition-delay: 0.1s; }
+.reveal:nth-child(2) { transition-delay: 0.2s; }
+.reveal:nth-child(3) { transition-delay: 0.3s; }
+.reveal:nth-child(4) { transition-delay: 0.4s; }
+.reveal:nth-child(5) { transition-delay: 0.5s; }
+
+/* 蓝色面板滑入动画 */
+.panel-slide-in {
+  transform: translateX(-30px); opacity: 0;
+  transition: transform 0.8s var(--ease-out-expo), opacity 0.6s var(--ease-out-expo);
+}
+.slide.visible .panel-slide-in { transform: translateX(0); opacity: 1; }
+
+/* 内容区延迟淡入 */
+.fade-in-delay {
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out-expo) 0.3s;
+}
+.slide.visible .fade-in-delay { opacity: 1; }
+
+/* ===========================================
+   进度条 & 导航点
+   =========================================== */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px;
+  background: var(--neon); z-index: 1000;
+  transition: width 0.3s ease;
+}
+.nav-dots {
+  position: fixed; right: clamp(0.5rem, 2vw, 1.5rem);
+  top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 0.6rem;
+  z-index: 1000;
+}
+.nav-dots .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  cursor: pointer; transition: all 0.3s ease;
+}
+.nav-dots .dot.active { background: var(--neon); transform: scale(1.5); }
+.nav-dots .dot:hover { background: rgba(255,255,255,0.5); }
+
+/* ===========================================
+   键盘提示
+   =========================================== */
+.keyboard-hint {
+  position: fixed; bottom: clamp(0.5rem, 2vh, 1.5rem);
+  left: 50%; transform: translateX(-50%);
+  font-family: var(--font-mono); font-size: var(--small-size);
+  color: var(--text-muted); z-index: 999;
+  pointer-events: none; transition: opacity 0.5s ease;
+}
+
+/* ===========================================
+   内联编辑
+   =========================================== */
+.edit-hotzone {
+  position: fixed; top: 0; left: 0;
+  width: 80px; height: 80px; z-index: 10000;
+  cursor: pointer;
+}
+.edit-toggle {
+  position: fixed; top: 12px; left: 12px;
+  width: 36px; height: 36px;
+  border-radius: 50%; border: none;
+  background: var(--dark); color: var(--neon);
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10001;
+}
+.edit-toggle.show, .edit-toggle.active {
+  opacity: 1; pointer-events: auto;
+}
+.edit-banner {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--neon); color: var(--dark);
+  font-family: var(--font-mono); font-size: var(--small-size);
+  text-align: center; padding: 0.4em;
+  z-index: 9999; transform: translateY(-100%);
+  transition: transform 0.3s ease;
+}
+.edit-banner.active { transform: translateY(0); }
+body.edit-active [contenteditable] {
+  outline: 2px dashed rgba(212,255,0,0.4);
+  outline-offset: 4px;
+  cursor: text;
+}
+
+/* ===========================================
+   响应式
+   =========================================== */
+@media (max-height: 700px) {
+  :root {
+    --slide-padding: clamp(0.75rem, 3vw, 2rem);
+    --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+    --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+    --h2-size: clamp(1rem, 3vw, 1.75rem);
+  }
+}
+@media (max-height: 600px) {
+  :root {
+    --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+    --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+    --title-size: clamp(1.1rem, 4vw, 2rem);
+    --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+  }
+  .nav-dots, .keyboard-hint { display: none; }
+}
+@media (max-height: 500px) {
+  :root {
+    --slide-padding: clamp(0.4rem, 2vw, 1rem);
+    --title-size: clamp(1rem, 3.5vw, 1.5rem);
+    --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    --body-size: clamp(0.65rem, 1vw, 0.85rem);
+  }
+}
+@media (max-width: 600px) {
+  :root { --title-size: clamp(1.25rem, 7vw, 2.5rem); }
+  .content-slide { flex-direction: column; }
+  .content-slide .step-number {
+    flex: 0 0 auto;
+    flex-direction: row; gap: 1rem;
+    padding: clamp(0.5rem, 2vh, 1.5rem);
+  }
+  .content-slide .step-num { font-size: clamp(2rem, 10vw, 4rem); }
+  .title-slide { flex-direction: column; }
+  .title-slide .center-content { padding: var(--slide-padding); }
+  .intro-slide { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- 编辑热区 -->
+<div class="edit-hotzone"></div>
+<button class="edit-toggle" id="editToggle" title="编辑模式 (E)">&#9998;</button>
+<div class="edit-banner" id="editBanner">编辑模式已开启 · 点击文字即可编辑 · Ctrl+S 保存文件</div>
+
+<!-- 进度条 -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- 导航点 -->
+<nav class="nav-dots" id="navDots"></nav>
+
+<!-- 键盘提示 -->
+<div class="keyboard-hint" id="keyboardHint">← → 翻页 · Space 下一页</div>
+
+<!-- ===== 封面 ===== -->
+<section class="slide title-slide">
+  <div class="panel-left"></div>
+  <div class="panel-right"></div>
+  <div class="accent-bar panel-slide-in"></div>
+  <div class="center-content">
+    <span class="badge reveal">PDCA · 八大步骤</span>
+    <h1 class="reveal">武松打虎之<span class="accent-word">PDCA</span></h1>
+    <p class="sub reveal">用经典故事拆解问题解决的底层逻辑</p>
+  </div>
+</section>
+
+<!-- ===== 故事背景 ===== -->
+<section class="slide intro-slide">
+  <div class="intro-left">
+    <div class="reveal" style="max-width:90%;">
+      <span class="badge" style="margin-bottom:var(--content-gap);">故事背景</span>
+      <p class="intro-quote">武松出差回来，发现哥哥武大郎人没了。<br>于是开启了探寻真相、解决问题的过程。</p>
+      <p style="margin-top:var(--content-gap);color:var(--text-muted);">很多人解决问题时不知从何下手——<br>PDCA八大步骤，给出了清晰的路径。</p>
+    </div>
+  </div>
+  <div class="intro-right">
+    <ol class="step-list reveal" style="counter-reset:steps;">
+      <li>认知问题</li>
+      <li>把握现状</li>
+      <li>设定目标</li>
+      <li>确定真因</li>
+      <li>拟定对策</li>
+      <li>实施对策</li>
+      <li>确认效果</li>
+      <li>横向展开</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== 步骤1：认知问题 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">01</span>
+    <span class="step-num-label">步骤一</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">认知问题</h2>
+    <p class="core-action reveal">核心动作：界定问题，明确目的</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">武松通过一番调查，证实他哥哥武大郎并非如潘金莲所说死于心疼病，而是被谋害而死。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤2：把握现状 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">02</span>
+    <span class="step-num-label">步骤二</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">把握现状</h2>
+    <p class="core-action reveal">核心动作：界定范围，收集事实</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">武松只有一个哥哥，已被害。现状是潘金莲还在装腔作势，一口咬定大郎因心疼病而亡。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤3：设定目标 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">03</span>
+    <span class="step-num-label">步骤三</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">设定目标</h2>
+    <p class="core-action reveal">核心动作：量化指标，明确目标</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">武松目标很简单——替兄报仇，不搞扩大化处理，不伤及无辜。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤4：确定真因 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">04</span>
+    <span class="step-num-label">步骤四</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">确定真因</h2>
+    <p class="core-action reveal">核心动作：追根溯源，排除干扰</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">除了找何九叔，武松还走访了郓哥等人，给了郓哥五两银子，打消其后顾之忧，便于讲出真情。最终得出真因：哥哥大郎是被潘金莲、王婆、西门庆三人合谋而害。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤5：拟定对策 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">05</span>
+    <span class="step-num-label">步骤五</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">拟定对策</h2>
+    <p class="core-action reveal">核心动作：依据真因，确定对策</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">第一条对策：到衙门告状。奈何县吏与西门庆关系好，知县偏袒西门庆。武松无奈，只得拟定第二条对策——自己来解决。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤6：实施对策 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">06</span>
+    <span class="step-num-label">步骤六</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">实施对策</h2>
+    <p class="core-action reveal">核心动作：落实执行，过程控制</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">武松手握利刃，喝令王婆、潘金莲交代出具体过程，邻居胡先生做好记录，结果了二人。又找到狮子楼，斗杀西门庆。至此，三名加害者被除。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤7：确认效果 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">07</span>
+    <span class="step-num-label">步骤七</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">确认效果</h2>
+    <p class="core-action reveal">核心动作：检查结果，闭环反馈</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">武松的做法</p>
+      <p class="story-text">第二条对策有效，三名加害者被除，大仇得报。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 步骤8：横向展开 ===== -->
+<section class="slide content-slide">
+  <div class="step-number panel-slide-in">
+    <span class="step-num">08</span>
+    <span class="step-num-label">步骤八</span>
+  </div>
+  <div class="step-body">
+    <h2 class="step-title reveal">横向展开</h2>
+    <p class="core-action reveal">核心动作：固化成果，分享经验</p>
+    <div class="story-block fade-in-delay">
+      <p class="story-label">故事与现实的对照</p>
+      <p class="story-text">在武松的故事中，他无需横向展开这次经验。但在企业工作中，解决问题的成果需要通过标准化、人员培训等动作进行固化；同时，应将经验或教训分享给其他同事。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 总结 ===== -->
+<section class="slide summary-slide">
+  <div class="summary-content">
+    <h2 class="reveal" style="color:var(--dark);">心中有谱，手中有招</h2>
+    <p class="reveal" style="color:rgba(26,26,46,0.7);font-size:var(--body-size);">
+      有了八大步骤，解决工作问题时，<br>能有效提升解决问题的效率与质量。
+    </p>
+    <p class="highlight-box reveal">PDCA · 八大步骤 · 武松打虎</p>
+  </div>
+</section>
+
+<script>
+/* ===========================================
+   幻灯片控制器
+   =========================================== */
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.totalSlides = this.slides.length;
+    this.currentSlide = 0;
+    this.progressBar = document.getElementById('progressBar');
+    this.navDots = document.getElementById('navDots');
+    this.keyboardHint = document.getElementById('keyboardHint');
+    this.isScrolling = false;
+
+    this.buildNavDots();
+    this.setupIntersectionObserver();
+    this.setupKeyboardNav();
+    this.setupWheelNav();
+    this.setupTouchNav();
+    this.setupNavDotClicks();
+    this.hideHintTimer();
+  }
+
+  /* 构建导航点 */
+  buildNavDots() {
+    this.navDots.innerHTML = '';
+    for (let i = 0; i < this.totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.dataset.index = i;
+      this.navDots.appendChild(dot);
+    }
+  }
+
+  /* Intersection Observer — 触发动画 + 更新导航 */
+  setupIntersectionObserver() {
+    const options = { root: null, rootMargin: '0px', threshold: 0.3 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          this.currentSlide = Array.from(this.slides).indexOf(entry.target);
+          this.updateNav();
+        }
+      });
+    }, options);
+    this.slides.forEach(s => observer.observe(s));
+  }
+
+  /* 更新进度条和导航点 */
+  updateNav() {
+    const pct = ((this.currentSlide + 1) / this.totalSlides) * 100;
+    this.progressBar.style.width = pct + '%';
+    const dots = this.navDots.querySelectorAll('.dot');
+    dots.forEach((d, i) => d.classList.toggle('active', i === this.currentSlide));
+  }
+
+  /* 跳转到指定页 */
+  goToSlide(index) {
+    if (index < 0 || index >= this.totalSlides) return;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+    this.currentSlide = index;
+    this.updateNav();
+  }
+
+  /* 键盘导航 */
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      if (e.target.getAttribute('contenteditable')) return;
+      const key = e.key;
+      if (key === 'ArrowRight' || key === 'ArrowDown' || key === ' ') {
+        e.preventDefault();
+        this.goToSlide(Math.min(this.currentSlide + 1, this.totalSlides - 1));
+      } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
+        e.preventDefault();
+        this.goToSlide(Math.max(this.currentSlide - 1, 0));
+      } else if (key === 'Home') {
+        e.preventDefault(); this.goToSlide(0);
+      } else if (key === 'End') {
+        e.preventDefault(); this.goToSlide(this.totalSlides - 1);
+      }
+    });
+  }
+
+  /* 滚轮导航 */
+  setupWheelNav() {
+    document.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      if (this.isScrolling) return;
+      this.isScrolling = true;
+      if (e.deltaY > 0) {
+        this.goToSlide(Math.min(this.currentSlide + 1, this.totalSlides - 1));
+      } else {
+        this.goToSlide(Math.max(this.currentSlide - 1, 0));
+      }
+      setTimeout(() => { this.isScrolling = false; }, 800);
+    }, { passive: false });
+  }
+
+  /* 触屏导航 */
+  setupTouchNav() {
+    let touchStartY = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          this.goToSlide(Math.min(this.currentSlide + 1, this.totalSlides - 1));
+        } else {
+          this.goToSlide(Math.max(this.currentSlide - 1, 0));
+        }
+      }
+    });
+  }
+
+  /* 导航点击 */
+  setupNavDotClicks() {
+    this.navDots.addEventListener('click', (e) => {
+      if (e.target.classList.contains('dot')) {
+        this.goToSlide(parseInt(e.target.dataset.index));
+      }
+    });
+  }
+
+  /* 几秒后隐藏键盘提示 */
+  hideHintTimer() {
+    setTimeout(() => {
+      this.keyboardHint.style.opacity = '0';
+    }, 6000);
+  }
+}
+
+/* ===========================================
+   内联编辑器 (用户选择了"需要编辑")
+   =========================================== */
+class InlineEditor {
+  constructor() {
+    this.isActive = false;
+    this.editToggle = document.getElementById('editToggle');
+    this.editBanner = document.getElementById('editBanner');
+    this.editableSelectors = 'h1, h2, h3, p, .story-text, .intro-quote, .step-num-label';
+    this.setupToggle();
+    this.setupHotzone();
+    this.setupKeyboardShortcut();
+    this.setupAutoSave();
+  }
+
+  setupToggle() {
+    this.editToggle.addEventListener('click', () => this.toggleEditMode());
+  }
+
+  setupHotzone() {
+    const hotzone = document.querySelector('.edit-hotzone');
+    let hideTimeout = null;
+
+    hotzone.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+      this.editToggle.classList.add('show');
+    });
+    hotzone.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.editToggle.classList.remove('show');
+      }, 400);
+    });
+    this.editToggle.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+    });
+    this.editToggle.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        if (!this.isActive) this.editToggle.classList.remove('show');
+      }, 400);
+    });
+    hotzone.addEventListener('click', () => this.toggleEditMode());
+  }
+
+  setupKeyboardShortcut() {
+    document.addEventListener('keydown', (e) => {
+      if ((e.key === 'e' || e.key === 'E') && !e.target.getAttribute('contenteditable') && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        if (e.ctrlKey || e.metaKey) return;
+        this.toggleEditMode();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 's' && this.isActive) {
+        e.preventDefault();
+        this.exportFile();
+      }
+    });
+  }
+
+  setupAutoSave() {
+    const saved = localStorage.getItem('wusong-pdca-html');
+    if (saved) {
+      // 不做自动恢复，避免意外覆盖
+    }
+    // 每30秒自动保存到localStorage
+    setInterval(() => {
+      if (this.isActive) {
+        localStorage.setItem('wusong-pdca-html', document.documentElement.outerHTML);
+      }
+    }, 30000);
+  }
+
+  toggleEditMode() {
+    this.isActive = !this.isActive;
+    const els = document.querySelectorAll(this.editableSelectors);
+
+    if (this.isActive) {
+      els.forEach(el => el.setAttribute('contenteditable', 'true'));
+      document.body.classList.add('edit-active');
+      this.editToggle.classList.add('active');
+      this.editBanner.classList.add('active');
+      this.editToggle.innerHTML = '&#10003;';
+    } else {
+      els.forEach(el => el.removeAttribute('contenteditable'));
+      document.body.classList.remove('edit-active');
+      this.editToggle.classList.remove('active', 'show');
+      this.editBanner.classList.remove('active');
+      this.editToggle.innerHTML = '&#9998;';
+    }
+  }
+
+  exportFile() {
+    const editableEls = Array.from(document.querySelectorAll('[contenteditable]'));
+    editableEls.forEach(el => el.removeAttribute('contenteditable'));
+    document.body.classList.remove('edit-active');
+    this.editToggle.classList.remove('active', 'show');
+    this.editBanner.classList.remove('active');
+
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+    // 恢复编辑状态
+    editableEls.forEach(el => el.setAttribute('contenteditable', 'true'));
+    document.body.classList.add('edit-active');
+    this.editToggle.classList.add('active');
+    this.editBanner.classList.add('active');
+
+    const blob = new Blob([html], { type: 'text/html;charset=UTF-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = '武松打虎之PDCA.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+}
+
+// 初始化
+new SlidePresentation();
+new InlineEditor();
+</script>
+</body>
+</html>

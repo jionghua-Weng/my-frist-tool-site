@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>职场271法则 · 高效团队管理核心</title>
+
+<!-- Fonts: Noto Serif SC for elegant display, Noto Sans SC for clean body -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================
+   CSS CUSTOM PROPERTIES (THEME)
+   Premium consulting-firm aesthetic
+   =========================================== */
+:root {
+  /* Background */
+  --bg-primary: #080c14;
+  --bg-secondary: #0d1119;
+  --bg-card: #11161f;
+
+  /* Text */
+  --text-primary: #f0ece6;
+  --text-secondary: #8a8780;
+  --text-muted: #5c5954;
+
+  /* Accent — warm gold */
+  --accent: #c8945c;
+  --accent-glow: rgba(200, 148, 92, 0.2);
+
+  /* Category colors */
+  --color-red: #e8734a;
+  --color-red-bg: rgba(232, 115, 74, 0.08);
+  --color-red-border: rgba(232, 115, 74, 0.25);
+  --color-amber: #d4a434;
+  --color-amber-bg: rgba(212, 164, 52, 0.08);
+  --color-amber-border: rgba(212, 164, 52, 0.25);
+  --color-blue: #6b8db5;
+  --color-blue-bg: rgba(107, 141, 181, 0.08);
+  --color-blue-border: rgba(107, 141, 181, 0.25);
+
+  /* Typography — Chinese-optimized, all clamp() */
+  --font-display: "Noto Serif SC", serif;
+  --font-body: "Noto Sans SC", sans-serif;
+  --title-size: clamp(2rem, 5vw, 4.5rem);
+  --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+  --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+  --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+  --small-size: clamp(0.65rem, 1vw, 0.875rem);
+  --big-number: clamp(4rem, 12vw, 10rem);
+
+  /* Spacing — all clamp() */
+  --slide-padding: clamp(1.5rem, 4vw, 4rem);
+  --content-gap: clamp(0.75rem, 2vw, 2rem);
+  --element-gap: clamp(0.4rem, 1vw, 1rem);
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-normal: 0.7s;
+  --duration-slow: 1s;
+}
+
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   =========================================== */
+
+/* 1. Lock html/body to viewport */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* 2. Each slide = exact viewport height */
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 3. Content container with flex for centering */
+.slide-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+  overflow: hidden;
+  padding: var(--slide-padding);
+}
+
+/* 4. Cards/containers use viewport-relative max sizes */
+.card, .container, .content-box {
+  max-width: min(90vw, 1000px);
+  max-height: min(80vh, 700px);
+}
+
+/* 5. Lists auto-scale with viewport */
+.feature-list, .bullet-list {
+  gap: clamp(0.4rem, 1vh, 1rem);
+}
+
+.feature-list li, .bullet-list li {
+  font-size: var(--body-size);
+  line-height: 1.4;
+}
+
+/* 6. Grids adapt to available space */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+/* 7. Images constrained to viewport */
+img, .image-container {
+  max-width: 100%;
+  max-height: min(50vh, 400px);
+  object-fit: contain;
+}
+
+/* ===========================================
+   RESPONSIVE BREAKPOINTS
+   =========================================== */
+
+@media (max-height: 700px) {
+  :root {
+    --slide-padding: clamp(0.75rem, 3vw, 2rem);
+    --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+    --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+    --h2-size: clamp(1rem, 3vw, 1.75rem);
+    --big-number: clamp(3rem, 10vw, 7rem);
+  }
+}
+
+@media (max-height: 600px) {
+  :root {
+    --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+    --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+    --title-size: clamp(1.1rem, 4vw, 2rem);
+    --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+  }
+  .nav-dots, .keyboard-hint { display: none; }
+}
+
+@media (max-height: 500px) {
+  :root {
+    --slide-padding: clamp(0.4rem, 2vw, 1rem);
+    --title-size: clamp(1rem, 3.5vw, 1.5rem);
+    --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    --body-size: clamp(0.65rem, 1vw, 0.85rem);
+    --big-number: clamp(2rem, 8vw, 5rem);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --title-size: clamp(1.25rem, 7vw, 2.5rem);
+  }
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* ===========================================
+   REDUCED MOTION
+   =========================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.2s !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ===========================================
+   GLOBAL RESET & BASE
+   =========================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subtle noise texture overlay on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===========================================
+   PROGRESS BAR
+   =========================================== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--color-red), var(--accent));
+  z-index: 10000;
+  transition: width 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ===========================================
+   NAVIGATION DOTS
+   =========================================== */
+.nav-dots {
+  position: fixed;
+  right: clamp(0.75rem, 2vw, 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.5vh, 1rem);
+  z-index: 10000;
+}
+
+.nav-dot {
+  width: clamp(6px, 0.8vw, 10px);
+  height: clamp(6px, 0.8vw, 10px);
+  border-radius: 50%;
+  background: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+}
+
+.nav-dot:hover {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+.nav-dot.active {
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  height: clamp(18px, 3vh, 28px);
+  border-radius: 10px;
+}
+
+/* ===========================================
+   KEYBOARD HINT
+   =========================================== */
+.keyboard-hint {
+  position: fixed;
+  bottom: clamp(0.75rem, 2vh, 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--small-size);
+  color: var(--text-muted);
+  z-index: 10000;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+/* ===========================================
+   BACKGROUND EFFECTS
+   =========================================== */
+
+/* Gradient mesh for depth */
+.bg-mesh {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-mesh::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(200, 148, 92, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.bg-mesh::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -5%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(107, 141, 181, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Subtle grid pattern */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ===========================================
+   ANIMATION: REVEAL ON SCROLL
+   =========================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity var(--duration-normal) var(--ease-out-expo),
+    transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.slide.visible .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays */
+.reveal:nth-child(1) { transition-delay: 0.05s; }
+.reveal:nth-child(2) { transition-delay: 0.15s; }
+.reveal:nth-child(3) { transition-delay: 0.25s; }
+.reveal:nth-child(4) { transition-delay: 0.35s; }
+.reveal:nth-child(5) { transition-delay: 0.45s; }
+.reveal:nth-child(6) { transition-delay: 0.55s; }
+
+/* Scale reveal for big numbers */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition:
+    opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+}
+
+.slide.visible .reveal-scale {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Slide-in from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition:
+    opacity var(--duration-normal) var(--ease-out-expo),
+    transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.slide.visible .reveal-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===========================================
+   SLIDE 1: TITLE SLIDE
+   =========================================== */
+.slide-title {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(200, 148, 92, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(232, 115, 74, 0.05) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+.slide-title .title-main {
+  font-family: var(--font-display);
+  font-size: var(--title-size);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.slide-title .title-main .hl {
+  color: var(--accent);
+  position: relative;
+}
+
+/* Subtle underline glow for the "271" */
+.slide-title .title-main .hl::after {
+  content: '';
+  position: absolute;
+  bottom: -0.1em;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  border-radius: 1px;
+}
+
+.slide-title .title-sub {
+  font-family: var(--font-body);
+  font-size: var(--h3-size);
+  color: var(--text-secondary);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  margin-top: var(--content-gap);
+}
+
+.slide-title .title-tagline {
+  font-size: var(--small-size);
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  font-weight: 400;
+  margin-top: var(--element-gap);
+  text-transform: uppercase;
+}
+
+/* Decorative line */
+.slide-title .title-line {
+  width: clamp(40px, 6vw, 80px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: var(--content-gap) auto 0;
+}
+
+/* ===========================================
+   SLIDE 2: OVERVIEW — THREE CARDS
+   =========================================== */
+.slide-overview {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(200, 148, 92, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(107, 141, 181, 0.04) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+.slide-overview .section-label {
+  font-family: var(--font-body);
+  font-size: var(--small-size);
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: var(--element-gap);
+}
+
+.slide-overview .section-title {
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--content-gap);
+}
+
+/* Card grid */
+.cards-row {
+  display: flex;
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  flex: 0 1 auto;
+  max-height: min(55vh, 480px);
+}
+
+.card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: clamp(8px, 1.2vw, 14px);
+  padding: clamp(1rem, 2.5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 0.8vh, 0.75rem);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition: transform 0.4s var(--ease-out-expo), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Colored top border accent */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: clamp(1rem, 2.5vw, 2rem);
+  right: clamp(1rem, 2.5vw, 2rem);
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  transition: all 0.4s ease;
+}
+
+.card-red::before { background: var(--color-red); }
+.card-amber::before { background: var(--color-amber); }
+.card-blue::before { background: var(--color-blue); }
+
+.card-red { border-top: 2px solid transparent; }
+.card-amber { border-top: 2px solid transparent; }
+.card-blue { border-top: 2px solid transparent; }
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover::before {
+  left: 0;
+  right: 0;
+}
+
+.card-red:hover { border-top-color: var(--color-red); }
+.card-amber:hover { border-top-color: var(--color-amber); }
+.card-blue:hover { border-top-color: var(--color-blue); }
+
+/* Card internal glow */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-red::after { background: radial-gradient(ellipse at 50% 0%, rgba(232, 115, 74, 0.08), transparent 70%); }
+.card-amber::after { background: radial-gradient(ellipse at 50% 0%, rgba(212, 164, 52, 0.08), transparent 70%); }
+.card-blue::after { background: radial-gradient(ellipse at 50% 0%, rgba(107, 141, 181, 0.08), transparent 70%); }
+
+.card:hover::after { opacity: 1; }
+
+.card-percent {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-weight: 900;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.02em;
+}
+
+.card-red .card-percent { color: var(--color-red); }
+.card-amber .card-percent { color: var(--color-amber); }
+.card-blue .card-percent { color: var(--color-blue); }
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.04em;
+}
+
+.card-desc {
+  font-size: var(--body-size);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+.card-desc span {
+  display: block;
+  position: relative;
+  padding-left: 1em;
+}
+
+.card-desc span::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* Slogan bar at bottom */
+.slogan-area {
+  margin-top: var(--content-gap);
+  flex-shrink: 0;
+}
+
+.slogan-bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.slogan-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+.slogan-text {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.slogan-sub {
+  font-size: var(--small-size);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: clamp(0.3rem, 0.6vh, 0.6rem);
+}
+
+/* ===========================================
+   SLIDES 3-5: DETAIL SLIDES (per-category)
+   =========================================== */
+.slide-detail {
+  background:
+    radial-gradient(ellipse at 50% 50%, var(--detail-glow, rgba(200, 148, 92, 0.04)) 0%, transparent 60%),
+    var(--bg-primary);
+}
+
+.detail-layout {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  max-height: 100%;
+}
+
+.detail-number-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detail-number {
+  font-family: var(--font-display);
+  font-size: var(--big-number);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.detail-number.red { color: var(--color-red); }
+.detail-number.amber { color: var(--color-amber); }
+.detail-number.blue { color: var(--color-blue); }
+
+.detail-label {
+  font-family: var(--font-body);
+  font-size: var(--small-size);
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  margin-top: var(--element-gap);
+}
+
+.detail-content-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.detail-title {
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--content-gap);
+}
+
+.detail-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 1vh, 0.8rem);
+}
+
+.detail-list li {
+  font-size: var(--body-size);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding-left: clamp(1rem, 2vw, 1.5rem);
+  position: relative;
+}
+
+.detail-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.detail-list.red li::before { background: var(--color-red); }
+.detail-list.amber li::before { background: var(--color-amber); }
+.detail-list.blue li::before { background: var(--color-blue); }
+
+.detail-accent-line {
+  width: clamp(30px, 4vw, 60px);
+  height: 2px;
+  border-radius: 1px;
+  margin-top: var(--content-gap);
+}
+
+.detail-accent-line.red { background: var(--color-red); }
+.detail-accent-line.amber { background: var(--color-amber); }
+.detail-accent-line.blue { background: var(--color-blue); }
+
+/* ===========================================
+   SLIDE 6: SUMMARY / CLOSING
+   =========================================== */
+.slide-closing {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(200, 148, 92, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(232, 115, 74, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 80%, rgba(107, 141, 181, 0.05) 0%, transparent 40%),
+    var(--bg-primary);
+}
+
+.closing-icon {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: var(--content-gap);
+  opacity: 0.8;
+}
+
+.closing-quote {
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  max-width: min(85vw, 700px);
+}
+
+.closing-quote .hl {
+  color: var(--accent);
+}
+
+.closing-sub {
+  font-size: var(--body-size);
+  color: var(--text-secondary);
+  margin-top: var(--content-gap);
+  letter-spacing: 0.08em;
+  font-weight: 300;
+}
+
+.closing-line {
+  width: clamp(60px, 8vw, 120px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: var(--content-gap) auto 0;
+}
+
+/* ===========================================
+   RESPONSIVE: Stack detail layout on narrow
+   =========================================== */
+@media (max-width: 700px) {
+  .detail-layout {
+    flex-direction: column;
+    gap: var(--content-gap);
+    text-align: center;
+    align-items: center;
+  }
+  .detail-number-col { align-items: center; }
+  .detail-list li { text-align: left; }
+
+  .cards-row {
+    flex-direction: column;
+    max-height: none;
+  }
+  .card { flex: 0 0 auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots" aria-label="幻灯片导航"></nav>
+
+<!-- Keyboard hint -->
+<div class="keyboard-hint">← → 或空格键切换 ｜ 滑动翻页</div>
+
+<!-- ===========================================
+     SLIDE 1: TITLE
+     =========================================== -->
+<section class="slide slide-title" id="slide-1">
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+  <h1 class="title-main reveal">职场 <span class="hl">271</span> 法则</h1>
+  <p class="title-sub reveal">高效团队管理核心</p>
+  <p class="title-tagline reveal">二八分化进阶版 &nbsp;·&nbsp; 优胜劣汰 激活团队</p>
+  <div class="title-line reveal"></div>
+</section>
+
+<!-- ===========================================
+     SLIDE 2: THREE CATEGORIES OVERVIEW
+     =========================================== -->
+<section class="slide slide-overview" id="slide-2">
+  <div class="bg-mesh"></div>
+  <div class="slide-content">
+    <div class="section-label reveal">核心框架</div>
+    <h2 class="section-title reveal">人才分布三层次</h2>
+    <div class="cards-row">
+      <!-- 20% Card -->
+      <div class="card card-red reveal" data-tilt>
+        <div class="card-percent">20%</div>
+        <div class="card-title">优秀骨干</div>
+        <div class="card-desc">
+          <span>精英标杆 · 主动突破</span>
+          <span>重点激励 · 优先培养</span>
+        </div>
+      </div>
+      <!-- 70% Card -->
+      <div class="card card-amber reveal" data-tilt>
+        <div class="card-percent">70%</div>
+        <div class="card-title">中坚力量</div>
+        <div class="card-desc">
+          <span>踏实履职 · 团队基石</span>
+          <span>重点赋能 · 持续成长</span>
+        </div>
+      </div>
+      <!-- 10% Card -->
+      <div class="card card-blue reveal" data-tilt>
+        <div class="card-percent">10%</div>
+        <div class="card-title">末尾后进</div>
+        <div class="card-desc">
+          <span>能力滞后 · 态度散漫</span>
+          <span>限期改进 · 优化淘汰</span>
+        </div>
+      </div>
+    </div>
+    <div class="slogan-area reveal">
+      <div class="slogan-bar">
+        <div class="slogan-line"></div>
+        <div class="slogan-text">奖励优秀 &nbsp;·&nbsp; 赋能中间 &nbsp;·&nbsp; 淘汰末尾</div>
+        <div class="slogan-line"></div>
+      </div>
+      <p class="slogan-sub">打造高活力、高绩效精英团队</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================
+     SLIDE 3: 20% 优秀骨干 DETAIL
+     =========================================== -->
+<section class="slide slide-detail" id="slide-3" style="--detail-glow: rgba(232, 115, 74, 0.06);">
+  <div class="bg-mesh"></div>
+  <div class="slide-content">
+    <div class="detail-layout">
+      <div class="detail-number-col reveal-scale">
+        <div class="detail-number red">20%</div>
+        <div class="detail-label">头部梯队</div>
+      </div>
+      <div class="detail-content-col">
+        <h2 class="detail-title reveal">优秀骨干</h2>
+        <ul class="detail-list red">
+          <li class="reveal">精英标杆，主动承担挑战性任务，持续突破业绩天花板</li>
+          <li class="reveal">作为团队核心驱动力，以结果为导向带动整体战斗力</li>
+          <li class="reveal">重点激励对象，优先获得晋升资源与快速发展通道</li>
+          <li class="reveal">赋予导师角色，以强带弱形成正向人才裂变效应</li>
+        </ul>
+        <div class="detail-accent-line red reveal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================
+     SLIDE 4: 70% 中坚力量 DETAIL
+     =========================================== -->
+<section class="slide slide-detail" id="slide-4" style="--detail-glow: rgba(212, 164, 52, 0.06);">
+  <div class="bg-mesh"></div>
+  <div class="slide-content">
+    <div class="detail-layout">
+      <div class="detail-number-col reveal-scale">
+        <div class="detail-number amber">70%</div>
+        <div class="detail-label">中坚力量</div>
+      </div>
+      <div class="detail-content-col">
+        <h2 class="detail-title reveal">中坚力量</h2>
+        <ul class="detail-list amber">
+          <li class="reveal">踏实履职，构成团队稳定基石，保障日常运营平稳推进</li>
+          <li class="reveal">具备成长潜力，通过系统赋能可从合格走向优秀</li>
+          <li class="reveal">重点投入培训资源，提供清晰的职业发展路径规划</li>
+          <li class="reveal">建立导师带教机制，由20%头部骨干带动持续进阶</li>
+        </ul>
+        <div class="detail-accent-line amber reveal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================
+     SLIDE 5: 10% 末尾后进 DETAIL
+     =========================================== -->
+<section class="slide slide-detail" id="slide-5" style="--detail-glow: rgba(107, 141, 181, 0.06);">
+  <div class="bg-mesh"></div>
+  <div class="slide-content">
+    <div class="detail-layout">
+      <div class="detail-number-col reveal-scale">
+        <div class="detail-number blue">10%</div>
+        <div class="detail-label">末尾梯队</div>
+      </div>
+      <div class="detail-content-col">
+        <h2 class="detail-title reveal">末尾后进</h2>
+        <ul class="detail-list blue">
+          <li class="reveal">能力或态度未达岗位要求，需要正视差距并限期改进</li>
+          <li class="reveal">明确改进目标与时间节点，给予公平的观察与辅导期</li>
+          <li class="reveal">建立明确的退出机制，对持续不达标者果断优化淘汰</li>
+          <li class="reveal">保持团队活力，避免劣币驱逐良币，维护高绩效文化</li>
+        </ul>
+        <div class="detail-accent-line blue reveal"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================================
+     SLIDE 6: CLOSING / SUMMARY
+     =========================================== -->
+<section class="slide slide-closing" id="slide-6">
+  <div class="bg-mesh"></div>
+  <div class="closing-icon reveal">◆</div>
+  <p class="closing-quote reveal">
+    奖励<span class="hl">优秀</span> &nbsp;·&nbsp;
+    赋能<span class="hl">中间</span> &nbsp;·&nbsp;
+    淘汰<span class="hl">末尾</span>
+  </p>
+  <p class="closing-sub reveal">打造高活力、高绩效精英团队</p>
+  <div class="closing-line reveal"></div>
+</section>
+
+<!-- ===========================================
+     SLIDE PRESENTATION CONTROLLER
+     =========================================== -->
+<script>
+class SlidePresentation {
+  constructor() {
+    this.slides = document.querySelectorAll('.slide');
+    this.totalSlides = this.slides.length;
+    this.currentSlide = 0;
+    this.isTransitioning = false;
+
+    this.progressBar = document.getElementById('progressBar');
+    this.navDotsContainer = document.getElementById('navDots');
+    this.keyboardHint = document.querySelector('.keyboard-hint');
+
+    this.init();
+  }
+
+  init() {
+    this.setupIntersectionObserver();
+    this.setupNavDots();
+    this.setupKeyboardNav();
+    this.setupWheelNav();
+    this.setupTouchNav();
+    this.setupTiltEffect();
+    this.updateProgress(0);
+    this.hideHintAfterDelay();
+  }
+
+  /* ---- Intersection Observer: triggers reveal animations ---- */
+  setupIntersectionObserver() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const index = Array.from(this.slides).indexOf(entry.target);
+          if (index >= 0) {
+            this.currentSlide = index;
+            this.updateProgress(index);
+            this.updateNavDots(index);
+          }
+        }
+      });
+    }, options);
+
+    this.slides.forEach(slide => this.observer.observe(slide));
+  }
+
+  /* ---- Navigation dots ---- */
+  setupNavDots() {
+    this.navDotsContainer.innerHTML = '';
+    for (let i = 0; i < this.totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'nav-dot';
+      dot.setAttribute('aria-label', `转到第 ${i + 1} 页`);
+      dot.addEventListener('click', () => this.goToSlide(i));
+      this.navDotsContainer.appendChild(dot);
+    }
+    this.navDots = this.navDotsContainer.querySelectorAll('.nav-dot');
+    if (this.navDots.length > 0) this.navDots[0].classList.add('active');
+  }
+
+  updateNavDots(index) {
+    this.navDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  /* ---- Progress bar ---- */
+  updateProgress(index) {
+    const pct = ((index + 1) / this.totalSlides) * 100;
+    this.progressBar.style.width = pct + '%';
+  }
+
+  /* ---- Keyboard navigation ---- */
+  setupKeyboardNav() {
+    document.addEventListener('keydown', (e) => {
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+        case ' ':
+          e.preventDefault();
+          this.nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          this.prevSlide();
+          break;
+        case 'Home':
+          e.preventDefault();
+          this.goToSlide(0);
+          break;
+        case 'End':
+          e.preventDefault();
+          this.goToSlide(this.totalSlides - 1);
+          break;
+      }
+    });
+  }
+
+  /* ---- Mouse wheel (debounced) ---- */
+  setupWheelNav() {
+    let wheelTimeout;
+    window.addEventListener('wheel', (e) => {
+      if (this.isTransitioning) return;
+      e.preventDefault();
+      if (wheelTimeout) return;
+      wheelTimeout = setTimeout(() => { wheelTimeout = null; }, 800);
+
+      if (e.deltaY > 0) this.nextSlide();
+      else this.prevSlide();
+    }, { passive: false });
+  }
+
+  /* ---- Touch / swipe ---- */
+  setupTouchNav() {
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (this.isTransitioning) return;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const threshold = 50;
+
+      if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > threshold) {
+        if (dy > 0) this.prevSlide();
+        else this.nextSlide();
+      }
+    });
+  }
+
+  /* ---- Navigation helpers ---- */
+  goToSlide(index) {
+    if (index < 0 || index >= this.totalSlides || index === this.currentSlide) return;
+    this.isTransitioning = true;
+    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => { this.isTransitioning = false; }, 800);
+  }
+
+  nextSlide() {
+    if (this.currentSlide < this.totalSlides - 1) {
+      this.goToSlide(this.currentSlide + 1);
+    }
+  }
+
+  prevSlide() {
+    if (this.currentSlide > 0) {
+      this.goToSlide(this.currentSlide - 1);
+    }
+  }
+
+  /* ---- Hide keyboard hint after first interaction ---- */
+  hideHintAfterDelay() {
+    const hide = () => {
+      this.keyboardHint.style.opacity = '0';
+      setTimeout(() => { this.keyboardHint.remove(); }, 500);
+    };
+
+    const onInteract = () => {
+      hide();
+      document.removeEventListener('keydown', onInteract);
+      document.removeEventListener('wheel', onInteract);
+      document.removeEventListener('touchstart', onInteract);
+    };
+
+    document.addEventListener('keydown', onInteract, { once: true });
+    document.addEventListener('wheel', onInteract, { once: true });
+    document.addEventListener('touchstart', onInteract, { once: true });
+
+    // Auto-hide after 8 seconds
+    setTimeout(hide, 8000);
+  }
+
+  /* ---- 3D Tilt effect on cards ---- */
+  setupTiltEffect() {
+    const cards = document.querySelectorAll('[data-tilt]');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `translateY(-4px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) rotateY(0) rotateX(0)';
+      });
+    });
+  }
+}
+
+// Boot
+document.addEventListener('DOMContentLoaded', () => {
+  new SlidePresentation();
+});
+</script>
+
+</body>
+</html>

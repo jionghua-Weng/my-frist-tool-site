@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>霓虹胶片 · 海报系列</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#0a0a0b;
+    color:#f0ede8;
+    font-family:'Noto Sans SC',sans-serif;
+    display:flex;flex-direction:column;align-items:center;gap:48px;
+    padding:48px 16px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---- 仪表盘工具栏 ---- */
+  .toolbar{
+    position:fixed;top:16px;right:16px;z-index:999;
+    display:flex;gap:8px;
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;
+  }
+  .toolbar button{
+    background:rgba(255,255,255,.08);color:#f0ede8;border:1px solid rgba(255,255,255,.18);
+    padding:10px 18px;cursor:pointer;border-radius:2px;
+    text-transform:uppercase;letter-spacing:.14em;
+    transition:all .25s;
+  }
+  .toolbar button:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35)}
+
+  /* ---- 海报画布 ---- */
+  .poster{
+    position:relative;
+    width:450px;height:800px;
+    overflow:hidden;
+    border-radius: 2px;
+    box-shadow:0 0 0 1px rgba(255,255,255,.06),0 24px 80px rgba(0,0,0,.6);
+  }
+
+  /* ---- 画布纹理层 ---- */
+  .poster::before{
+    content:"";position:absolute;inset:0;z-index:60;pointer-events:none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+    background-size:200px 200px;
+    mix-blend-mode:overlay;
+  }
+
+  /* ---- 胶片颗粒(叠加) ---- */
+  .poster::after{
+    content:"";position:absolute;inset:0;z-index:61;pointer-events:none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.08'/%3E%3C/svg%3E");
+    background-size:300px 300px;
+    mix-blend-mode:screen;
+  }
+
+  /* ---- 背景图层 ---- */
+  .bg-layer{
+    position:absolute;inset:0;z-index:0;
+    background:radial-gradient(ellipse at 50% 55%, #0d0f18 0%, #05050a 100%);
+  }
+  .bg-neon-pink{
+    position:absolute;top:-12%;right:-8%;width:55%;height:45%;
+    background:radial-gradient(ellipse,#ff2d78 0%,transparent 70%);
+    opacity:.18;filter:blur(60px);
+  }
+  .bg-neon-blue{
+    position:absolute;bottom:-5%;left:-5%;width:50%;height:40%;
+    background:radial-gradient(ellipse,#00b4d8 0%,transparent 70%);
+    opacity:.15;filter:blur(70px);
+  }
+  .bg-fluorescent{
+    position:absolute;top:18%;left:50%;transform:translateX(-50%);
+    width:70%;height:50%;
+    background:linear-gradient(180deg,rgba(230,240,255,.06) 0%,rgba(200,220,255,.02) 50%,transparent 100%);
+  }
+  /* 便利店货架模糊背景暗示 */
+  .shelf-hint{
+    position:absolute;top:0;left:0;right:0;bottom:48%;
+    background:
+      repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(255,255,255,.015) 28px,rgba(255,255,255,.015) 29px),
+      repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,.012) 80px,rgba(255,255,255,.012) 81px);
+    z-index:1;opacity:.7;
+  }
+  .glass-door{
+    position:absolute;inset:0;z-index:2;
+    background:linear-gradient(135deg,rgba(255,255,255,.03) 0%,transparent 40%,transparent 60%,rgba(180,200,255,.04) 100%);
+  }
+
+  /* ---- 内容层 ---- */
+  .content{
+    position:relative;z-index:50;
+    width:100%;height:100%;
+    display:flex;flex-direction:column;
+    padding:48px 40px;
+  }
+
+  /* ---- 排版元素 ---- */
+  .tag-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .tag-line{width:28px;height:1px;background:#ff2d78;opacity:.8}
+  .tag-text{
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.32em;
+    text-transform:uppercase;color:#ff2d78;opacity:.85
+  }
+  .headline{
+    font-family:'Noto Serif SC',serif;font-weight:700;font-size:38px;
+    line-height:1.12;letter-spacing:.02em;margin:12px 0 8px;
+  }
+  .headline .pink{color:#ff4d8a}
+  .headline .blue{color:#5ec5d4}
+  .subhead{
+    font-family:'Noto Serif SC',serif;font-weight:300;font-size:16px;
+    line-height:1.6;opacity:.7;letter-spacing:.06em;margin-bottom:auto;
+  }
+  .en-accent{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:600;
+    font-size:13px;letter-spacing:.08em;opacity:.45;margin-bottom:28px;
+  }
+  .bottom-block{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .specs{
+    font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;
+    text-transform:uppercase;opacity:.5;
+    display:flex;gap:18px;flex-wrap:wrap;
+  }
+  .specs span{opacity:.7}
+  .quote{
+    font-family:'Noto Serif SC',serif;font-weight:300;font-size:14px;
+    line-height:1.6;opacity:.55;font-style:italic;letter-spacing:.04em;
+    padding-left:14px;border-left:1px solid rgba(255,255,255,.18);
+  }
+
+  /* ---- 第1张: 封面/氛围 ---- */
+  .p1 .bg-neon-pink{opacity:.22;width:60%;height:50%}
+  .p1 .bg-neon-blue{opacity:.18}
+  .p1 .headline{font-size:44px;margin-top:18vh}
+
+  /* ---- 第2张: 人物特写 ---- */
+  .p2 .headline{font-size:34px;margin-top:auto;padding-top:40px}
+  .p2 .subhead{font-size:14px;margin-bottom:0}
+  .p2 .bg-fluorescent{top:0;height:65%}
+  .p2 .shelf-hint{bottom:55%}
+
+  /* ---- 第3张: 霓虹色调 ---- */
+  .p3{color:#0a0a0b}
+  .p3 .bg-layer{background:radial-gradient(ellipse at 50% 55%, #f8f4ee 0%, #e8e2d8 100%)}
+  .p3 .bg-neon-pink{opacity:.12}
+  .p3 .bg-neon-blue{opacity:.12}
+  .p3 .glass-door{background:linear-gradient(135deg,rgba(0,0,0,.04) 0%,transparent 50%,rgba(0,0,0,.03) 100%)}
+  .p3 .tag-text{color:#c01a3a}
+  .p3 .tag-line{background:#c01a3a}
+  .p3 .headline{color:#0a0a0b}
+  .p3 .headline .pink{color:#d42a5a}
+  .p3 .headline .blue{color:#1a7a8c}
+  .p3 .subhead{color:#0a0a0b;opacity:.6}
+  .p3 .en-accent{color:#0a0a0b;opacity:.35}
+  .p3 .specs{color:#0a0a0b;opacity:.45}
+  .p3 .specs span{color:#0a0a0b;opacity:.6}
+  .p3 .quote{color:#0a0a0b;opacity:.4;border-left-color:rgba(0,0,0,.15)}
+
+  /* ---- 第4张: 极简电影 ---- */
+  .p4 .bg-layer{background:radial-gradient(ellipse at 50% 40%, #07070d 0%, #010103 100%)}
+  .p4 .bg-neon-pink{opacity:.12;width:50%;height:35%}
+  .p4 .bg-neon-blue{opacity:.08}
+  .p4 .bg-fluorescent{display:none}
+  .p4 .shelf-hint{display:none}
+  .p4 .content{justify-content:center;align-items:center;text-align:center}
+  .p4 .headline{font-size:48px;text-align:center}
+  .p4 .subhead{text-align:center;max-width:80%}
+
+  /* ---- 第5张: 拍立得 ---- */
+  .p5 .bg-layer{background:#0f0d0a}
+  .p5 .bg-neon-pink{opacity:.1}
+  .p5 .bg-neon-blue{opacity:.08}
+  .p5 .polaroid-frame{
+    margin:auto;width:75%;aspect-ratio:.85;
+    background:#faf7f0;padding:14px 14px 48px 14px;
+    box-shadow:0 8px 40px rgba(0,0,0,.5);
+    display:flex;flex-direction:column;
+  }
+  .p5 .polaroid-img{
+    flex:1;background:linear-gradient(135deg,#1a1520 30%,#0d1820 60%,#101018 100%);
+    position:relative;overflow:hidden;
+  }
+  .p5 .polaroid-img::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 45%,rgba(200,210,230,.08) 0%,transparent 60%);
+  }
+  .p5 .polaroid-caption{
+    font-family:'Noto Serif SC',serif;font-weight:400;font-size:11px;
+    color:#3a3530;text-align:center;margin-top:12px;letter-spacing:.08em;
+  }
+  .p5 .content{justify-content:center}
+
+  /* ---- 响应式 ---- */
+  @media(max-width:520px){
+    .poster{width:92vw;height:calc(92vw * 1.78)}
+    .headline{font-size:clamp(24px,7vw,38px)!important}
+    .content{padding:clamp(24px,6vw,48px) clamp(20px,5vw,40px)}
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="screenshotAll()">截图保存</button>
+</div>
+
+<!-- 海报1: 封面氛围 -->
+<div class="poster p1" id="poster-1">
+  <div class="bg-layer">
+    <div class="bg-neon-pink"></div>
+    <div class="bg-neon-blue"></div>
+    <div class="bg-fluorescent"></div>
+    <div class="shelf-hint"></div>
+    <div class="glass-door"></div>
+  </div>
+  <div class="content">
+    <div class="tag-row"><span class="tag-line"></span><span class="tag-text">35mm · 深夜便利店</span></div>
+    <div class="headline">
+      荧光灯<span class="pink">溺亡</span><br>在<span class="blue">霓虹</span>里
+    </div>
+    <div class="subhead">
+      玻璃门上倒映着两个世界——<br>里面是冰冷的白，外面是暧昧的粉与蓝
+    </div>
+    <div class="en-accent">Fuji Superia 400 · pushed +1</div>
+    <div class="bottom-block">
+      <div class="specs"><span>ISO 800</span> <span>f/2.0</span> <span>1/60s</span> <span>35mm</span></div>
+      <div class="quote">"便利店是城市的灯塔，永远亮着，永远不属于任何人。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- 海报2: 人物特写 -->
+<div class="poster p2" id="poster-2">
+  <div class="bg-layer">
+    <div class="bg-neon-pink"></div>
+    <div class="bg-neon-blue"></div>
+    <div class="bg-fluorescent"></div>
+    <div class="shelf-hint"></div>
+    <div class="glass-door"></div>
+  </div>
+  <div class="content">
+    <div class="tag-row"><span class="tag-line"></span><span class="tag-text">Frame 23 · 亲密中景</span></div>
+    <div class="headline">
+      她靠在<span class="pink">玻璃门</span>上<br>手里握着<span class="blue">冰凉的夜</span>
+    </div>
+    <div class="subhead">
+      马尾松散，碎发贴在脸颊。<br>瓷白的皮肤映着粉蓝交织的光。<br>自然的光泽，不是修出来的光滑。
+    </div>
+    <div class="en-accent">Kodak Portra 800 · tungsten light</div>
+    <div class="bottom-block">
+      <div class="specs"><span>ISO 800</span> <span>f/1.4</span> <span>1/125s</span> <span>50mm</span></div>
+      <div class="quote">"不做完美的塑料人偶，做有毛孔、有雀斑、有温度的真人。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- 海报3: 反转色调 · 白日霓虹 -->
+<div class="poster p3" id="poster-3">
+  <div class="bg-layer">
+    <div class="bg-neon-pink"></div>
+    <div class="bg-neon-blue"></div>
+    <div class="bg-fluorescent"></div>
+    <div class="shelf-hint"></div>
+    <div class="glass-door"></div>
+  </div>
+  <div class="content">
+    <div class="tag-row"><span class="tag-line"></span><span class="tag-text">反转片 · E-6 迫冲</span></div>
+    <div class="headline">
+      褪去<span class="pink">夜色</span><br>看见<span class="blue">真实</span>质地
+    </div>
+    <div class="subhead">
+      雀斑、毛孔、松散的碎发。<br>不完美的细节，才是底片上最贵的那一层银盐。
+    </div>
+    <div class="en-accent">Kodak Ektachrome E100 · cross-processed</div>
+    <div class="bottom-block">
+      <div class="specs"><span>ISO 100</span> <span>f/2.8</span> <span>1/250s</span> <span>85mm</span></div>
+      <div class="quote">"数字可以无限锐化，但银盐颗粒会呼吸。"</div>
+    </div>
+  </div>
+</div>
+
+<!-- 海报4: 极简电影标题 -->
+<div class="poster p4" id="poster-4">
+  <div class="bg-layer">
+    <div class="bg-neon-pink"></div>
+    <div class="bg-neon-blue"></div>
+    <div class="bg-fluorescent"></div>
+    <div class="shelf-hint"></div>
+    <div class="glass-door"></div>
+  </div>
+  <div class="content">
+    <div class="tag-row"><span class="tag-line"></span><span class="tag-text">午夜第二十四小时</span></div>
+    <div class="headline" style="font-size:56px;line-height:1.05;">
+      <span class="pink">NEON</span><br>&amp;<br><span class="blue">GRAIN</span>
+    </div>
+    <div class="subhead" style="margin-top:8px;">
+      霓虹与颗粒 · 一场关于真实的胶片宣言
+    </div>
+    <div class="en-accent" style="margin-top:12px;">directed by the light itself</div>
+    <div class="bottom-block" style="margin-top:24px;">
+      <div class="specs"><span>2.35:1</span> <span>35mm</span> <span>Dolby SR</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 海报5: 拍立得风格 -->
+<div class="poster p5" id="poster-5">
+  <div class="bg-layer">
+    <div class="bg-neon-pink"></div>
+    <div class="bg-neon-blue"></div>
+    <div class="bg-fluorescent"></div>
+    <div class="shelf-hint"></div>
+    <div class="glass-door"></div>
+  </div>
+  <div class="content">
+    <div class="polaroid-frame">
+      <div class="polaroid-img">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2;color:#f0ede8;font-family:'Noto Serif SC',serif;opacity:.4;">
+          <div style="font-size:48px;font-weight:700;line-height:1;">📸</div>
+        </div>
+      </div>
+      <div class="polaroid-caption">便利店门口 · 凌晨2:47 · 2025</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function screenshotAll(){
+  alert('在浏览器中打开开发者工具(Ctrl+Shift+I)，切换设备模式模拟手机，然后逐个截图即可。\\n\\n推荐尺寸：375×667 或 414×896 (iPhone比例)');
+}
+</script>
+</body>
+</html>
