@@ -4,7 +4,10 @@ on:
   push:
     branches: [main]
     paths:
-      - 'yingyu-site/**'
+      - '**.html'
+      - '**.css'
+      - '**.js'
+      - '**.svg'
 
 permissions:
   contents: read
@@ -31,7 +34,7 @@ jobs:
       - name: 上传 yingyu-site 为 Pages 内容
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './yingyu-site'
+          path: '.'
 
       - name: 部署到 GitHub Pages
         id: deployment
