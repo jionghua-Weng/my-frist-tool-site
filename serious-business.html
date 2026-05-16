@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>手绘 M 笑脸 — 点击有惊喜</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1a1a2e;
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    overflow: hidden;
+}
+
+.face {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.face:active { transform: scale(0.96); transition: transform 0.15s; }
+
+.face-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 0 80px rgba(245, 200, 66, 0.35));
+}
+
+.pop {
+    position: fixed;
+    pointer-events: none;
+    font-size: 36px;
+    z-index: 100;
+    animation: floatUp 1.2s ease-out forwards;
+}
+@keyframes floatUp {
+    0%   { opacity: 1; transform: translateY(0) scale(0.5) rotate(0deg); }
+    30%  { opacity: 1; transform: translateY(-30px) scale(1.2) rotate(-10deg); }
+    100% { opacity: 0; transform: translateY(-160px) scale(0.8) rotate(15deg); }
+}
+
+.eye {
+    position: absolute;
+    width: 60px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+.eye.left  { top: 112px; left: 76px; }
+.eye.right { top: 112px; right: 76px; }
+
+.eye-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.pupil {
+    width: 24px;
+    height: 24px;
+    background: #111;
+    border-radius: 46% 44% 42% 48%;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.05s ease-out;
+}
+.pupil::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+
+/* 微笑 */
+.mouth {
+    position: absolute;
+    bottom: 62px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+.mouth svg { display: block; }
+
+.label {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+</style>
+</head>
+<body>
+
+<div class="face" id="face">
+    <!-- 手绘 M 金拱门 -->
+    <svg class="face-bg" viewBox="0 0 320 320">
+        <!-- 主 M 形状 -->
+        <path d="M 50 270
+                 C 55 190, 65 110, 80 68
+                 C 88 50, 98 58, 112 80
+                 C 122 94, 130 104, 142 108
+                 C 152 112, 158 108, 160 104
+                 C 162 108, 168 112, 178 108
+                 C 190 104, 198 94, 208 80
+                 C 222 58, 232 50, 240 68
+                 C 255 110, 265 190, 270 270
+                 Z"
+              fill="#f5c842" stroke="#d4a017" stroke-width="4" stroke-linejoin="round"/>
+        <!-- 手绘辅助线 -->
+        <path d="M 48 268
+                 C 53 186, 63 108, 78 66
+                 C 86 48, 96 56, 110 78
+                 C 120 92, 128 102, 140 106
+                 C 150 110, 156 106, 160 102
+                 C 164 106, 170 110, 180 106
+                 C 192 102, 200 92, 210 78
+                 C 224 56, 234 48, 242 66
+                 C 257 108, 267 186, 272 268
+                 Z"
+              fill="none" stroke="#c8950a" stroke-width="1.5" stroke-linejoin="round" opacity="0.35"/>
+    </svg>
+
+    <!-- 左眼 — 嵌在左拱门里 -->
+    <div class="eye left">
+        <svg class="eye-bg" viewBox="0 0 60 64">
+            <ellipse cx="30" cy="32" rx="25" ry="28" fill="#fff" stroke="#d4a017" stroke-width="2"
+                     transform="rotate(-2 30 32)"/>
+            <ellipse cx="30" cy="32" rx="24" ry="27" fill="none" stroke="#e8e8e8" stroke-width="0.8"
+                     transform="rotate(-1 30 32)" opacity="0.5"/>
+        </svg>
+        <div class="pupil" id="pupilL"></div>
+    </div>
+
+    <!-- 右眼 — 嵌在右拱门里，略小 -->
+    <div class="eye right">
+        <svg class="eye-bg" viewBox="0 0 60 64">
+            <ellipse cx="30" cy="32" rx="22" ry="25" fill="#fff" stroke="#d4a017" stroke-width="2"
+                     transform="rotate(2 30 32)"/>
+            <ellipse cx="30" cy="32" rx="21" ry="24" fill="none" stroke="#e8e8e8" stroke-width="0.8"
+                     transform="rotate(3 30 32)" opacity="0.5"/>
+        </svg>
+        <div class="pupil" id="pupilR"></div>
+    </div>
+
+    <!-- 手绘微笑 -->
+    <div class="mouth">
+        <svg width="90" height="36" viewBox="0 0 90 36">
+            <path d="M 10 8 Q 45 34 80 8" fill="none" stroke="#111" stroke-width="4.5"
+                  stroke-linecap="round"/>
+            <path d="M 10 8 Q 8 6 14 10" fill="none" stroke="#111" stroke-width="2.5"
+                  stroke-linecap="round"/>
+            <path d="M 80 8 Q 82 6 76 10" fill="none" stroke="#111" stroke-width="2.5"
+                  stroke-linecap="round"/>
+        </svg>
+    </div>
+</div>
+
+<div class="label">: )</div>
+
+<script>
+(function() {
+    var face = document.getElementById('face');
+    var pupilL = document.getElementById('pupilL');
+    var pupilR = document.getElementById('pupilR');
+    var maxShift = 16;
+
+    document.addEventListener('mousemove', function(e) {
+        var faceRect = face.getBoundingClientRect();
+        var faceCX = faceRect.left + faceRect.width / 2;
+        var faceCY = faceRect.top + faceRect.height / 2;
+        var dx = e.clientX - faceCX;
+        var dy = e.clientY - faceCY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var maxDist = 400;
+        var ratio = Math.min(dist / maxDist, 1);
+        var shiftX = (dx / (dist || 1)) * ratio * maxShift;
+        var shiftY = (dy / (dist || 1)) * ratio * maxShift;
+        pupilL.style.transform = 'translate(' + shiftX + 'px, ' + shiftY + 'px)';
+        pupilR.style.transform = 'translate(' + shiftX + 'px, ' + shiftY + 'px)';
+    });
+
+    var pops = ['❤️', '💋', '💕', '😘', '💖', '💗'];
+    face.addEventListener('click', function(e) {
+        for (var i = 0; i < 5; i++) {
+            (function() {
+                var el = document.createElement('span');
+                el.className = 'pop';
+                el.textContent = pops[Math.floor(Math.random() * pops.length)];
+                el.style.left = (e.clientX + (Math.random() - 0.5) * 80) + 'px';
+                el.style.top  = (e.clientY + (Math.random() - 0.5) * 40) + 'px';
+                el.style.animationDuration = (0.8 + Math.random() * 1) + 's';
+                el.style.fontSize = (24 + Math.random() * 28) + 'px';
+                document.body.appendChild(el);
+                setTimeout(function() { el.remove(); }, 1300);
+            })();
+        }
+    });
+})();
+</script>
+
+</body>
+</html>
