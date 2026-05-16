@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OG 分享图生成器 — 英语研习社</title>
+<style>
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#e8e8e8;display:flex;flex-direction:column;align-items:center;padding:30px 20px 50px;gap:16px}
+h2{color:#39375b;margin:0}
+canvas{border-radius:12px;box-shadow:0 4px 28px rgba(0,0,0,.15);max-width:600px;width:100%;height:auto}
+button{padding:14px 36px;font-size:16px;font-weight:600;color:#fff;background:#39375b;border:none;border-radius:10px;cursor:pointer;font-family:inherit;transition:background .2s}
+button:hover{background:#2d2a4a}
+.info{font-size:13px;color:#999;margin:0;text-align:center;max-width:500px;line-height:1.6}
+</style>
+</head>
+<body>
+<h2>英语研习社 · 社交分享图</h2>
+<canvas id="c" width="1200" height="630"></canvas>
+<button id="dlBtn">下载 og-image.png</button>
+<p class="info">社交平台手机端通常裁成 1:1 正方 — 设计保证核心内容居中可见</p>
+
+<script>
+(function(){
+var c=document.getElementById('c');
+var ctx=c.getContext('2d');
+var W=1200,H=630;
+var cx=W/2; // 水平中心
+
+// 背景
+ctx.fillStyle='#39375b';
+ctx.fillRect(0,0,W,H);
+
+// 金底条
+ctx.fillRect(0,626,W,4);
+
+// ===== 主标题 =====
+ctx.textAlign='center';
+ctx.fillStyle='#fff';
+ctx.font='800 88px "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
+ctx.fillText('英语研习社',cx,210);
+
+// ===== 副标题 =====
+ctx.fillStyle='#f5c842';
+ctx.font='600 36px "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
+ctx.fillText('免费英语学习，从实用出发',cx,290);
+
+// ===== 简短说明 =====
+ctx.fillStyle='rgba(255,255,255,0.6)';
+ctx.font='400 30px "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
+ctx.fillText('语法 · 词汇 · 句型 · 口语',cx,400);
+
+// ===== 域名 =====
+ctx.fillStyle='rgba(255,255,255,0.35)';
+ctx.font='500 26px "Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
+ctx.fillText('easyeng.club',cx,500);
+
+// 下载
+document.getElementById('dlBtn').addEventListener('click',function(){
+    var link=document.createElement('a');
+    link.download='og-image.png';
+    link.href=c.toDataURL('image/png');
+    link.click();
+});
+})();
+</script>
+</body>
+</html>
