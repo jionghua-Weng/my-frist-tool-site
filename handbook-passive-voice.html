@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>被动语态：把"谁做的"藏起来 — 语法魔典 | 英语研习社</title>
+<meta name="description" content="语法魔典第八篇：被动语态不是死记be+done，而是搞懂什么时候该藏主语、什么时候不该藏。八大时态被动式一表打尽。">
+<meta property="og:title" content="被动语态：把"谁做的"藏起来 — 语法魔典 | 英语研习社">
+<meta property="og:description" content="语法魔典第八篇：被动语态不是死记be+done，而是搞懂什么时候该藏主语、什么时候不该藏。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://easyeng.club/handbook-passive-voice.html">
+<meta property="og:site_name" content="英语研习社">
+<meta property="og:image" content="https://easyeng.club/og-image.png?v=2">
+<meta property="og:image:type" content="image/png">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="被动语态：把"谁做的"藏起来 — 语法魔典 | 英语研习社">
+<meta name="twitter:description" content="语法魔典第八篇：被动语态不是死记be+done，而是搞懂什么时候该藏主语。">
+<style>
+:root{--navy:#39375b;--accent:#3498db;--accent-hover:#1464cc;--text-dark:#111827;--text-gray:#6b7280;--text-medium:#4b5563;--white:#ffffff;--bg-light:#f8f9fa;--max-width:1200px;--font-heading:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;--font-body:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);font-size:18px;line-height:1.7;color:var(--text-medium);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+.site-header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--max-width);margin:0 auto;padding:0 20px}
+.logo a{display:flex;align-items:center;gap:10px;color:var(--white);font-size:21px;font-weight:700;letter-spacing:.5px;text-decoration:none}
+.logo-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0}.logo-icon svg{width:100%;height:100%;display:block}
+.main-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.main-nav a{color:var(--white);padding:8px 13px;border-radius:6px;font-size:14.5px;font-weight:500;white-space:nowrap;transition:background .2s;text-decoration:none}
+.main-nav a:hover{background:rgba(255,255,255,0.12)}.main-nav a.nav-glow{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-weight:600;border-radius:6px;box-shadow:0 0 12px rgba(168,85,247,0.4);animation:glowPulse 1.6s ease-in-out infinite;text-shadow:0 0 6px rgba(255,255,255,0.3)}.main-nav a.nav-glow:hover{animation:none;background:linear-gradient(135deg,#6d28d9,#9333ea);box-shadow:0 0 24px rgba(168,85,247,0.8),0 0 40px rgba(139,92,246,0.3);transform:scale(1.05)}@keyframes glowPulse{0%{box-shadow:0 0 8px rgba(168,85,247,0.3);transform:scale(1)}25%{box-shadow:0 0 18px rgba(139,92,246,0.6),0 0 30px rgba(168,85,247,0.2);transform:scale(1.04)}50%{box-shadow:0 0 14px rgba(168,85,247,0.5),0 0 36px rgba(124,58,237,0.35);transform:scale(1.02)}75%{box-shadow:0 0 22px rgba(147,51,234,0.7),0 0 28px rgba(168,85,247,0.25);transform:scale(1.05)}100%{box-shadow:0 0 10px rgba(168,85,247,0.35);transform:scale(1)}}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200}
+.mobile-panel{display:none;position:fixed;top:0;right:0;width:280px;height:100vh;background:var(--navy);z-index:201;padding:20px;overflow-y:auto}
+.mobile-panel.active,.mobile-overlay.active{display:block}
+.mobile-panel .close-btn{background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;float:right;padding:4px 8px}
+.mobile-panel a{display:block;color:#e0e0e0;padding:14px 16px;font-size:17px;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;clear:both}
+.mobile-panel a:hover{color:var(--white)}
+.article{max-width:800px;margin:60px auto;padding:0 20px}
+.article .breadcrumb{font-size:14px;color:var(--text-gray);margin-bottom:20px}
+.article .breadcrumb a{color:var(--text-gray)}
+.article h1{font-family:var(--font-heading);font-size:36px;font-weight:700;color:var(--text-dark);margin-bottom:16px;line-height:1.3}
+.article .meta{font-size:14px;color:var(--text-gray);margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid #e5e7eb}
+.article h2{font-family:var(--font-heading);font-size:26px;font-weight:700;color:var(--text-dark);margin:36px 0 14px}
+.article h3{font-size:20px;font-weight:600;color:var(--text-dark);margin:24px 0 10px}
+.article p{margin-bottom:18px;line-height:1.9}
+.article .example{background:var(--bg-light);border-left:3px solid var(--accent);padding:16px 20px;margin:18px 0;border-radius:0 8px 8px 0}
+.article .example .en{font-size:20px;color:var(--text-dark);font-weight:600;margin-bottom:4px}
+.article .example .zh{font-size:16px;color:var(--text-gray)}
+.article .highlight{background:linear-gradient(180deg,transparent 60%,#dbeafe 60%);padding:0 4px}
+.article .key-point{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:20px;margin:24px 0}
+.article .key-point strong{display:block;margin-bottom:6px;color:var(--text-dark)}
+.article .role-card{border:2px solid #e5e7eb;border-radius:12px;padding:24px;margin:28px 0;transition:box-shadow .2s}
+.article .role-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.1)}
+.article .role-card .rc-icon{font-size:32px;margin-bottom:8px}
+.article .role-card h2{margin-top:0;margin-bottom:8px}
+.article .role-card .rc-tag{display:inline-block;background:var(--navy);color:#fff;padding:2px 10px;border-radius:4px;font-size:12px;font-weight:600;margin-bottom:8px}
+.article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px}
+.article table th{background:var(--navy);color:#fff;padding:12px 14px;text-align:left;font-weight:600}
+.article table td{padding:11px 14px;border-bottom:1px solid #e5e7eb}
+.article table tr:nth-child(even){background:#f9fafb}
+.article .related{border-top:1px solid #e5e7eb;margin-top:40px;padding-top:24px}
+.article .related h3{font-size:18px;margin-bottom:12px}
+.article .related a{display:inline-block;margin-right:16px;font-size:15px}
+.article .rule-box{background:#faf5ff;border:1px solid #ddd6fe;border-radius:8px;padding:18px 20px;margin:16px 0}
+.article .rule-box .rb-title{font-weight:700;color:#7c3aed;margin-bottom:6px;font-size:16px}
+.article .rule-box .rb-body{font-size:15px;color:var(--text-medium)}
+.article .compare-table{margin:28px 0}
+.article .compare-table td:first-child{font-weight:600;white-space:nowrap;color:var(--navy)}
+.ad-slot{width:100%;max-width:100%;margin:8px auto;text-align:center;overflow:hidden}
+.ad-slot .ad-label{color:#999;font-size:12px}
+.site-footer{background:var(--navy);color:#c0c0d0;text-align:center;padding:30px 20px;font-size:14px;margin-top:60px}
+.site-footer a{color:#c0c0d0}
+@media(max-width:959px){.main-nav{display:none}.hamburger{display:flex;margin-left:auto}.article h1{font-size:28px}.article h2{font-size:22px}}
+@media(max-width:640px){.ad-slot:first-of-type{display:none}.article{margin:40px auto}.article h1{font-size:24px}.article h2{font-size:20px}.article .example .en{font-size:18px}}
+.theme-toggle{background:none;border:none;cursor:pointer;padding:6px 8px;color:var(--white);display:flex;align-items:center;flex-shrink:0}[data-theme="dark"] body{background:#111827;color:#cbd5e1}[data-theme="dark"] .article h1,[data-theme="dark"] .article h2,[data-theme="dark"] .article h3,[data-theme="dark"] .article .example .en,[data-theme="dark"] .key-point strong{color:#e2e8f0}[data-theme="dark"] .article .meta,[data-theme="dark"] .article p,[data-theme="dark"] .article .example .zh{color:#94a3b8}[data-theme="dark"] .article .example{background:#1e293b}[data-theme="dark"] .article .key-point{background:#1e293b;border-color:#334155}[data-theme="dark"] .article .highlight{background:linear-gradient(180deg,transparent 60%,#1e3a5f 60%)}[data-theme="dark"] .article .meta,[data-theme="dark"] .article .related{border-color:#334155}[data-theme="dark"] .article table td{border-bottom-color:#334155}[data-theme="dark"] .article table tr:nth-child(even){background:#1e293b}[data-theme="dark"] .article .role-card,[data-theme="dark"] .article .rule-box{border-color:#334155}[data-theme="dark"] .article .rule-box{background:#1e293b}[data-theme="dark"] .compare-table td:first-child{color:#a5b4fc}[data-theme="dark"] .site-footer{background:#0f0f23}[data-theme="dark"] .back-to-top{background:var(--accent)}.back-to-top{position:fixed;bottom:25px;right:20px;width:44px;height:44px;background:#e5e7eb;color:#6b7280;border:none;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,background .2s;z-index:50}.back-to-top.visible{opacity:1;visibility:visible}.back-to-top:hover{background:var(--accent);color:var(--white)}.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:999;width:0;transition:width .1s}.floating-face{position:fixed;bottom:16px;right:80px;width:64px;height:64px;z-index:97;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.floating-face:active{transform:scale(.9)}.floating-face .f-face-bg{position:absolute;inset:-1px;width:66px;height:66px;z-index:0;pointer-events:none}.floating-face .f-eye{position:absolute;width:14px;height:16px;display:flex;align-items:center;justify-content:center;z-index:1}.floating-face .f-eye.left{top:20px;left:16px}.floating-face .f-eye.right{top:20px;right:16px}.floating-face .f-eye .f-eye-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}.floating-face .f-pupil{width:5px;height:5px;background:#111;border-radius:44% 48% 42% 46%;z-index:1;position:relative}.floating-face .f-mouth{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:1}.floating-face .f-mouth svg{display:block}.floating-pop{position:fixed;pointer-events:none;font-size:28px;z-index:200;animation:fUp 1.2s ease-out forwards}@keyframes fUp{0%{opacity:1;transform:translateY(0)scale(.5)rotate(0deg)}30%{opacity:1;transform:translateY(-30px)scale(1.2)rotate(-10deg)}100%{opacity:0;transform:translateY(-140px)scale(.8)rotate(15deg)}}@media(max-width:640px){.floating-face{bottom:72px;right:16px;width:52px;height:52px}.floating-face .f-face-bg{width:54px;height:54px}.floating-face .f-eye{width:11px;height:13px}.floating-face .f-eye.left{top:16px;left:13px}.floating-face .f-eye.right{top:16px;right:13px}.floating-face .f-pupil{width:4px;height:4px}.floating-face .f-mouth{bottom:13px}}</style>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6082621192201664" crossorigin="anonymous"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9MHT64DB7P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MHT64DB7P');
+</script>
+
+<style>.sp-overlay{display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,0.15)}.sp-overlay.show{display:block}.search-panel{display:none;position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:200;width:90%;max-width:480px;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.15);overflow:hidden}.search-panel.show{display:block}.sp-input{padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e7eb}.sp-input svg{flex-shrink:0}.sp-input input{flex:1;border:none;font-size:16px;font-family:var(--font-body);outline:none;color:#111827}.sp-input input::placeholder{color:#9ca3af}.sp-close{background:none;border:none;cursor:pointer;color:#9ca3af;font-size:18px;padding:4px;border-radius:4px}.sp-close:hover{background:#f3f4f6}.sp-results{max-height:360px;overflow-y:auto}.sp-result{display:block;padding:12px 16px;text-decoration:none;border-bottom:1px solid #f3f4f6;transition:background .15s}.sp-result:hover{background:#f0f4ff}.sp-result .sr-title{font-size:14px;font-weight:600;color:#111827}.sp-result .sr-title mark{background:#fff3b0;border-radius:2px}.sp-result .sr-desc{font-size:13px;color:#6b7280;margin-top:1px}.sp-empty{padding:32px 16px;text-align:center;color:#9ca3af;font-size:14px}.srch-btn{background:none;border:none;cursor:pointer;padding:6px 8px;margin-left:4px;color:#fff;display:flex;align-items:center;border-radius:6px;transition:background .2s}.srch-btn:hover{background:rgba(255,255,255,0.12)}.srch-btn.active{background:rgba(255,255,255,0.15)}@media(max-width:640px){.search-panel{max-width:100%;border-radius:0}}</style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo"><a href="index.html"><span class="logo-icon"><svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#39375b"/><path d="M16 16 Q20 12 22 16 Q24 20 20 22 Q14 24 12 18 Q10 12 16 8 Q24 6 26 14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="26" cy="20" r="1.5" fill="#3498db"/></svg></span>英语研习社</a></div>
+        <nav class="main-nav">
+            <a href="index.html">首页</a>
+            <a href="grammar.html">语法精讲</a>
+            <a href="vocabulary.html">词汇辨析</a>
+            <a href="patterns.html">实用句型</a>
+            <a href="daily.html">场景口语</a>
+            <a href="handbook.html" class="nav-glow">语法魔典</a>
+            <a href="about.html">关于</a>
+        </nav>
+        <button class="hamburger" id="hamburgerBtn" aria-label="菜单"><span></span><span></span><span></span></button><button class="theme-toggle" id="themeToggle" aria-label="暗色模式"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+                <button class="srch-btn" id="searchBtn" aria-label="搜索" title="搜索文章" onclick="toggleSearch()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+    </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel">
+    <button class="close-btn" id="closeMobileMenu">&times;</button>
+    <div style="padding-top:20px"><a href="index.html">首页</a><a href="grammar.html">语法精讲</a><a href="vocabulary.html">词汇辨析</a><a href="patterns.html">实用句型</a><a href="daily.html">场景口语</a><a href="handbook.html" class="nav-glow">语法魔典</a><a href="about.html">关于</a></div>
+
+</div>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="ad-slot"><ins class="adsbygoogle" style="display:block;width:728px;height:90px;margin:0 auto" data-ad-client="ca-pub-6082621192201664" data-ad-slot="3505431088"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+<main class="article">
+    <div class="breadcrumb"><a href="index.html">首页</a> &raquo; <a href="handbook.html">语法魔典</a> &raquo; 被动语态：把"谁做的"藏起来</div>
+    <h1>被动语态：把"谁做的"藏起来</h1>
+    <div class="meta">发布于 2026-05-22 &nbsp;|&nbsp; 分类：语法魔典</div>
+
+    <p>英语里有一种"隐身术"——找一个动作，把做动作的人藏起来，让承受动作的人或东西站到聚光灯下。这就是<strong>被动语态</strong>（Passive Voice）。它在新闻、学术写作、说明书里的出现频率远超日常对话，如果不掌握，读《经济学人》会觉得每个句子都反着来。</p>
+
+    <!-- ========== 一、主动 vs 被动 ========== -->
+    <h2>一、一句话搞懂主动变被动</h2>
+    <p>主动句里，三个角色的站位是这样：</p>
+
+    <div class="example">
+        <div class="en">Shakespeare <span class="highlight">wrote</span> Hamlet.</div>
+        <div class="zh">莎士比亚写了《哈姆雷特》。做动作的人（Shakespeare）在前，动作承受者（Hamlet）在后。</div>
+    </div>
+
+    <p>被动句把这三者的位置彻底交换——<strong>承受者跑到句首，动词变形，动作者变成可选项扔到句尾</strong>：</p>
+
+    <div class="example">
+        <div class="en">Hamlet <span class="highlight">was written</span> by Shakespeare.</div>
+        <div class="zh">《哈姆雷特》是莎士比亚写的。（现在焦点变成了《哈姆雷特》，"by Shakespeare"甚至可以删掉：Hamlet was written in 1600.）</div>
+    </div>
+
+    <div class="key-point">
+        <strong>主动 → 被动转换公式</strong>
+        <p style="margin-top:6px">主语 + 动词 + 宾语（主动）<br>
+        → 宾语变主语 + <strong>be + 过去分词</strong> + (by + 原主语)（被动）<br>
+        核心动作只有一件事：把原来的宾语提到句首，动词改成 be + 过去分词。</p>
+    </div>
+
+    <!-- ========== 二、八大时态的被动语态 ========== -->
+    <h2>二、八大时态的被动语态速查</h2>
+    <p>被动语态本身不挑时态——任何一个时态都可以变成被动。关键规律：<strong>把主动句的动词改成 be + 过去分词，其中 be 跟着时态走</strong>。下面是一张完整的对照表：</p>
+
+    <table>
+        <thead><tr><th>时态</th><th>主动结构</th><th>被动结构</th><th>例句</th></tr></thead>
+        <tbody>
+            <tr><td><strong>一般现在时</strong></td><td>writes / write</td><td>am/is/are + written</td><td>English <strong>is spoken</strong> worldwide.</td></tr>
+            <tr><td><strong>一般过去时</strong></td><td>wrote</td><td>was/were + written</td><td>The email <strong>was sent</strong> yesterday.</td></tr>
+            <tr><td><strong>一般将来时</strong></td><td>will write</td><td>will be + written</td><td>The report <strong>will be finished</strong> by Friday.</td></tr>
+            <tr><td><strong>现在进行时</strong></td><td>am/is/are writing</td><td>am/is/are being + written</td><td>The road <strong>is being repaired</strong>.</td></tr>
+            <tr><td><strong>过去进行时</strong></td><td>was/were writing</td><td>was/were being + written</td><td>The house <strong>was being painted</strong> when I arrived.</td></tr>
+            <tr><td><strong>现在完成时</strong></td><td>has/have written</td><td>has/have been + written</td><td>The meeting <strong>has been canceled</strong>.</td></tr>
+            <tr><td><strong>过去完成时</strong></td><td>had written</td><td>had been + written</td><td>The cake <strong>had been eaten</strong> before I got home.</td></tr>
+            <tr><td><strong>将来进行时</strong></td><td>will be writing</td><td>—（极少使用）</td><td>will be being written 语法上存在，但实际英语中几乎不用，改用一般将来被动即可。</td></tr>
+        </tbody>
+    </table>
+
+    <div class="key-point">
+        <strong>规律速记</strong>
+        <p style="margin-top:6px">被动语态的核心永远是 <strong>be + 过去分词</strong>。时态信息由 be 承载：<br>
+        一般现在 → am/is/are done &nbsp;|&nbsp; 一般过去 → was/were done &nbsp;|&nbsp; 将来 → will be done<br>
+        进行 → be being done &nbsp;|&nbsp; 完成 → have/has/had been done</p>
+    </div>
+
+    <!-- ========== 三、什么时候用被动 ========== -->
+    <h2>三、什么时候该用被动？</h2>
+    <p>这个问题比"怎么变被动"更重要。中文思维习惯"谁做了什么事"，所以中国学生默认写主动句。但英语里被动不是备选项——它有自己的主场：</p>
+
+    <div class="role-card">
+        <div class="rc-icon">&#x1F3AF;</div>
+        <span class="rc-tag">场景一</span>
+        <h2>不知道动作者是谁，或不重要</h2>
+        <div class="example">
+            <div class="en">My wallet <span class="highlight">was stolen</span>.</div>
+            <div class="zh">"我的钱包被偷了。"——我不知道谁偷的，也没必要说。如果说"Someone stole my wallet"，反而不自然，因为焦点应该是"钱包没了"，不是"谁偷了"。</div>
+        </div>
+    </div>
+
+    <div class="role-card">
+        <div class="rc-icon">&#x1F4F0;</div>
+        <span class="rc-tag">场景二</span>
+        <h2>动作者是泛指的人（people / they / someone）</h2>
+        <div class="example">
+            <div class="en">Rice <span class="highlight">is grown</span> in Asia.</div>
+            <div class="zh">"水稻在亚洲种植。"——不必说"People grow rice in Asia"，因为是谁种的不是重点，稻子才是。</div>
+        </div>
+    </div>
+
+    <div class="role-card">
+        <div class="rc-icon">&#x1F4DD;</div>
+        <span class="rc-tag">场景三</span>
+        <h2>正式写作、学术、新闻中的客观语气</h2>
+        <div class="example">
+            <div class="en">The experiment <span class="highlight">was conducted</span> over six months. / A new policy <span class="highlight">has been announced</span>.</div>
+            <div class="zh">"实验进行了六个月。""新政策已公布。"——学术和新闻刻意隐去执行者，突出事件本身，显得客观。</div>
+        </div>
+    </div>
+
+    <div class="role-card">
+        <div class="rc-icon">&#x1F4E6;</div>
+        <span class="rc-tag">场景四</span>
+        <h2>说明流程、步骤、规则</h2>
+        <div class="example">
+            <div class="en">Applications <span class="highlight">must be submitted</span> before March 1. / The mixture <span class="highlight">is heated</span> to 200°C.</div>
+            <div class="zh">"申请须在3月1日前提交。""混合物加热到200°C。"——说明书和流程文档大量用被动。</div>
+        </div>
+    </div>
+
+    <!-- ========== 四、by 的省略规则 ========== -->
+    <h2>四、什么时候要 by，什么时候不写？</h2>
+    <p>被动句里 by + 动作者是<strong>可选的</strong>。事实上，英语中大约80%的被动句都不带 by。规则很清晰：</p>
+
+    <div class="rule-box">
+        <div class="rb-title">省略 by：动作者未知、泛指、或不重要</div>
+        <div class="rb-body">The window <strong>was broken</strong>.（不知道谁打破的）<br>
+        English <strong>is spoken</strong> here.（泛指大家说英语）</div>
+    </div>
+
+    <div class="rule-box">
+        <div class="rb-title">保留 by：动作者是新信息、需要强调、或是特定人物</div>
+        <div class="rb-body">Hamlet <strong>was written by Shakespeare</strong>.（莎士比亚才是重点，这句话可能在介绍莎士比亚）<br>
+        The building <strong>was designed by</strong> a 23-year-old architect.（23岁的建筑师——这是新闻点）</div>
+    </div>
+
+    <div class="key-point">
+        <strong>判断口诀</strong>
+        <p style="margin-top:6px">by 后面跟的人，如果删掉了句子意思完全不受影响 → 省略。<br>
+        by 后面跟的人，如果删掉了你最想表达的信息没了 → 保留。</p>
+    </div>
+
+    <!-- ========== 五、双宾语动词的被动 ========== -->
+    <h2>五、双宾语动词的两种被动变法</h2>
+    <p>有些动词后面跟两个宾语——直接宾语（物）和间接宾语（人），比如 give、send、show、tell、offer。这种句子有两种被动变化：</p>
+
+    <div class="example">
+        <div class="en">主动：They <strong>gave</strong> Mary <strong>a prize</strong>.（玛丽——间接宾语，奖品——直接宾语）</div>
+    </div>
+
+    <p>你可以把任何一方的宾语提到句首：</p>
+
+    <table>
+        <thead><tr><th>变法</th><th>谁变主语</th><th>被动句</th></tr></thead>
+        <tbody>
+            <tr><td><strong>变法一</strong></td><td>间接宾语（人）</td><td>Mary <strong>was given</strong> a prize.</td></tr>
+            <tr><td><strong>变法二</strong></td><td>直接宾语（物）</td><td>A prize <strong>was given to</strong> Mary.</td></tr>
+        </tbody>
+    </table>
+
+    <p>两种都对。日常英语中<strong>用人做主语的变法一更常见</strong>：I was told the news. / She was offered the job. / We were shown the way.</p>
+
+    <div class="example">
+        <div class="en">I <span class="highlight">was sent</span> an invitation. / An invitation <span class="highlight">was sent to</span> me.</div>
+        <div class="zh">两句意思一样，但第一句更自然——因为说话的焦点是"我收到了邀请"。</div>
+    </div>
+
+    <!-- ========== 六、感官动词和使役动词的特殊规则 ========== -->
+    <h2>六、感官动词 / 使役动词：被动时 to 会"复活"</h2>
+    <p>这是被动语态里最容易出错的细节。看一个例子：</p>
+
+    <div class="example">
+        <div class="en">主动：I <strong>saw</strong> him <span class="highlight">enter</span> the building.（him 后面是动词原形 enter，没有 to）</div>
+    </div>
+
+    <p>变成被动时，<strong>原来不带 to 的不定式必须加回 to</strong>：</p>
+
+    <div class="example">
+        <div class="en">被动：He <strong>was seen</strong> <span class="highlight">to enter</span> the building.</div>
+        <div class="zh">"有人看到他进了楼。"——不能说 "He was seen enter"，必须加 to。</div>
+    </div>
+
+    <div class="rule-box">
+        <div class="rb-title">受影响的动词全家桶</div>
+        <div class="rb-body"><strong>感官动词：</strong>see, hear, watch, notice, feel, observe<br>
+        <strong>使役动词：</strong>make, let, have（let 的被动很少用，通常用 be allowed to 替代）<br>
+        <strong>共同规则：</strong>主动句里跟不带 to 的不定式（make sb <u>do</u> sth），被动句里 to 必须回来（sb was made <u>to do</u> sth）。</div>
+    </div>
+
+    <div class="example">
+        <div class="en">主动：They <strong>made</strong> him <strong>apologize</strong>. → 被动：He <strong>was made to apologize</strong>.</div>
+        <div class="zh">"他们逼他道歉。""他被逼着道歉。"</div>
+    </div>
+
+    <div class="example">
+        <div class="en">主动：We <strong>heard</strong> her <strong>sing</strong>. → 被动：She <strong>was heard to sing</strong>.</div>
+        <div class="zh">"我们听见她唱歌。""有人听见她唱歌。"</div>
+    </div>
+
+    <!-- ========== 七、及物 vs 不及物 ========== -->
+    <h2>七、不是所有动词都能被动</h2>
+    <p>被动语态必须有一个宾语可以"搬到前面去"。所以<strong>不及物动词不能变被动</strong>。常见不能变被动的动词：</p>
+
+    <table>
+        <thead><tr><th>动词</th><th>为什么不能被动</th></tr></thead>
+        <tbody>
+            <tr><td>happen, occur, take place</td><td>不及物——"发生"没有宾语</td></tr>
+            <tr><td>die</td><td>不及物——"死"没有宾语</td></tr>
+            <tr><td>arrive, come, go</td><td>不及物——"到达""来""去"没有宾语</td></tr>
+            <tr><td>belong to</td><td>不及物——"属于"不能被动</td></tr>
+            <tr><td>have（表"拥有"）</td><td>状态动词——不可以说 "A car is had by me"</td></tr>
+        </tbody>
+    </table>
+
+    <div class="example">
+        <div class="en">&#x2717; An accident <strong>was happened</strong>. &nbsp; &#x2713; An accident <strong>happened</strong>.</div>
+        <div class="zh">"发生了一起事故。"happen 本身就不带宾语，没有东西可以搬到主语位置。</div>
+    </div>
+
+    <!-- ========== 八、get 被动 ========== -->
+    <h2>八、口语里的 get 被动</h2>
+    <p>日常口语中，<strong>get + 过去分词</strong>常替代 be + 过去分词，尤其用来表达<strong>意外、不幸、或某人自己惹上的后果</strong>：</p>
+
+    <div class="example">
+        <div class="en">He <span class="highlight">got fired</span>. / I <span class="highlight">got lost</span>. / She <span class="highlight">got hurt</span> in the accident.</div>
+        <div class="zh">"他被炒了。""我迷路了。""她在事故中受了伤。"</div>
+    </div>
+
+    <p>get 被动的语气比 be 被动更生活化，但<strong>正式写作中不用 get</strong>——学术论文、新闻、合同全部用 be 被动。</p>
+
+    <div class="rule-box">
+        <div class="rb-title">get 被动 vs be 被动</div>
+        <div class="rb-body">be + done → 中性陈述事实（The window was broken. 窗子破了。）<br>
+        get + done → 强调结果或意外（The window got broken during the party. 窗子在派对中被弄破了——语气更生动。）</div>
+    </div>
+
+    <!-- ========== 总结 ========== -->
+    <h2>被动语态一页总结</h2>
+
+    <table>
+        <thead><tr><th>要点</th><th>一句话</th></tr></thead>
+        <tbody>
+            <tr><td><strong>结构</strong></td><td>be + 过去分词，时态信息由 be 承载</td></tr>
+            <tr><td><strong>核心功能</strong></td><td>把承受者推到焦点位置，把做动作的人藏起来</td></tr>
+            <tr><td><strong>by 省略</strong></td><td>80% 的被动句不写 by——动作者不明确、不重要、或泛指时才省略</td></tr>
+            <tr><td><strong>by 保留</strong></td><td>动作者是重要新信息、或需要强调时才写 by</td></tr>
+            <tr><td><strong>双宾语</strong></td><td>间接宾语（人）变主语更常用：I was told...</td></tr>
+            <tr><td><strong>感官/使役动词</strong></td><td>主动不带 to → 被动必须带 to：was seen to enter</td></tr>
+            <tr><td><strong>不及物动词</strong></td><td>不能变被动——因为没有宾语可以搬</td></tr>
+            <tr><td><strong>get 被动</strong></td><td>口语用 get done，正式写作用 be done</td></tr>
+        </tbody>
+    </table>
+
+    <p>被动语态说到底是一种<strong>视角切换工具</strong>。当你不想说"谁做了这件事"，或者"这件事的承受者"才是信息焦点时，就用被动。写学术论文、看新闻标题、读操作说明——练好被动，这三类文本瞬间变顺。</p>
+
+    <div class="related">
+        <h3>语法魔典系列</h3>
+        <a href="handbook-word-classes.html">第一篇：词性概览</a>
+        <a href="handbook-nouns.html">第二篇：名词</a>
+        <a href="handbook-determiners.html">第三篇：限定词</a>
+        <a href="handbook-pronouns.html">第四篇：代词</a>
+        <a href="handbook-adjectives-adverbs.html">第五篇：形容词与副词</a>
+        <a href="handbook-tenses-1.html">第六篇：动词时态（上）</a>
+        <a href="handbook-tenses-2.html">第七篇：动词时态（下）</a>
+        <a href="handbook-passive-voice.html">第八篇：被动语态</a>
+        <span style="color:var(--text-gray);font-size:14px">（第九篇：非谓语动词（上）— 即将更新）</span>
+    </div>
+</main>
+
+<div class="ad-slot"><ins class="adsbygoogle" style="display:block;width:728px;height:90px;margin:0 auto" data-ad-client="ca-pub-6082621192201664" data-ad-slot="3505431088"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+<div class="ad-slot"><ins class="adsbygoogle" style="display:block;width:728px;height:90px;margin:0 auto" data-ad-client="ca-pub-6082621192201664" data-ad-slot="9269122560"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+
+<footer class="site-footer">
+    <div style="margin-bottom:12px"><a href="about.html">关于我们</a> &nbsp;|&nbsp; <a href="privacy.html">隐私政策</a> &nbsp;|&nbsp; <a href="contact.html">联系方式</a></div>
+    <div>Copyright &copy; 2026 英语研习社 — All Rights Reserved</div>
+</footer>
+
+<script>(function(){var o=document.getElementById('mobileOverlay'),p=document.getElementById('mobilePanel');function op(){o.classList.add('active');p.classList.add('active');document.body.style.overflow='hidden'}function cl(){o.classList.remove('active');p.classList.remove('active');document.body.style.overflow=''}document.getElementById('hamburgerBtn').addEventListener('click',op);document.getElementById('closeMobileMenu').addEventListener('click',cl);o.addEventListener('click',cl)})();</script>
+
+<div class="floating-face" id="floatingFace"><svg class="f-face-bg" viewBox="0 0 64 64"><path d="M10 50C11 36 14 22 17 15C19 12 22 16 26 20C28 22 30 24 32 24C34 24 36 22 38 20C42 16 45 12 47 15C50 22 53 36 55 50Z" fill="#f5c842" stroke="#d4a017" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 48C10 34 13 20 16 13C18 10 21 14 25 18C27 20 29 22 32 22C35 22 37 20 39 18C43 14 46 10 48 13C51 20 54 34 56 48Z" fill="none" stroke="#c8950a" stroke-width="0.5" stroke-linejoin="round" opacity="0.4"/></svg><div class="f-eye left"><svg class="f-eye-bg" viewBox="0 0 14 16"><ellipse cx="7" cy="8" rx="5.5" ry="6.5" fill="#fff" stroke="#d4a017" stroke-width="0.6" transform="rotate(-3 7 8)"/></svg><div class="f-pupil" id="fpL"></div></div><div class="f-eye right"><svg class="f-eye-bg" viewBox="0 0 14 16"><ellipse cx="7" cy="8" rx="4.5" ry="5.5" fill="#fff" stroke="#d4a017" stroke-width="0.6" transform="rotate(3 7 8)"/></svg><div class="f-pupil" id="fpR"></div></div><div class="f-mouth"><svg width="24" height="10" viewBox="0 0 24 10"><path d="M3 3Q12 9 21 3" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+<button class="back-to-top" id="backToTop" aria-label="回到顶部"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+(function(){var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme:dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}var b=document.getElementById("themeToggle");if(b){b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",c);localStorage.setItem("theme",c)})}})();
+(function(){var p=document.getElementById("progressBar");if(p){window.addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-window.innerHeight;p.style.width=(h>0?(window.scrollY/h)*100:0)+"%"})}})();
+(function(){var b=document.getElementById("backToTop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("visible",window.scrollY>300)});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})}})();
+</script>
+</body>
+</html>
