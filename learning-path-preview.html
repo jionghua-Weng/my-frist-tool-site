@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学习路线 — 英语研习社</title>
+<style>
+:root{--navy:#39375b;--accent:#3498db;--accent-hover:#1464cc;--text-dark:#111827;--text-gray:#6b7280;--text-medium:#4b5563;--white:#ffffff;--bg-light:#f8f9fa;--font-heading:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;--font-body:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);font-size:18px;line-height:1.7;color:var(--text-medium);background:#fff;-webkit-font-smoothing:antialiased}
+
+/* 顶部Hero */
+.hero{background:var(--navy);color:var(--white);text-align:center;padding:80px 20px 64px}
+.hero h1{font-family:var(--font-heading);font-size:42px;font-weight:700;margin-bottom:12px}
+.hero p{font-size:18px;color:#c0c0d0;max-width:600px;margin:0 auto;line-height:1.6}
+
+/* 路线图容器 */
+.roadmap{max-width:900px;margin:0 auto;padding:40px 20px 80px;position:relative}
+
+/* 中轴线 */
+.roadmap::before{content:'';position:absolute;left:80px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#e5e7eb,#3498db,#e5e7eb,#7c3aed,#e5e7eb)}
+
+/* 阶段卡片 */
+.stage{position:relative;margin-bottom:60px;padding-left:140px}
+.stage:last-child{margin-bottom:0}
+
+/* 阶段节点 */
+.stage-node{position:absolute;left:80px;top:0;width:40px;height:40px;border-radius:50%;transform:translate(-18px,0);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:var(--white);z-index:1;box-shadow:0 0 0 8px rgba(52,152,219,0.15)}
+.s1 .stage-node{background:var(--accent)}
+.s2 .stage-node{background:#2980b9}
+.s3 .stage-node{background:#8e44ad}
+.s4 .stage-node{background:#e67e22}
+.s5 .stage-node{background:#27ae60}
+
+/* 阶段标题 */
+.stage-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+.s1 .stage-label{color:var(--accent)}
+.s2 .stage-label{color:#2980b9}
+.s3 .stage-label{color:#8e44ad}
+.s4 .stage-label{color:#e67e22}
+.s5 .stage-label{color:#27ae60}
+
+.stage-title{font-family:var(--font-heading);font-size:28px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.stage-desc{font-size:16px;color:var(--text-gray);margin-bottom:24px}
+
+/* 文章列表 */
+.stage-articles{display:flex;flex-direction:column;gap:0}
+.stage-article{display:flex;align-items:center;gap:14px;padding:10px 16px;border-radius:8px;text-decoration:none;color:var(--text-medium);transition:all .15s;border-left:3px solid transparent}
+.stage-article:hover{background:var(--bg-light);border-left-color:var(--accent)}
+.stage-article:hover .sa-title{color:var(--accent)}
+.sa-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-gray)}
+.stage-article:hover .sa-num{background:var(--accent);color:var(--white)}
+.sa-title{font-size:16px;font-weight:600;color:var(--text-dark);transition:color .15s}
+.sa-tag{font-size:11px;padding:2px 7px;border-radius:4px;font-weight:600;flex-shrink:0;margin-left:auto}
+.tag-mandian{background:#f3e8ff;color:#7c3aed}
+.tag-yufa{background:#dbeafe;color:#2563eb}
+.tag-cihui{background:#fff7ed;color:#c2410c}
+.tag-juxing{background:#fce7f3;color:#be185d}
+.tag-kouyu{background:#d1fae5;color:#059669}
+
+/* 子分类标签 */
+.stage-sub{font-size:13px;font-weight:700;color:var(--text-gray);margin:16px 0 8px;padding-left:16px;letter-spacing:1px}
+
+/* 统计栏 */
+.stats{max-width:900px;margin:0 auto;padding:0 20px 60px;display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.stat-card{background:var(--bg-light);border-radius:12px;padding:24px 32px;text-align:center;min-width:120px}
+.stat-card .sn{font-size:36px;font-weight:700;color:var(--navy);font-family:var(--font-heading)}
+.stat-card .sl{font-size:14px;color:var(--text-gray);margin-top:4px}
+
+/* footer */
+.site-footer{background:var(--navy);color:#c0c0d0;text-align:center;padding:30px 20px;font-size:14px}
+.site-footer a{color:#c0c0d0}
+
+@media(max-width:768px){
+  .hero h1{font-size:30px}
+  .hero{padding:50px 20px 40px}
+  .roadmap::before{left:32px}
+  .stage{padding-left:70px;margin-bottom:40px}
+  .stage-node{left:32px;transform:translate(-18px,0)}
+  .stage-title{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>从零基础到流利表达</h1>
+  <p>一条清晰的攀登路线，把74篇文章串成体系。按顺序走，每一步都有支撑。</p>
+</div>
+
+<div class="roadmap">
+
+  <!-- 阶段1 -->
+  <div class="stage s1">
+    <div class="stage-node">1</div>
+    <div class="stage-label">STAGE 1 · 零基础友好</div>
+    <div class="stage-title">启蒙：认识英语的"零件"</div>
+    <div class="stage-desc">先不碰句子，从词开始。搞清楚英语里每个词在干什么。</div>
+
+    <div class="stage-sub">语法魔典 · 词性入门</div>
+    <a class="stage-article" href="handbook-word-classes.html"><span class="sa-num">1</span><span class="sa-title">词性概览：十大词性总览</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-nouns.html"><span class="sa-num">2</span><span class="sa-title">名词：王国第一大族</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-determiners.html"><span class="sa-num">3</span><span class="sa-title">限定词：名词的"贴身侍卫"</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-pronouns.html"><span class="sa-num">4</span><span class="sa-title">代词：名词的"替身使者"</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-adjectives-adverbs.html"><span class="sa-num">5</span><span class="sa-title">形容词与副词：化妆师和解说员</span><span class="sa-tag tag-mandian">魔典</span></a>
+
+    <div class="stage-sub">语法精讲 · 入门夯实</div>
+    <a class="stage-article" href="grammar-articles.html"><span class="sa-num">6</span><span class="sa-title">冠词 a/an/the 一次搞懂</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-prepositions.html"><span class="sa-num">7</span><span class="sa-title">in/on/at 时间与空间规律</span><span class="sa-tag tag-yufa">语法</span></a>
+  </div>
+
+  <!-- 阶段2 -->
+  <div class="stage s2">
+    <div class="stage-node">2</div>
+    <div class="stage-label">STAGE 2 · 核心骨架</div>
+    <div class="stage-title">筑基：动词和句子的运转</div>
+    <div class="stage-desc">动词是句子的引擎。时态、语态、句子结构——英语语法最核心的地段。</div>
+
+    <div class="stage-sub">语法魔典 · 动词与时态</div>
+    <a class="stage-article" href="handbook-tenses-1.html"><span class="sa-num">1</span><span class="sa-title">动词时态（上）：过去·现在·将来</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-tenses-2.html"><span class="sa-num">2</span><span class="sa-title">动词时态（下）：完成与进行</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-passive-voice.html"><span class="sa-num">3</span><span class="sa-title">被动语态：把"谁做的"藏起来</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-sentence-patterns.html"><span class="sa-num">4</span><span class="sa-title">句子成分与五大句型</span><span class="sa-tag tag-mandian">魔典</span></a>
+
+    <div class="stage-sub">语法精讲 · 时态语态强化</div>
+    <a class="stage-article" href="grammar-tenses.html"><span class="sa-num">5</span><span class="sa-title">英语时态一张图讲清楚</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-present-perfect-vs-past.html"><span class="sa-num">6</span><span class="sa-title">现在完成时 vs 一般过去时</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-passive-voice.html"><span class="sa-num">7</span><span class="sa-title">被动语态：不止是"被"字那么简单</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-modals.html"><span class="sa-num">8</span><span class="sa-title">情态动词 can/could/may/must 一次搞懂</span><span class="sa-tag tag-yufa">语法</span></a>
+  </div>
+
+  <!-- 阶段3 -->
+  <div class="stage s3">
+    <div class="stage-node">3</div>
+    <div class="stage-label">STAGE 3 · 复杂表达</div>
+    <div class="stage-title">精进：从句和非谓语</div>
+    <div class="stage-desc">告别简单句。从句、非谓语、特殊句式——让你的表达有层次、有逻辑。</div>
+
+    <div class="stage-sub">语法魔典 · 进阶篇</div>
+    <a class="stage-article" href="handbook-nonfinite-1.html"><span class="sa-num">1</span><span class="sa-title">非谓语（上）：不定式与动名词</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-nonfinite-2.html"><span class="sa-num">2</span><span class="sa-title">非谓语（下）：分词与独立主格</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-clauses-1.html"><span class="sa-num">3</span><span class="sa-title">从句体系（上）：名词性从句</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-clauses-2.html"><span class="sa-num">4</span><span class="sa-title">从句体系（中）：定语从句</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-clauses-3.html"><span class="sa-num">5</span><span class="sa-title">从句体系（下）：状语从句</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-special-1.html"><span class="sa-num">6</span><span class="sa-title">特殊句式（上）：倒装与强调</span><span class="sa-tag tag-mandian">魔典</span></a>
+    <a class="stage-article" href="handbook-special-2.html"><span class="sa-num">7</span><span class="sa-title">特殊句式（下）：省略与虚拟语气</span><span class="sa-tag tag-mandian">魔典</span></a>
+
+    <div class="stage-sub">语法精讲 · 进阶突破</div>
+    <a class="stage-article" href="grammar-conditionals.html"><span class="sa-num">8</span><span class="sa-title">条件句的三个层级</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-subjunctive.html"><span class="sa-num">9</span><span class="sa-title">虚拟语气：if I were 还是 if I was？</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-relative-clauses.html"><span class="sa-num">10</span><span class="sa-title">定语从句：who/which/that 选哪个？</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-inversion.html"><span class="sa-num">11</span><span class="sa-title">倒装句：Not only 放句首怎么接？</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-reported-speech.html"><span class="sa-num">12</span><span class="sa-title">间接引语：别人的话怎么"搬"？</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-emphatic-sentences.html"><span class="sa-num">13</span><span class="sa-title">强调句：It is...that 让你的表达有重点</span><span class="sa-tag tag-yufa">语法</span></a>
+    <a class="stage-article" href="grammar-comparatives.html"><span class="sa-num">14</span><span class="sa-title">比较级和最高级：规则只有三条</span><span class="sa-tag tag-yufa">语法</span></a>
+  </div>
+
+  <!-- 阶段4 -->
+  <div class="stage s4">
+    <div class="stage-node">4</div>
+    <div class="stage-label">STAGE 4 · 词汇升级</div>
+    <div class="stage-title">充实：告别"小学生词汇"</div>
+    <div class="stage-desc">语法通了，词汇决定了你表达的上限。近义词怎么分、地道说法怎么说。</div>
+
+    <div class="stage-sub">核心动词系列</div>
+    <a class="stage-article" href="vocabulary-phrasal-verbs.html"><span class="sa-num">1</span><span class="sa-title">高频动词短语20个</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-say-tell-speak-talk.html"><span class="sa-num">2</span><span class="sa-title">四个"说"：say/tell/speak/talk</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-see-look-watch.html"><span class="sa-num">3</span><span class="sa-title">"看"的十种英文说法</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-hear-listen.html"><span class="sa-num">4</span><span class="sa-title">"听"怎么分：hear和听觉家族</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-walk.html"><span class="sa-num">5</span><span class="sa-title">"走"的各种姿态</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-think-believe.html"><span class="sa-num">6</span><span class="sa-title">think/believe/suppose/assume 怎么分？</span><span class="sa-tag tag-cihui">词汇</span></a>
+
+    <div class="stage-sub">形容词升级</div>
+    <a class="stage-article" href="vocabulary-upgrade-expressions.html"><span class="sa-num">7</span><span class="sa-title">别再说"very good"了：升级词汇库</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-good-bad.html"><span class="sa-num">8</span><span class="sa-title">"好"和"坏"的高级替换</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-big-small.html"><span class="sa-num">9</span><span class="sa-title">"大"和"小"的高级说法</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-important.html"><span class="sa-num">10</span><span class="sa-title">"重要"的高阶替换</span><span class="sa-tag tag-cihui">词汇</span></a>
+
+    <div class="stage-sub">场景词汇与易混辨析</div>
+    <a class="stage-article" href="vocabulary-like-love.html"><span class="sa-num">11</span><span class="sa-title">"喜欢"的8个层次</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-emotions.html"><span class="sa-num">12</span><span class="sa-title">精准表达情绪的20个词</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-email.html"><span class="sa-num">13</span><span class="sa-title">职场邮件必备表达</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-confusing-pairs.html"><span class="sa-num">14</span><span class="sa-title">最容易用错的五组近义词</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-used-to.html"><span class="sa-num">15</span><span class="sa-title">used to / be used to / get used to</span><span class="sa-tag tag-cihui">词汇</span></a>
+    <a class="stage-article" href="vocabulary-body-idioms.html"><span class="sa-num">16</span><span class="sa-title">身体部位的习惯用语</span><span class="sa-tag tag-cihui">词汇</span></a>
+  </div>
+
+  <!-- 阶段5 -->
+  <div class="stage s5">
+    <div class="stage-node">5</div>
+    <div class="stage-label">STAGE 5 · 真实应用</div>
+    <div class="stage-title">实战：把它说出口</div>
+    <div class="stage-desc">知识要变成反应。句型模板 + 场景模拟——让英语成为本能。</div>
+
+    <div class="stage-sub">实用句型模板</div>
+    <a class="stage-article" href="patterns-polite.html"><span class="sa-num">1</span><span class="sa-title">让沟通更委婉的三个句型</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-wondering-if.html"><span class="sa-num">2</span><span class="sa-title">"I was wondering if…" 更礼貌的请求</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-the-thing-is.html"><span class="sa-num">3</span><span class="sa-title">"The thing is…" 万能过渡句</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-would-rather.html"><span class="sa-num">4</span><span class="sa-title">"I'd rather…" 表达偏好</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-not-that-just-that.html"><span class="sa-num">5</span><span class="sa-title">"It's not that… it's just that…" 委婉否定</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-i-wish.html"><span class="sa-num">6</span><span class="sa-title">"I wish / If only" 表达愿望和遗憾</span><span class="sa-tag tag-juxing">句型</span></a>
+    <a class="stage-article" href="patterns-not-only-but-also.html"><span class="sa-num">7</span><span class="sa-title">"Not only… but also…" 强调句型</span><span class="sa-tag tag-juxing">句型</span></a>
+
+    <div class="stage-sub">场景实战口语</div>
+    <a class="stage-article" href="daily-coffee.html"><span class="sa-num">8</span><span class="sa-title">用英文点咖啡</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-restaurant.html"><span class="sa-num">9</span><span class="sa-title">餐厅英语全流程</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-shopping.html"><span class="sa-num">10</span><span class="sa-title">购物英语：试穿、砍价、退货</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-hotel.html"><span class="sa-num">11</span><span class="sa-title">酒店入住英语</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-airport.html"><span class="sa-num">12</span><span class="sa-title">机场和登机必备英语</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-phone-calls.html"><span class="sa-num">13</span><span class="sa-title">接电话不再慌：职场电话英语</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-doctor.html"><span class="sa-num">14</span><span class="sa-title">看病就医英语</span><span class="sa-tag tag-kouyu">口语</span></a>
+    <a class="stage-article" href="daily-expressing-anger.html"><span class="sa-num">15</span><span class="sa-title">用英文表达"不爽"的分级指南</span><span class="sa-tag tag-kouyu">口语</span></a>
+
+    <div class="stage-sub">收尾</div>
+    <a class="stage-article" href="handbook-glossary.html"><span class="sa-num">16</span><span class="sa-title">语法术语中英对照（附录）</span><span class="sa-tag tag-mandian">魔典</span></a>
+  </div>
+
+</div>
+
+<!-- 统计栏 -->
+<div class="stats">
+  <div class="stat-card"><div class="sn">5</div><div class="sl">学习阶段</div></div>
+  <div class="stat-card"><div class="sn">60</div><div class="sl">篇推荐路线</div></div>
+  <div class="stat-card"><div class="sn">74</div><div class="sl">全站文章</div></div>
+  <div class="stat-card"><div class="sn">0</div><div class="sl">零基础起步</div></div>
+</div>
+
+<footer class="site-footer">
+  <div style="margin-bottom:8px">零基础 → 体系化 → 能实战</div>
+  <div>Copyright &copy; 2026 英语研习社</div>
+</footer>
+
+<script>
+// 滚动渐显
+(function(){
+var stages=document.querySelectorAll('.stage');
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.style.opacity='1';
+      e.target.style.transform='translateY(0)';
+    }
+  });
+},{threshold:0.15});
+stages.forEach(function(s){
+  s.style.opacity='0';
+  s.style.transform='translateY(30px)';
+  s.style.transition='opacity .5s,transform .5s';
+  observer.observe(s);
+});
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>自测题预览 — 语法魔典 | 英语研习社</title>
+<style>
+:root{--navy:#39375b;--accent:#3498db;--accent-hover:#1464cc;--text-dark:#111827;--text-gray:#6b7280;--text-medium:#4b5563;--white:#ffffff;--bg-light:#f8f9fa;--font-heading:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;--font-body:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);font-size:18px;line-height:1.7;color:var(--text-medium);background:#fff;-webkit-font-smoothing:antialiased}
+.article{max-width:800px;margin:60px auto;padding:0 20px}
+.article h1{font-family:var(--font-heading);font-size:36px;font-weight:700;color:var(--text-dark);margin-bottom:16px;line-height:1.3}
+.article h2{font-family:var(--font-heading);font-size:26px;font-weight:700;color:var(--text-dark);margin:36px 0 14px}
+.article p{margin-bottom:18px;line-height:1.9}
+
+/* === 自测题组件 === */
+.quiz-section{margin:48px 0;border:2px solid #e5e7eb;border-radius:16px;overflow:hidden}
+.quiz-header{background:var(--navy);color:var(--white);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.quiz-header .qh-title{font-family:var(--font-heading);font-size:20px;font-weight:700}
+.quiz-header .qh-counter{font-size:14px;color:#c0c0d0}
+.quiz-body{padding:28px 24px}
+.quiz-progress{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.quiz-progress .qp-dot{width:12px;height:12px;border-radius:50%;background:#e5e7eb;transition:all .3s}
+.quiz-progress .qp-dot.done{background:var(--accent)}
+.quiz-progress .qp-dot.wrong{background:#ef4444}
+.quiz-progress .qp-dot.active{box-shadow:0 0 0 4px rgba(52,152,219,0.25);background:var(--accent)}
+.quiz-question{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:20px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-option{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border:2px solid #e5e7eb;border-radius:10px;cursor:pointer;transition:all .2s;font-size:17px;line-height:1.5;background:var(--white)}
+.quiz-option:hover{border-color:var(--accent);background:#f0f7ff}
+.quiz-option.selected{border-color:var(--accent);background:#eff6ff}
+.quiz-option.correct{border-color:#22c55e;background:#f0fdf4}
+.quiz-option.wrong{border-color:#ef4444;background:#fef2f2}
+.quiz-option .qo-letter{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--text-medium);transition:all .2s}
+.quiz-option.selected .qo-letter{background:var(--accent);color:var(--white)}
+.quiz-option.correct .qo-letter{background:#22c55e;color:var(--white)}
+.quiz-option.wrong .qo-letter{background:#ef4444;color:var(--white)}
+.quiz-feedback{margin-top:20px;padding:16px 20px;border-radius:10px;display:none;font-size:16px;line-height:1.6}
+.quiz-feedback.show{display:block}
+.quiz-feedback.correct{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.quiz-feedback.wrong{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.quiz-feedback .qf-label{font-weight:700;font-size:15px;margin-bottom:4px}
+.quiz-actions{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.quiz-btn{padding:10px 24px;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.quiz-btn.primary{background:var(--accent);color:var(--white)}
+.quiz-btn.primary:hover{background:var(--accent-hover)}
+.quiz-btn.secondary{background:var(--bg-light);color:var(--text-medium);border:1px solid #e5e7eb}
+.quiz-btn.secondary:hover{background:#e5e7eb}
+.quiz-btn:disabled{opacity:.5;cursor:not-allowed}
+.quiz-result{text-align:center;padding:32px 24px;display:none}
+.quiz-result.show{display:block}
+.quiz-result .qr-score{font-size:56px;font-weight:700;color:var(--navy);font-family:var(--font-heading)}
+.quiz-result .qr-icon{font-size:48px;margin-bottom:12px}
+.quiz-result .qr-msg{font-size:18px;color:var(--text-medium);margin:8px 0 20px}
+.quiz-answer-line{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:15px;color:var(--text-gray)}
+.quiz-answer-line .qal-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:12px;font-weight:600;color:var(--white);background:var(--accent)}
+
+/* 暗色模式 */
+[data-theme="dark"] body{background:#111827;color:#cbd5e1}
+[data-theme="dark"] .article h1,[data-theme="dark"] .article h2,[data-theme="dark"] .quiz-question{color:#e2e8f0}
+[data-theme="dark"] .quiz-section{border-color:#334155}
+[data-theme="dark"] .quiz-option{background:#1e293b;border-color:#334155;color:#cbd5e1}
+[data-theme="dark"] .quiz-option:hover{border-color:var(--accent);background:#1e3a5f}
+[data-theme="dark"] .quiz-option.selected{border-color:var(--accent);background:#1e3a5f}
+[data-theme="dark"] .quiz-option.correct{background:#052e16;border-color:#166534}
+[data-theme="dark"] .quiz-option.wrong{background:#450a0a;border-color:#7f1d1d}
+[data-theme="dark"] .quiz-feedback.correct{background:#052e16;border-color:#166534;color:#86efac}
+[data-theme="dark"] .quiz-feedback.wrong{background:#450a0a;border-color:#7f1d1d;color:#fca5a5}
+[data-theme="dark"] .quiz-btn.secondary{background:#1e293b;border-color:#334155;color:#cbd5e1}
+[data-theme="dark"] .quiz-btn.secondary:hover{background:#334155}
+[data-theme="dark"] .quiz-progress .qp-dot{background:#334155}
+[data-theme="dark"] .quiz-option .qo-letter{background:#334155;color:#94a3b8}
+[data-theme="dark"] .quiz-result .qr-score{color:#e2e8f0}
+
+@media(max-width:640px){
+  .article h1{font-size:24px}.article h2{font-size:20px}
+  .quiz-header{padding:16px 18px}.quiz-body{padding:20px 16px}
+  .quiz-question{font-size:18px}.quiz-option{font-size:16px;padding:12px 14px}
+  .quiz-result .qr-score{font-size:42px}
+}
+</style>
+</head>
+<body>
+
+<article class="article">
+  <h1>自测题组件预览</h1>
+  <p>以下是"词性概览"文章的配套自测题。做完5道题看效果。组件纯JS、零依赖，适配亮/暗模式。</p>
+
+  <div class="quiz-section" id="quiz1">
+    <div class="quiz-header">
+      <span class="qh-title">随堂自测：词性概览</span>
+      <span class="qh-counter" id="counter1">第 1 / 5 题</span>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-progress" id="progress1"></div>
+      <div class="quiz-question" id="question1"></div>
+      <div class="quiz-options" id="options1"></div>
+      <div class="quiz-feedback" id="feedback1"></div>
+      <div class="quiz-actions" id="actions1">
+        <button class="quiz-btn primary" id="btnConfirm1">确认答案</button>
+        <button class="quiz-btn secondary" id="btnNext1" style="display:none">下一题 →</button>
+      </div>
+    </div>
+    <div class="quiz-result" id="result1"></div>
+  </div>
+</article>
+
+<!-- 暗色模式开关（预览用） -->
+<button id="themeToggle" style="position:fixed;bottom:20px;right:20px;padding:10px 16px;background:var(--navy);color:var(--white);border:none;border-radius:8px;cursor:pointer;font-size:14px;z-index:99">切换暗色模式</button>
+
+<script>
+// ========== 自测题引擎 ==========
+function QuizEngine(containerId, questions) {
+  var container = document.getElementById(containerId);
+  var idx = 0;
+  var answers = [];       // 每题用户选的索引
+  var confirmed = false;  // 当前题是否已确认
+
+  var progressEl = container.querySelector('.quiz-progress');
+  var questionEl = container.querySelector('.quiz-question');
+  var optionsEl  = container.querySelector('.quiz-options');
+  var feedbackEl = container.querySelector('.quiz-feedback');
+  var counterEl  = container.querySelector('.qh-counter');
+  var btnConfirm = container.querySelector('.quiz-btn.primary');
+  var btnNext    = container.querySelector('.quiz-btn.secondary');
+  var resultEl   = container.querySelector('.quiz-result');
+  var actionsEl  = container.querySelector('.quiz-actions');
+  var bodyEl     = container.querySelector('.quiz-body');
+
+  // 初始化进度点
+  for (var i = 0; i < questions.length; i++) {
+    var dot = document.createElement('span');
+    dot.className = 'qp-dot' + (i === 0 ? ' active' : '');
+    progressEl.appendChild(dot);
+  }
+
+  function renderQuestion() {
+    var q = questions[idx];
+    questionEl.textContent = (idx + 1) + '. ' + q.q;
+    counterEl.textContent = '第 ' + (idx + 1) + ' / ' + questions.length + ' 题';
+    optionsEl.innerHTML = '';
+    feedbackEl.className = 'quiz-feedback';
+    feedbackEl.innerHTML = '';
+    confirmed = false;
+
+    var letters = ['A', 'B', 'C', 'D'];
+    for (var i = 0; i < q.options.length; i++) {
+      var opt = document.createElement('div');
+      opt.className = 'quiz-option';
+      if (answers[idx] === i) opt.classList.add(confirmed && i === q.answer ? 'correct' : confirmed ? 'wrong' : 'selected');
+      opt.innerHTML = '<span class="qo-letter">' + letters[i] + '</span><span>' + q.options[i] + '</span>';
+      (function(i, opt) {
+        opt.addEventListener('click', function() {
+          if (confirmed) return;
+          var prev = optionsEl.querySelector('.selected');
+          if (prev) prev.classList.remove('selected');
+          opt.classList.add('selected');
+          answers[idx] = i;
+          btnConfirm.disabled = false;
+        });
+      })(i, opt);
+      optionsEl.appendChild(opt);
+    }
+
+    btnConfirm.style.display = '';
+    btnConfirm.disabled = (answers[idx] === undefined);
+    btnConfirm.textContent = '确认答案';
+    btnNext.style.display = 'none';
+    updateDots();
+  }
+
+  function updateDots() {
+    var dots = progressEl.querySelectorAll('.qp-dot');
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].className = 'qp-dot';
+      if (answers[i] !== undefined && answers[i] === questions[i].answer) dots[i].classList.add('done');
+      else if (answers[i] !== undefined && answers[i] !== questions[i].answer) dots[i].classList.add('wrong');
+      if (i === idx && !confirmed) dots[i].classList.add('active');
+    }
+  }
+
+  btnConfirm.addEventListener('click', function() {
+    if (answers[idx] === undefined) return;
+    confirmed = true;
+    var q = questions[idx];
+    var isCorrect = answers[idx] === q.answer;
+    var letters = ['A', 'B', 'C', 'D'];
+    var userLetter = letters[answers[idx]];
+    var correctLetter = letters[q.answer];
+
+    // 高亮选项
+    var opts = optionsEl.querySelectorAll('.quiz-option');
+    for (var i = 0; i < opts.length; i++) {
+      if (i === q.answer) opts[i].classList.add('correct');
+      else if (i === answers[idx] && i !== q.answer) opts[i].classList.add('wrong');
+      opts[i].style.pointerEvents = 'none';
+    }
+
+    // 反馈
+    feedbackEl.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'wrong');
+    feedbackEl.innerHTML = '<div class="qf-label">' + (isCorrect ? '回答正确！' : '回答错误') + '</div>'
+      + (q.explanation || '') + '<div class="quiz-answer-line"><span class="qal-tag">正确答案</span> ' + correctLetter + '. ' + q.options[q.answer] + '</div>';
+
+    btnConfirm.style.display = 'none';
+    btnNext.style.display = '';
+    btnNext.textContent = idx < questions.length - 1 ? '下一题 →' : '查看结果';
+    updateDots();
+  });
+
+  btnNext.addEventListener('click', function() {
+    if (idx < questions.length - 1) {
+      idx++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  function showResult() {
+    var correct = 0;
+    for (var i = 0; i < questions.length; i++) {
+      if (answers[i] === questions[i].answer) correct++;
+    }
+    var pct = Math.round(correct / questions.length * 100);
+    var icon, msg;
+    if (pct === 100) { icon = '🏆'; msg = '全对！你已经掌握了词性的核心概念。'; }
+    else if (pct >= 80) { icon = '👏'; msg = '很不错！只差一点就全对了。'; }
+    else if (pct >= 60) { icon = '📖'; msg = '还不错，建议再复习一下文章中的重点。'; }
+    else { icon = '💪'; msg = '建议重新读一遍文章，重点关注标注的关键点。'; }
+
+    bodyEl.style.display = 'none';
+    actionsEl.style.display = 'none';
+    resultEl.className = 'quiz-result show';
+    resultEl.innerHTML = '<div class="qr-icon">' + icon + '</div>'
+      + '<div class="qr-score">' + correct + ' / ' + questions.length + '</div>'
+      + '<div class="qr-msg">' + msg + '</div>'
+      + '<button class="quiz-btn primary" onclick="location.reload()">再做一遍</button>';
+  }
+
+  renderQuestion();
+}
+
+// ========== 示例题目（词性概览） ==========
+var sampleQuestions = [
+  {
+    q: '在"句子王国"的比喻中，"名词"被比作什么？',
+    options: ['王国的居民', '王国的引擎', '王国的化妆师', '王国的桥梁'],
+    answer: 0,
+    explanation: '名词是句子王国的"居民"——它们是句子中表示人、事物、地点或抽象概念的词。'
+  },
+  {
+    q: '"She runs quickly" 中，哪个词是动词？',
+    options: ['She', 'runs', 'quickly', '全部都是'],
+    answer: 1,
+    explanation: 'runs 是动词，表示"跑"这个动作。动词是句子的"引擎"，驱动整个句子的运转。'
+  },
+  {
+    q: '下列哪个词属于"连词"（conjunction）？',
+    options: ['happy', 'run', 'because', 'quickly'],
+    answer: 2,
+    explanation: 'because 是连词，用于连接两个句子。连词是"桥梁"，把句子的各个部分连接起来。'
+  },
+  {
+    q: '"The cat is very cute" 中，very 是什么词性？',
+    options: ['形容词', '副词', '名词', '代词'],
+    answer: 1,
+    explanation: 'very 是副词，修饰形容词 cute，表示程度。副词是"解说员"，为句子补充方式、程度、时间等细节。'
+  },
+  {
+    q: '以下关于"代词"的说法，哪个是正确的？',
+    options: ['代词用来代替名词', '代词用来修饰动词', '代词就是形容词的一种', '代词只能指人'],
+    answer: 0,
+    explanation: '代词（pronoun）的含义就是"代替名词"（pro = 代替，noun = 名词）。he、she、it、this 等都属于代词。'
+  }
+];
+
+new QuizEngine('quiz1', sampleQuestions);
+
+// 暗色模式切换
+document.getElementById('themeToggle').addEventListener('click', function() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'dark' ? '' : 'dark');
+});
+</script>
+
+</body>
+</html>
