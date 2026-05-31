@@ -249,5 +249,40 @@ function toggleSearch(){var p=document.getElementById("searchPanel"),o=document.
 function doSearch(q){var el=document.getElementById("spResults");if(!q.trim()){el.innerHTML='<div class="sp-empty">输入关键词开始搜索</div>';return}var kw=q.trim().toLowerCase(),hits=[];_siteIndex.forEach(function(item){var s=0;if(item.t.toLowerCase().indexOf(kw)>=0)s+=3;if(item.d.toLowerCase().indexOf(kw)>=0)s+=1;if(s>0)hits.push({item:item,score:s})});hits.sort(function(a,b){return b.score-a.score});hits=hits.slice(0,8);if(!hits.length){el.innerHTML='<div class="sp-empty">没有找到相关内容</div>';return}el.innerHTML=hits.map(function(h){var t=h.item.t.replace(new RegExp("("+kw.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","gi"),"<mark>$1</mark>");return'<a class="sp-result" href="'+h.item.u+'"><div class="sr-title">'+t+'</div><div class="sr-desc">'+h.item.d+'</div></a>'}).join("")}
 document.addEventListener("keydown",function(e){if(e.key==="Escape")toggleSearch()});
 </script>
+<script>
+(function(){
+var s=document.createElement('style');
+s.textContent='.audio-btn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;margin-left:8px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;vertical-align:middle;transition:background .2s,transform .15s}.audio-btn:hover{background:var(--accent-hover);transform:scale(1.1)}.audio-btn.playing{background:#e74c3c;animation:audioPulse .8s infinite}@keyframes audioPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}[data-theme="dark"] .audio-btn.playing{background:#ef4444}';
+document.head.appendChild(s);
+if(!window.speechSynthesis)return;
+var voices=[];
+function lv(){voices=window.speechSynthesis.getVoices()}
+lv();window.speechSynthesis.onvoiceschanged=lv;
+function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
+function speak(t,b){
+window.speechSynthesis.cancel();
+var u=new SpeechSynthesisUtterance(t);
+u.lang='en-US';u.rate=0.9;
+var v=gv();if(v)u.voice=v;
+b.classList.add('playing');
+u.onend=u.onerror=function(){b.classList.remove('playing')};
+window.speechSynthesis.speak(u);
+}
+var S='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>';
+function mkBtn(txt,el){
+var btn=document.createElement('button');
+btn.className='audio-btn';
+btn.innerHTML=S;
+btn.title='点击听发音';
+btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();speak(txt,btn)});
+el.appendChild(btn);
+}
+document.querySelectorAll('.example .en').forEach(function(el){mkBtn(el.textContent.trim(),el)});
+document.querySelectorAll('.dialogue .line').forEach(function(el){
+var c=el.cloneNode(true);var sp=c.querySelector('.speaker');if(sp)sp.remove();
+var t=c.textContent.trim();if(t&&/[a-zA-Z]/.test(t)){mkBtn(t,el)}
+});
+})();
+</script>
 </body>
 </html>
