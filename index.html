@@ -273,6 +273,79 @@ img { max-width: 100%; height: auto; display: block; }
     max-width: 700px;
 }
 
+/* ========== 最新更新 ========== */
+.recent-section {
+    padding: 40px 0 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+.recent-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.recent-head h2 {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.recent-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+.recent-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+.recent-card {
+    flex: 0 0 200px;
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: box-shadow .25s;
+    text-decoration: none;
+    display: block;
+}
+.recent-card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+.recent-card .rc-thumb {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #e4e9f5;
+}
+.recent-card .rc-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.recent-card .rc-body {
+    padding: 12px 14px;
+}
+.recent-card .rc-body h3 {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-dark);
+}
+.recent-card .rc-date {
+    font-size: 12px;
+    color: var(--text-gray);
+    margin-top: 6px;
+}
+@media (max-width: 640px) {
+    .recent-card { flex: 0 0 160px; }
+}
+
 /* ========== 卡片网格 ========== */
 .card-grid {
     display: grid;
@@ -647,6 +720,38 @@ img { max-width: 100%; height: auto; display: block; }
         <a href="grammar-tenses.html" class="hero-link">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 语法精讲：一张图搞懂英语时态
         </a>
+    </div>
+</section>
+
+<!-- 最新更新 -->
+<section class="recent-section">
+    <div class="container">
+        <div class="recent-head">
+            <h2>最新更新</h2>
+            <span class="recent-badge">NEW</span>
+        </div>
+        <div class="recent-row">
+            <a class="recent-card" href="daily-small-talk.html">
+                <div class="rc-thumb"><img loading="lazy" decoding="async" src="英语研习社图片/场景口语/聚会闲聊.gif" alt="聚会闲聊 Small Talk"></div>
+                <div class="rc-body"><h3>聚会闲聊 Small Talk：不会冷场的万能话题</h3><div class="rc-date">2026-05-31</div></div>
+            </a>
+            <a class="recent-card" href="daily-hair-salon.html">
+                <div class="rc-thumb"><img loading="lazy" decoding="async" src="英语研习社图片/场景口语/理发店英语.gif" alt="理发店英语"></div>
+                <div class="rc-body"><h3>别让发型毁了你：理发店英语全攻略</h3><div class="rc-date">2026-05-31</div></div>
+            </a>
+            <a class="recent-card" href="daily-renting.html">
+                <div class="rc-thumb"><img loading="lazy" decoding="async" src="英语研习社图片/场景口语/租房英语.gif" alt="租房英语"></div>
+                <div class="rc-body"><h3>How Much Is Rent? 租房英语从看房到签约</h3><div class="rc-date">2026-05-31</div></div>
+            </a>
+            <a class="recent-card" href="daily-taxi.html">
+                <div class="rc-thumb"><img loading="lazy" decoding="async" src="英语研习社图片/场景口语/打车英语.gif" alt="打车英语"></div>
+                <div class="rc-body"><h3>"Where to, sir?" 打车叫车英语全攻略</h3><div class="rc-date">2026-05-31</div></div>
+            </a>
+            <a class="recent-card" href="daily-banking.html">
+                <div class="rc-thumb"><img loading="lazy" decoding="async" src="英语研习社图片/场景口语/银行英语.gif" alt="银行英语"></div>
+                <div class="rc-body"><h3>I'd Like to Open an Account 银行英语</h3><div class="rc-date">2026-05-31</div></div>
+            </a>
+        </div>
     </div>
 </section>
 
