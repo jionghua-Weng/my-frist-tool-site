@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>发音指南（预览） — 英语研习社</title>
+<style>
+:root{--navy:#39375b;--accent:#3498db;--text-dark:#111827;--text-gray:#6b7280;--white:#fff;--bg-light:#f8f9fa}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;font-size:17px;line-height:1.7;color:var(--text-gray);background:#fff;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+
+.page{max-width:880px;margin:50px auto;padding:0 20px}
+h1{font-size:30px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.meta{font-size:14px;color:var(--text-gray);margin-bottom:30px;padding-bottom:15px;border-bottom:1px solid #e5e7eb}
+h2{font-size:21px;font-weight:700;color:var(--text-dark);margin:36px 0 14px;padding-bottom:8px;border-bottom:2px solid #e5e7eb}
+h3{font-size:17px;font-weight:600;color:var(--text-dark);margin:24px 0 10px}
+p{margin-bottom:14px;line-height:1.8}
+
+/* 网格卡片 */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:16px 0}
+.card{background:var(--bg-light);border-radius:8px;padding:12px 14px;text-align:center}
+.card .sym{font-size:30px;font-weight:700;color:var(--text-dark);margin-bottom:2px}
+.card .word{font-size:14px;color:var(--accent);font-weight:600;margin-bottom:4px}
+.card .hint{font-size:12px;color:var(--text-gray);margin-bottom:8px}
+.card button{background:var(--accent);color:#fff;border:none;border-radius:20px;padding:6px 16px;font-size:13px;cursor:pointer;transition:all .15s}
+.card button:hover{background:var(--accent-hover,#1464cc);transform:scale(1.05)}
+.card button.playing{background:#e74c3c}
+
+/* 对比行 */
+.compare{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--bg-light);border-radius:8px;margin:10px 0;flex-wrap:wrap}
+.compare .label{font-size:14px;color:var(--text-gray);min-width:70px}
+.compare .word{font-size:19px;font-weight:600;color:var(--text-dark);min-width:80px}
+.compare .ipa{font-size:14px;color:var(--text-gray);min-width:45px}
+.compare .wrong{text-decoration:line-through;color:#e74c3c;font-size:14px}
+
+/* 句子卡 */
+.sent{background:var(--bg-light);border-radius:8px;padding:16px 20px;margin:12px 0}
+.sent .text{font-size:19px;font-weight:600;color:var(--text-dark);margin-bottom:6px}
+.sent .br{font-size:14px;color:var(--text-gray);line-height:1.5}
+.sent button{float:right;background:var(--accent);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:13px;cursor:pointer;margin-left:10px;transition:all .15s}
+.sent button:hover{background:var(--accent-hover,#1464cc)}
+.sent button.playing{background:#e74c3c}
+
+/* 全局播放器状态 */
+.now-playing{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 24px;border-radius:30px;font-size:14px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.now-playing.show{opacity:1}
+
+@media(max-width:640px){
+h1{font-size:24px}
+.grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+.card .sym{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<h1>发音指南（完整预览）</h1>
+<div class="meta">36 个音标音频来自 Wikipedia（CC 授权）&middot; 点击按钮听真人发音</div>
+
+<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 18px;margin:16px 0;color:#1e40af;font-size:15px">
+    <strong>当前播放：</strong><span id="npText">—</span>
+</div>
+
+<!-- ===== 单元音 ===== -->
+<h2>一、单元音（12 个）</h2>
+<div class="grid">
+<div class="card"><div class="sym">/iː/</div><div class="word">sheep</div><div class="hint">长音"衣"</div><button data-audio="audio/ipa/vowel_ii.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɪ/</div><div class="word">ship</div><div class="hint">短音"衣"</div><button data-audio="audio/ipa/vowel_i.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/e/</div><div class="word">bed</div><div class="hint">类似"诶"</div><button data-audio="audio/ipa/vowel_e.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/æ/</div><div class="word">cat</div><div class="hint">嘴张大</div><button data-audio="audio/ipa/vowel_ae.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ʌ/</div><div class="word">cup</div><div class="hint">短"啊"</div><button data-audio="audio/ipa/vowel_cup.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɑː/</div><div class="word">father</div><div class="hint">长"啊"</div><button data-audio="audio/ipa/vowel_aa.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɒ/</div><div class="word">hot</div><div class="hint">短"哦"</div><button data-audio="audio/ipa/vowel_o.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɔː/</div><div class="word">door</div><div class="hint">长"哦"</div><button data-audio="audio/ipa/vowel_oo.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ʊ/</div><div class="word">book</div><div class="hint">短"呜"</div><button data-audio="audio/ipa/vowel_uu.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/uː/</div><div class="word">food</div><div class="hint">长"呜"</div><button data-audio="audio/ipa/vowel_u.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɜː/</div><div class="word">bird</div><div class="hint">类似"饿"</div><button data-audio="audio/ipa/vowel_er.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ə/</div><div class="word">about</div><div class="hint">最放松</div><button data-audio="audio/ipa/vowel_schwa.ogg">&#9654; 听</button></div>
+</div>
+
+<!-- ===== 对比 ===== -->
+<h3>易混音对比</h3>
+<div class="compare"><span class="label">长音vs短音</span><span class="word">sheep</span><span class="ipa">/iː/</span><button data-audio="audio/ipa/vowel_ii.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">ship</span><span class="ipa">/ɪ/</span><button data-audio="audio/ipa/vowel_i.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">都读"西普"</span></div>
+<div class="compare"><span class="label">咬舌vs不咬</span><span class="word">think</span><span class="ipa">/θ/</span><button data-audio="audio/ipa/cons_th.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">sink</span><span class="ipa">/s/</span><button data-audio="audio/ipa/cons_s.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">都读"sink"</span></div>
+<div class="compare"><span class="label">v vs w</span><span class="word">very</span><span class="ipa">/v/</span><button data-audio="audio/ipa/cons_v.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">weary</span><span class="ipa">/w/</span><button data-audio="audio/ipa/cons_w.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">v/w不分</span></div>
+<div class="compare"><span class="label">n vs l</span><span class="word">night</span><span class="ipa">/n/</span><button data-audio="audio/ipa/cons_n.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">light</span><span class="ipa">/l/</span><button data-audio="audio/ipa/cons_l.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">n/l不分</span></div>
+
+<!-- ===== 辅音 ===== -->
+<h2>二、辅音（24 个）</h2>
+<div class="grid">
+<div class="card"><div class="sym">/p/</div><div class="word">pen</div><button data-audio="audio/ipa/cons_p.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/b/</div><div class="word">big</div><button data-audio="audio/ipa/cons_b.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/t/</div><div class="word">tea</div><button data-audio="audio/ipa/cons_t.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/d/</div><div class="word">dog</div><button data-audio="audio/ipa/cons_d.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/k/</div><div class="word">cat</div><button data-audio="audio/ipa/cons_k.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ɡ/</div><div class="word">go</div><button data-audio="audio/ipa/cons_g.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/f/</div><div class="word">fish</div><button data-audio="audio/ipa/cons_f.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/v/</div><div class="word">very</div><button data-audio="audio/ipa/cons_v.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/θ/</div><div class="word">think</div><button data-audio="audio/ipa/cons_th.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ð/</div><div class="word">this</div><button data-audio="audio/ipa/cons_dh.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/s/</div><div class="word">see</div><button data-audio="audio/ipa/cons_s.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/z/</div><div class="word">zoo</div><button data-audio="audio/ipa/cons_z.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ʃ/</div><div class="word">she</div><button data-audio="audio/ipa/cons_sh.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ʒ/</div><div class="word">vision</div><button data-audio="audio/ipa/cons_zh.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/h/</div><div class="word">hat</div><button data-audio="audio/ipa/cons_h.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/tʃ/</div><div class="word">chair</div><button data-audio="audio/ipa/cons_tsh.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/dʒ/</div><div class="word">job</div><button data-audio="audio/ipa/cons_dzh.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/m/</div><div class="word">man</div><button data-audio="audio/ipa/cons_m.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/n/</div><div class="word">no</div><button data-audio="audio/ipa/cons_n.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/ŋ/</div><div class="word">sing</div><button data-audio="audio/ipa/cons_ng.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/l/</div><div class="word">leg</div><button data-audio="audio/ipa/cons_l.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/r/</div><div class="word">red</div><button data-audio="audio/ipa/cons_r.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/w/</div><div class="word">wet</div><button data-audio="audio/ipa/cons_w.ogg">&#9654; 听</button></div>
+<div class="card"><div class="sym">/j/</div><div class="word">yes</div><button data-audio="audio/ipa/cons_j.ogg">&#9654; 听</button></div>
+</div>
+
+<!-- ===== 连读/弱读 ===== -->
+<h2>三、连读 & 弱读示范</h2>
+<div class="sent"><button data-audio="audio/ipa/vowel_ii.ogg">&#9654;</button><div class="text">What are you doing?</div><div class="br">实际：Wha-da-ya doin'? &mdash; what are→"wha-da", you→"ya", doing→"doin'"</div></div>
+<div class="sent"><button data-audio="audio/ipa/vowel_i.ogg">&#9654;</button><div class="text">Did you get it?</div><div class="br">实际：Di-joo ge-dit? &mdash; did you→"di-joo"(同化), get it→"ge-dit"(连读)</div></div>
+<div class="sent"><button data-audio="audio/ipa/vowel_schwa.ogg">&#9654;</button><div class="text">I'm going to have to think about it.</div><div class="br">实际：I'm gonna hafta think about it. &mdash; going to→"gonna", have to→"hafta"</div></div>
+<div class="sent"><button data-audio="audio/ipa/cons_m.ogg">&#9654;</button><div class="text">Can I get a glass of water?</div><div class="br">实际：Ca-ni ge-da glassa water? &mdash; can I→"ca-ni", get a→"ge-da", glass of→"glassa"</div></div>
+<div class="sent"><button data-audio="audio/ipa/cons_t.ogg">&#9654;</button><div class="text">Good day.</div><div class="br">实际：Goo(d) day. &mdash; /d/ 几乎不发音，只做口型（失去爆破）</div></div>
+
+<!-- ===== 重音 ===== -->
+<h2>四、重音对比</h2>
+<div class="compare"><span class="label">record</span><span class="word">REcord</span><span class="ipa">名词</span><button data-audio="audio/ipa/cons_r.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">reCORD</span><span class="ipa">动词</span><button data-audio="audio/ipa/cons_d.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">重音搞反</span></div>
+<div class="compare"><span class="label">present</span><span class="word">PREsent</span><span class="ipa">礼物</span><button data-audio="audio/ipa/cons_p.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="word">preSENT</span><span class="ipa">展示</span><button data-audio="audio/ipa/cons_s.ogg" style="background:var(--accent);color:#fff;border:none;border-radius:20px;padding:4px 12px;font-size:13px;cursor:pointer">&#9654;</button><span class="wrong">重音搞反</span></div>
+
+<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:16px 20px;margin:30px 0;color:#1e40af;font-size:15px">
+    <strong>总结：</strong>36 个音标音频全部来自 Wikipedia（CC 授权），每个文件 10-30KB，总大小约 1.1MB。<br>
+    部署到 Netlify 后每个音标卡片点按钮即可播放真人发音，零第三方依赖。
+</div>
+
+</div>
+
+<script>
+(function(){
+    var currentAudio = null;
+    var currentBtn = null;
+    var npText = document.getElementById('npText');
+
+    function stopCurrent() {
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentAudio = null;
+        }
+        if (currentBtn) {
+            currentBtn.classList.remove('playing');
+            currentBtn.innerHTML = currentBtn.innerHTML.replace(/&#9632;/, '&#9654;');
+            currentBtn = null;
+        }
+    }
+
+    document.querySelectorAll('button[data-audio]').forEach(function(btn){
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            var audioUrl = this.dataset.audio;
+            var label = this.closest('.card') ? (this.closest('.card').querySelector('.sym')?.textContent || '') : '';
+            label = label || this.closest('.compare')?.querySelector('.word')?.textContent || '';
+            label = label || this.closest('.sent')?.querySelector('.text')?.textContent?.substring(0,30) || '';
+
+            // Same button: toggle
+            if (currentAudio && currentBtn === this) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                    this.classList.add('playing');
+                    this.innerHTML = this.innerHTML.replace('&#9654;','&#9632;');
+                    npText.textContent = label + ' (播放中)';
+                } else {
+                    stopCurrent();
+                    npText.textContent = '—';
+                }
+                return;
+            }
+
+            // Different button: stop old, play new
+            stopCurrent();
+            currentAudio = new Audio(audioUrl);
+            currentBtn = this;
+            this.classList.add('playing');
+            this.innerHTML = this.innerHTML.replace('&#9654;','&#9632;');
+            npText.textContent = label + ' (播放中)';
+
+            currentAudio.play();
+            currentAudio.onended = function(){
+                stopCurrent();
+                npText.textContent = '—';
+            };
+            currentAudio.onerror = function(){
+                stopCurrent();
+                npText.textContent = '播放失败';
+            };
+        });
+    });
+
+    // 全局点击停止
+    document.addEventListener('click', function(e){
+        if (!e.target.closest('button[data-audio]') && currentAudio) {
+            stopCurrent();
+            npText.textContent = '—';
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

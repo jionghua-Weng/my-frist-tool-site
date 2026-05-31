@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>音标音频测试 — 英语研习社</title>
+<style>
+:root{--navy:#39375b;--accent:#3498db;--text-dark:#111827;--text-gray:#6b7280;--bg-light:#f8f9fa}
+body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;font-size:18px;line-height:1.7;color:var(--text-gray);background:#fff;margin:0;padding:40px 20px}
+.page{max-width:700px;margin:0 auto}
+h1{font-size:28px;color:var(--text-dark);margin-bottom:8px}
+.meta{font-size:14px;color:var(--text-gray);margin-bottom:30px;padding-bottom:15px;border-bottom:1px solid #e5e7eb}
+h2{font-size:20px;color:var(--text-dark);margin:30px 0 14px}
+
+.sound-card{
+    background:var(--bg-light);
+    border-radius:10px;
+    padding:20px 24px;
+    margin:14px 0;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+.sound-card .ipa-symbol{font-size:48px;font-weight:700;color:var(--text-dark);min-width:80px;text-align:center}
+.sound-card .ipa-info{flex:1;min-width:180px}
+.sound-card .ipa-info .name{font-size:18px;font-weight:600;color:var(--text-dark)}
+.sound-card .ipa-info .desc{font-size:15px;color:var(--text-gray);margin-top:4px}
+.sound-card .ipa-info .example{font-size:16px;color:var(--accent);margin-top:6px;font-weight:500}
+
+.play-btn{
+    width:56px;height:56px;
+    border-radius:50%;
+    border:2.5px solid var(--accent);
+    background:#fff;
+    color:var(--accent);
+    font-size:24px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s;
+    flex-shrink:0;
+}
+.play-btn:hover{background:var(--accent);color:#fff;transform:scale(1.05)}
+.play-btn.playing{background:#e74c3c;border-color:#e74c3c;color:#fff;animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,0.4)}50%{box-shadow:0 0 0 12px rgba(231,76,60,0)}}
+
+.note{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px 18px;margin:24px 0;color:#1e40af;font-size:15px}
+
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:15px}
+td{border-bottom:1px solid #e5e7eb;padding:10px 14px}
+
+.status-ok{color:#16a34a}
+.status-fail{color:#e74c3c}
+</style>
+</head>
+<body>
+<div class="page">
+
+<h1>音标音频测试 — Wikipedia 真实音标发音</h1>
+<div class="meta">测试用，音标音频来自 Wikipedia/Wikimedia Commons（CC 授权）</div>
+
+<div class="note">
+    <strong>测试说明：</strong>下面是两个用真实预录音频的音标卡片。点圆形按钮播放，再点停止。和昨天的 Web Speech TTS 对比一下区别。
+</div>
+
+<h2>元音测试</h2>
+
+<div class="sound-card" id="card1">
+    <div class="ipa-symbol">/iː/</div>
+    <div class="ipa-info">
+        <div class="name">长元音 iː — Close front unrounded vowel</div>
+        <div class="desc">嘴角向两边拉开，舌尖抵下齿，长音"衣"</div>
+        <div class="example">例词：sheep / see / need</div>
+    </div>
+    <button class="play-btn" data-audio="audio/ipa/i_long.ogg" data-card="card1">&#9654;</button>
+</div>
+
+<div class="sound-card" id="card2">
+    <div class="ipa-symbol">/æ/</div>
+    <div class="ipa-info">
+        <div class="name">短元音 æ — Near-open front unrounded vowel</div>
+        <div class="desc">嘴巴张大到两指宽，舌尖抵下齿，中文里没有</div>
+        <div class="example">例词：cat / apple / bad</div>
+    </div>
+    <button class="play-btn" data-audio="audio/ipa/ae.ogg" data-card="card2">&#9654;</button>
+</div>
+
+<h2>跟昨天的 TTS 对比</h2>
+<p>下面两个按钮用的是 Web Speech API（浏览器 TTS），和上面的真人音频对比：</p>
+
+<div class="sound-card">
+    <div class="ipa-symbol" style="font-size:32px">sheep</div>
+    <div class="ipa-info">
+        <div class="name">含 /iː/ 的单词</div>
+        <div class="desc">浏览器 TTS 朗读 sheep</div>
+    </div>
+    <button class="play-btn tts-btn" data-word="sheep" style="border-color:#f59e0b;color:#f59e0b">&#9654;</button>
+</div>
+
+<div class="sound-card">
+    <div class="ipa-symbol" style="font-size:32px">cat</div>
+    <div class="ipa-info">
+        <div class="name">含 /æ/ 的单词</div>
+        <div class="desc">浏览器 TTS 朗读 cat</div>
+    </div>
+    <button class="play-btn tts-btn" data-word="cat" style="border-color:#f59e0b;color:#f59e0b">&#9654;</button>
+</div>
+
+<h2>48 音标音频获取清单</h2>
+<p>Wikipedia 每个 IPA 音标都有对应的音频文件。以下是验证过的文件命名规则（部分列举）：</p>
+
+<table>
+    <tr><th>音标</th><th>Wikipedia 英文页面</th><th>音频</th></tr>
+    <tr><td>/iː/</td><td>Close front unrounded vowel</td><td class="status-ok">已下载 (12.8KB)</td></tr>
+    <tr><td>/ɪ/</td><td>Near-close near-front unrounded vowel</td><td>待下载</td></tr>
+    <tr><td>/æ/</td><td>Near-open front unrounded vowel</td><td class="status-ok">已下载 (15.0KB)</td></tr>
+    <tr><td>/e/</td><td>Close-mid front unrounded vowel</td><td>待下载</td></tr>
+    <tr><td>/ʌ/</td><td>Open-mid back unrounded vowel</td><td>待下载</td></tr>
+    <tr><td colspan="3" style="font-size:14px;color:var(--text-gray)">… 其余 43 个音标的命名规则一致</td></tr>
+</table>
+
+<div class="note">
+    <strong>结论：</strong>Wikipedia 音频可行。每个 .ogg 文件 10-18KB，48 个音标约 700KB。<br>
+    .ogg 格式兼容 Chrome/Edge/Firefox。如需兼容 Safari 可批量转 .mp3。<br>
+    下一步可以写脚本批量下载全部 48 个音标音频。
+</div>
+
+</div>
+
+<script>
+(function(){
+    var currentAudio = null;
+    var currentBtn = null;
+
+    // 真实音频按钮
+    document.querySelectorAll('.play-btn:not(.tts-btn)').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            var audioUrl = this.dataset.audio;
+            var cardId = this.dataset.card;
+
+            // 同一个按钮：切换播放/暂停
+            if (currentAudio && currentBtn === this) {
+                if (currentAudio.paused) {
+                    currentAudio.play();
+                    this.innerHTML = '&#9654;';
+                    this.classList.add('playing');
+                } else {
+                    currentAudio.pause();
+                    this.innerHTML = '&#9654;';
+                    this.classList.remove('playing');
+                }
+                return;
+            }
+
+            // 停止之前的音频
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                if (currentBtn) { currentBtn.innerHTML = '&#9654;'; currentBtn.classList.remove('playing'); }
+            }
+
+            // 播放新音频
+            currentAudio = new Audio(audioUrl);
+            currentBtn = this;
+            this.innerHTML = '&#9632;';
+            this.classList.add('playing');
+
+            currentAudio.play();
+
+            currentAudio.onended = function(){
+                currentBtn.innerHTML = '&#9654;';
+                currentBtn.classList.remove('playing');
+                currentAudio = null;
+                currentBtn = null;
+            };
+
+            currentAudio.onerror = function(){
+                currentBtn.innerHTML = '&#9654;';
+                currentBtn.classList.remove('playing');
+                currentBtn.style.borderColor = '#e74c3c';
+                currentBtn.style.color = '#e74c3c';
+                currentAudio = null;
+                currentBtn = null;
+            };
+        });
+    });
+
+    // TTS 对比按钮
+    var ttsPlaying = null;
+    document.querySelectorAll('.tts-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+                if (ttsPlaying === this) { ttsPlaying.classList.remove('playing'); ttsPlaying = null; return; }
+            }
+
+            var word = this.dataset.word;
+            var u = new SpeechSynthesisUtterance(word);
+            u.lang = 'en-US';
+
+            var voices = speechSynthesis.getVoices();
+            var v = voices.find(function(x){ return x.lang.startsWith('en') && x.name.includes('Google'); })
+                 || voices.find(function(x){ return x.lang.startsWith('en-US'); })
+                 || voices.find(function(x){ return x.lang.startsWith('en'); });
+            if (v) u.voice = v;
+
+            ttsPlaying = this;
+            this.classList.add('playing');
+            this.innerHTML = '&#9632;';
+
+            u.onend = function(){
+                if (ttsPlaying) { ttsPlaying.classList.remove('playing'); ttsPlaying.innerHTML = '&#9654;'; ttsPlaying = null; }
+            };
+            u.onerror = function(){
+                if (ttsPlaying) { ttsPlaying.classList.remove('playing'); ttsPlaying.innerHTML = '&#9654;'; ttsPlaying = null; }
+            };
+
+            speechSynthesis.speak(u);
+        });
+    });
+
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = function(){ speechSynthesis.getVoices(); };
+})();
+</script>
+
+</body>
+</html>
