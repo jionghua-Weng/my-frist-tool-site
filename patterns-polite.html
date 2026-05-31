@@ -206,6 +206,7 @@ function lv(){voices=window.speechSynthesis.getVoices()}
 lv();window.speechSynthesis.onvoiceschanged=lv;
 function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
 function speak(t,b,el){
+t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
 window.speechSynthesis.cancel();
 var u=new SpeechSynthesisUtterance(t);
