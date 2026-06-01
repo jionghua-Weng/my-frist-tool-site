@@ -184,7 +184,7 @@ function speak(t,b,el){
 if(!ttsOk)return;
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
-if(window.speechSynthesis.speaking){window.speechSynthesis.cancel()}
+window.speechSynthesis.cancel()
 var u=new SpeechSynthesisUtterance(t);
 u.lang='en-US';u.rate=0.9;
 var v=gv();if(v)u.voice=v;
