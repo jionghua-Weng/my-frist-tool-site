@@ -300,12 +300,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")toggleSearch
 var s=document.createElement('style');
 s.textContent='.audio-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;margin-left:8px;background:var(--accent);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:16px;flex-shrink:0;vertical-align:middle;transition:background .2s,transform .15s}.audio-btn:hover{background:var(--accent-hover);transform:scale(1.1)}.audio-btn.playing{background:#e74c3c;animation:audioPulse .8s infinite}@keyframes audioPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}[data-theme="dark"] .audio-btn.playing{background:#ef4444}.audio-highlight{background:#fff3b0;border-radius:4px;transition:background .3s}[data-theme="dark"] .audio-highlight{background:#3d3520}';
 document.head.appendChild(s);
-var voices=[],curHL=null;
-function lv(){voices=window.speechSynthesis.getVoices()}
-lv();window.speechSynthesis.onvoiceschanged=lv;
+var ttsOk=!!window.speechSynthesis,voices=[],curHL=null;
+if(ttsOk){function lv(){voices=window.speechSynthesis.getVoices()}lv();window.speechSynthesis.onvoiceschanged=lv}
 function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
 function speak(t,b,el){
-if(!window.speechSynthesis)return;
+if(!ttsOk)return;
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
 window.speechSynthesis.cancel();
