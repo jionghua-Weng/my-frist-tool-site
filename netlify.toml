@@ -2,9 +2,6 @@
   command = ""
   publish = "."
 
-[functions]
-  directory = "netlify/functions"
-
 [[redirects]]
   from = "https://www.easyeng.club/*"
   to = "https://easyeng.club/:splat"
