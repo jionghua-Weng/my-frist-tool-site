@@ -227,7 +227,7 @@ function speak(t,b,el){
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
 if(!ttsOk){
-var url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q='+encodeURIComponent(t.substring(0,180));
+var url='https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(t.substring(0,180))+'&type=1';
 _playAudio(url,b,el);
 return;
 }
