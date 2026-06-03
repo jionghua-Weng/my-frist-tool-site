@@ -212,19 +212,34 @@ var _dbg=document.createElement('div');_dbg.id='audio-debug';_dbg.style.cssText=
 function _log(msg,bg){_dbg.textContent='[audio] '+msg;_dbg.style.display='block';_dbg.style.background=bg;clearTimeout(_dbg._t);_dbg._t=setTimeout(function(){_dbg.style.display='none'},4000)}
 if(ttsOk){function lv(){try{voices=window.speechSynthesis.getVoices()}catch(e){voices=[]}}lv();window.speechSynthesis.onvoiceschanged=lv}
 function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
+function _playAudio(url,b,el){
+var a=new Audio(url);a.preload='auto';
+b.classList.add('playing');if(el){el.classList.add('audio-highlight');curHL=el}
+_log('音频加载中...','#f57c00');
+var tmt=setTimeout(function(){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('音频加载超时','#c62828');a.remove()},10000);
+a.onplay=function(){clearTimeout(tmt);_log('播放中(Audio)','#2e7d32')};
+a.onended=function(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};a.remove()};
+a.onerror=function(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('音频加载失败(网络可能受限)','#c62828');a.remove()};
+a.load();
+a.play().catch(function(e){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('播放失败: '+e.message,'#c62828');a.remove()});
+}
 function speak(t,b,el){
-if(!ttsOk){_log('speechSynthesis不可用','#c62828');return}
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
+if(!ttsOk){
+var url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q='+encodeURIComponent(t.substring(0,180));
+_playAudio(url,b,el);
+return;
+}
 if(window.speechSynthesis.speaking){window.speechSynthesis.cancel()}
 var u=new SpeechSynthesisUtterance(t);
 u.lang='en-US';u.rate=0.9;
 if(!isAndroid){var v=gv();if(v)u.voice=v}
 b.classList.add('playing');
 if(el){el.classList.add('audio-highlight');curHL=el}
-u.onstart=function(){_log('播放中...','#2e7d32')};
+u.onstart=function(){_log('播放中(TTS)','#2e7d32')};
 u.onend=function(){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_curUtt=null};
-u.onerror=function(e){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_curUtt=null;_log('错误: '+(e.error||'unknown'),'#c62828')};
+u.onerror=function(e){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_curUtt=null;_log('TTS错误: '+(e.error||'unknown'),'#c62828')};
 _curUtt=u;
 window.speechSynthesis.speak(u);
 }
