@@ -216,12 +216,13 @@ function _playAudio(url,b,el){
 var a=new Audio(url);a.preload='auto';
 b.classList.add('playing');if(el){el.classList.add('audio-highlight');curHL=el}
 _log('音频加载中...','#f57c00');
-var tmt=setTimeout(function(){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('音频加载超时','#c62828');a.remove()},10000);
-a.onplay=function(){clearTimeout(tmt);_log('播放中(Audio)','#2e7d32')};
-a.onended=function(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};a.remove()};
-a.onerror=function(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('音频加载失败(网络可能受限)','#c62828');a.remove()};
-a.load();
-a.play().catch(function(e){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};_log('播放失败: '+e.message,'#c62828');a.remove()});
+var started=false;
+function _clean(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};a.remove()}
+var tmt=setTimeout(function(){if(!started){_clean();_log('音频加载超时','#c62828')}},12000);
+a.onplaying=function(){started=true;clearTimeout(tmt);_log('播放中(Audio)','#2e7d32')};
+a.onended=_clean;
+a.onerror=function(){if(!started){clearTimeout(tmt);_clean();_log('音频加载失败','#c62828')}};
+a.play().catch(function(e){console.log('[audio] play rejected:',e.message)});
 }
 function speak(t,b,el){
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
