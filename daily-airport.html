@@ -208,28 +208,27 @@ s.textContent='.audio-btn{display:inline-flex;align-items:center;justify-content
 document.head.appendChild(s);
 
 var isAndroid=/Android/i.test(navigator.userAgent),ttsOk=!!window.speechSynthesis,voices=[],curHL=null,_curUtt=null;
-var _dbg=document.createElement('div');_dbg.id='audio-debug';_dbg.style.cssText='position:fixed;bottom:8px;right:8px;background:#333;color:#fff;padding:6px 12px;border-radius:6px;font-size:12px;z-index:9999;display:none;max-width:80vw';_dbg.textContent='v7';_dbg.style.display='block';_dbg.style.background='#555';setTimeout(function(){_dbg.style.display='none'},1000);document.body.appendChild(_dbg);
+var _dbg=document.createElement('div');_dbg.id='audio-debug';_dbg.style.cssText='position:fixed;bottom:8px;right:8px;background:#333;color:#fff;padding:6px 12px;border-radius:6px;font-size:12px;z-index:9999;display:none;max-width:80vw';_dbg.textContent='v10';_dbg.style.display='block';_dbg.style.background='#555';setTimeout(function(){_dbg.style.display='none'},1000);document.body.appendChild(_dbg);
 function _log(msg,bg){_dbg.textContent='[audio] '+msg;_dbg.style.display='block';_dbg.style.background=bg;clearTimeout(_dbg._t);_dbg._t=setTimeout(function(){_dbg.style.display='none'},4000)}
 if(ttsOk){function lv(){try{voices=window.speechSynthesis.getVoices()}catch(e){voices=[]}}lv();window.speechSynthesis.onvoiceschanged=lv}
 function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
 function _playAudio(url,b,el){
 var a=new Audio(url);a.preload='auto';
 b.classList.add('playing');if(el){el.classList.add('audio-highlight');curHL=el}
-_log('音频加载中...','#f57c00');
+_log('加载...','#f57c00');
 var started=false;
 function _clean(){clearTimeout(tmt);b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null};a.remove()}
-var tmt=setTimeout(function(){if(!started){_clean();_log('音频加载超时','#c62828')}},12000);
-a.onplaying=function(){started=true;clearTimeout(tmt);_log('播放中(Audio)','#2e7d32')};
+var tmt=setTimeout(function(){if(!started){_clean();_log('超时','#c62828')}},12000);
+a.onplaying=function(){started=true;clearTimeout(tmt);_log('播放中','#2e7d32')};
 a.onended=_clean;
-a.onerror=function(){if(!started){clearTimeout(tmt);_clean();_log('音频加载失败','#c62828')}};
-a.play().catch(function(e){console.log('[audio] play rejected:',e.message)});
+a.onerror=function(){if(!started){clearTimeout(tmt);_clean();_log('无法加载','#c62828')}};
+a.play().catch(function(e){console.log('[audio]',e.message)});
 }
 function speak(t,b,el){
 t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
 if(!ttsOk){
-var url='https://dict.youdao.com/dictvoice?audio='+encodeURIComponent(t.substring(0,180))+'&type=1';
-_playAudio(url,b,el);
+_playAudio('/.netlify/functions/tts?text='+encodeURIComponent(t.substring(0,180)),b,el);
 return;
 }
 if(window.speechSynthesis.speaking){window.speechSynthesis.cancel()}
