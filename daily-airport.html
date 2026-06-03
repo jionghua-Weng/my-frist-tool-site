@@ -214,7 +214,7 @@ if(ttsOk){function lv(){try{voices=window.speechSynthesis.getVoices()}catch(e){v
 function gv(){var v=voices.find(function(x){return x.lang==='en-US'&&x.name.indexOf('Female')>=0});return v||voices.find(function(x){return x.lang.startsWith('en-')})||null}
 function speak(t,b,el){
 if(!ttsOk){b.style.outline='2px solid red';_log('speechSynthesis不可用','#c62828');return}
-t=t.replace(/\s?\/[^\/]*[^ -][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
+t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
 if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
 try{window.speechSynthesis.cancel()}catch(e){}
 var u=new SpeechSynthesisUtterance(t);
