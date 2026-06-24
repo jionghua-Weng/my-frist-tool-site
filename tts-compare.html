@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTS vs 真人 — 发音对比测试</title>
+<style>
+:root {
+    --navy: #39375b;
+    --accent: #3498db;
+    --text-dark: #111827;
+    --text-gray: #6b7280;
+    --white: #ffffff;
+    --bg-light: #f8f9fa;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #4b5563;
+    background: #fff;
+}
+.site-header {
+    background: var(--navy);
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 600;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+h1 { color: var(--text-dark); font-size: 28px; margin-bottom: 8px; }
+.subtitle { color: var(--text-gray); font-size: 15px; margin-bottom: 24px; }
+
+.compare-table { width: 100%; border-collapse: collapse; }
+.compare-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 15px;
+}
+.compare-table th:first-child { width: 60px; text-align: center; }
+.compare-table th.col-lme { background: #2c5282; }
+.compare-table th.col-tts { background: #7c3aed; }
+.compare-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+.compare-table td.sentence {
+    font-size: 18px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+.compare-table td.play-col { text-align: center; }
+.btn-play {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    transition: transform .1s, box-shadow .2s;
+}
+.btn-play:active { transform: scale(.95); }
+.btn-lme { background: #2c5282; }
+.btn-lme:hover { background: #1e3a5f; }
+.btn-tts { background: #7c3aed; }
+.btn-tts:hover { background: #6d28d9; }
+.btn-play.playing { box-shadow: 0 0 0 3px rgba(52,152,219,.4); }
+
+.verdict {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: var(--bg-light);
+    border-radius: 10px;
+}
+.verdict h2 { font-size: 20px; color: var(--text-dark); margin-bottom: 12px; }
+.verdict ul { padding-left: 20px; }
+.verdict li { margin-bottom: 8px; }
+
+.status-bar {
+    margin-bottom: 20px;
+    padding: 10px 16px;
+    background: #fef3c7;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #92400e;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">发音对比测试：真人 vs TTS</header>
+
+<div class="container">
+    <h1>逐句对比试听</h1>
+    <p class="subtitle">课程：A Snowy Day（初级）| 左列 LME 真人朗读 | 右列 浏览器 TTS 合成 | 可调速</p>
+
+    <div class="status-bar" id="ttsStatus">正在加载语音列表...</div>
+
+    <table class="compare-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>句子</th>
+                <th class="col-lme">LME 真人</th>
+                <th class="col-tts">浏览器 TTS</th>
+            </tr>
+        </thead>
+        <tbody id="sentenceBody"></tbody>
+    </table>
+
+    <div style="margin-top:16px; display:flex; align-items:center; gap:12px; font-size:14px; color:var(--text-gray);">
+        <span>播放速度：</span>
+        <input type="range" id="speedSlider" min="0.5" max="1.5" step="0.1" value="1" style="width:140px;">
+        <span id="speedLabel">1.0x</span>
+    </div>
+
+    <div class="verdict">
+        <h2>快速判断标准</h2>
+        <ul>
+            <li><strong>自然度</strong>：真人 > TTS。真人朗读有语调起伏、情感，TTS 偏平</li>
+            <li><strong>清晰度</strong>：TTS > 真人。TTS 每个词都字正腔圆，真人可能有连读/吞音</li>
+            <li><strong>跟读友好度</strong>：TTS 更"干净"，普通话级别的标准；真人更"真实"</li>
+            <li><strong>版权</strong>：TTS 零风险，真人音频不能搬运</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+// ===== 数据 =====
+const sentences = [
+    "Today is December 10th.",
+    "It snowed all night.",
+    "The snow is soft and white.",
+    "The snow is still falling.",
+    "My dad and I are happy.",
+    "My mom doesn't like the snow.",
+    "My mom has to clean the walkway.",
+    "My dad and I get to play outside.",
+    "I put on my boots and gloves.",
+    "My mom puts on my scarf."
+];
+
+// LME 音频 URL（从已抓取数据）
+const lmeUrls = [
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_1.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_2.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_3.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_4.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_5.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_6.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_7.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_8.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_9.mp3",
+    "https://letmeenglish.com/wp-content/uploads/2025/02//A_Snowy_Day_10.mp3"
+];
+
+// ===== TTS 引擎初始化 =====
+let ttsVoice = null;
+const statusBar = document.getElementById('ttsStatus');
+
+function initVoices() {
+    const voices = speechSynthesis.getVoices();
+    // 优先选英语母语者 — Microsoft 的神经网络语音最好
+    ttsVoice = voices.find(v => v.name.includes('Microsoft') && v.lang.startsWith('en-US') && v.name.includes('Online'))
+            || voices.find(v => v.name.includes('Google') && v.lang.startsWith('en-US'))
+            || voices.find(v => v.lang.startsWith('en-US'))
+            || voices.find(v => v.lang.startsWith('en'));
+
+    if (ttsVoice) {
+        statusBar.innerHTML = '语音引擎就绪：<strong>' + ttsVoice.name + '</strong>（' + ttsVoice.lang + '）';
+        statusBar.style.background = '#d1fae5';
+        statusBar.style.color = '#065f46';
+    } else {
+        statusBar.innerHTML = '警告：未找到英语语音。请用 Chrome/Edge 打开此页面。';
+        statusBar.style.background = '#fee2e2';
+        statusBar.style.color = '#991b1b';
+    }
+}
+
+// Chrome 需要异步加载 voices
+speechSynthesis.onvoiceschanged = initVoices;
+initVoices(); // Safari/Firefox 同步返回
+
+// ===== 渲染表格 =====
+const tbody = document.getElementById('sentenceBody');
+sentences.forEach((s, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td style="text-align:center;font-weight:600;color:var(--text-gray);">${i+1}</td>
+        <td class="sentence">${s}</td>
+        <td class="play-col">
+            <button class="btn-play btn-lme" data-type="lme" data-idx="${i}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                播放
+            </button>
+        </td>
+        <td class="play-col">
+            <button class="btn-play btn-tts" data-type="tts" data-idx="${i}">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+                播放
+            </button>
+        </td>`;
+    tbody.appendChild(tr);
+});
+
+// ===== 播放逻辑 =====
+let currentLmeAudio = null;
+
+function getSpeed() {
+    return parseFloat(document.getElementById('speedSlider').value);
+}
+
+document.getElementById('speedSlider').addEventListener('input', function() {
+    document.getElementById('speedLabel').textContent = this.value + 'x';
+    if (currentLmeAudio) {
+        currentLmeAudio.playbackRate = parseFloat(this.value);
+    }
+});
+
+document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.btn-play');
+    if (!btn) return;
+
+    const type = btn.dataset.type;
+    const idx = parseInt(btn.dataset.idx);
+    const speed = getSpeed();
+
+    // 停止之前的播放
+    if (currentLmeAudio) {
+        currentLmeAudio.pause();
+        currentLmeAudio = null;
+    }
+    speechSynthesis.cancel();
+
+    // 清除所有 playing 状态
+    document.querySelectorAll('.btn-play').forEach(b => b.classList.remove('playing'));
+    btn.classList.add('playing');
+
+    if (type === 'lme') {
+        const audio = new Audio(lmeUrls[idx]);
+        audio.playbackRate = speed;
+        currentLmeAudio = audio;
+        audio.play().catch(err => {
+            alert('LME 音频加载失败：' + err.message + '\n可能是跨域限制，试试用 start "" 打开本文件');
+            btn.classList.remove('playing');
+        });
+        audio.onended = () => btn.classList.remove('playing');
+    } else {
+        if (!ttsVoice) {
+            alert('语音引擎未就绪，请用 Chrome/Edge 打开');
+            btn.classList.remove('playing');
+            return;
+        }
+        const utter = new SpeechSynthesisUtterance(sentences[idx]);
+        utter.voice = ttsVoice;
+        utter.rate = speed;
+        utter.onend = () => btn.classList.remove('playing');
+        speechSynthesis.speak(utter);
+    }
+});
+
+// 键盘快捷键: Alt+L 播放LME, Alt+T 播放TTS（当前聚焦行）
+</script>
+
+</body>
+</html>
