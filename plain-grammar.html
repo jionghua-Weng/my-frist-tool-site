@@ -97,9 +97,23 @@ img { max-width: 100%; height: auto; display: block; }
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
   position: relative;
+  will-change: transform;
 }
-.card:hover { box-shadow: 0 28px 56px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.1); transform: translateY(-4px); }
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.card:hover { box-shadow: 0 28px 56px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.1); }
+.card:hover::after { opacity: 1; }
 .card-thumb { aspect-ratio: 16/9; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
 .card-thumb .thumb-key { position: absolute; top: 12px; right: 12px; background: #fff; color: var(--gold); font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
 .card-thumb .thumb-num { position: absolute; top: 12px; left: 12px; background: #fff; color: var(--text-gray); font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,0.08); width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
@@ -278,6 +292,22 @@ img { max-width: 100%; height: auto; display: block; }
 (function(){var p=document.getElementById("progressBar");if(p){window.addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-window.innerHeight;p.style.width=(h>0?(window.scrollY/h)*100:0)+"%"})}})();
 // 回到顶部
 (function(){var b=document.getElementById("backToTop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("visible",window.scrollY>300)});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})}})();
+// 卡片3D倾斜
+(function(){
+var cards=document.querySelectorAll('.card');
+cards.forEach(function(card){
+card.addEventListener('mousemove',function(e){
+var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top,cx=r.width/2,cy=r.height/2,rx=((y-cy)/cy*-12).toFixed(2),ry=((x-cx)/cx*12).toFixed(2);
+card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateZ(16px)';
+card.style.setProperty('--mx',((x/r.width)*100).toFixed(1)+'%');
+card.style.setProperty('--my',((y/r.height)*100).toFixed(1)+'%');
+});
+card.addEventListener('mouseleave',function(){
+card.style.transform='perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+card.style.setProperty('--mx','50%');card.style.setProperty('--my','50%');
+});
+});
+})();
 // 右下角小黄人 — 眼睛跟鼠标
 (function(){
 var face=document.getElementById("floatingFace");
