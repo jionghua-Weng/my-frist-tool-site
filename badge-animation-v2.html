@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Badge 动画 v2</title>
+<style>
+body { font-family: 'PingFang SC','Microsoft YaHei',sans-serif; background: #f8f9fa; text-align: center; padding: 60px 20px; }
+h1 { color: #1e293b; margin-bottom: 8px; }
+.sub { color: #94a3b8; font-size: 14px; margin-bottom: 40px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 36px; max-width: 1150px; margin: 0 auto; }
+.item { background: #fff; border-radius: 16px; padding: 44px 20px; box-shadow: 0 2px 14px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+.item h3 { font-size: 15px; color: #64748b; margin-bottom: 28px; font-weight: 500; }
+
+/* 公共badge */
+.badge { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 14px; font-weight: 700; padding: 7px 22px; border-radius: 20px; letter-spacing: 1px; position: relative; }
+
+/* 1. 流光扫过 — 一道光从左滑到右 */
+.b1 { overflow: hidden; }
+.b1::after { content: ''; position: absolute; top: -2px; left: -100%; width: 40%; height: calc(100% + 4px); background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent); transform: skewX(-25deg); animation: shimmer 2.5s ease-in-out infinite; }
+@keyframes shimmer { 0% { left: -100% } 100% { left: 150% } }
+
+/* 2. 边框跑马灯 — 金色光圈绕圈跑 */
+.b2 { background: linear-gradient(135deg, #f59e0b, #d97706); background-clip: padding-box; border: 4px solid transparent; position: relative; }
+.b2::before { content: ''; position: absolute; inset: -4px; border-radius: 24px; padding: 4px; background: conic-gradient(from 0deg, #f59e0b, #fbbf24, #fef3c7, #fbbf24, #f59e0b); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; animation: borderSpin 3s linear infinite; }
+@keyframes borderSpin { 0% { filter: hue-rotate(0deg) } 100% { filter: hue-rotate(0deg) } }
+/* 用旋转实现 */
+.b2-wrap { display: inline-block; position: relative; padding: 3px; border-radius: 23px; background: conic-gradient(from 0deg, #f59e0b, #fbbf24, #fef3c7, #fbbf24, #f59e0b); animation: bSpin 3s linear infinite; }
+.b2-inner { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; font-size: 14px; font-weight: 700; padding: 4px 19px; border-radius: 20px; letter-spacing: 1px; }
+@keyframes bSpin { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+
+/* 3. 弹性弹跳 */
+.b3 { animation: bounceIn 3s ease-in-out infinite; }
+@keyframes bounceIn { 0%,100% { transform: translateY(0) scale(1) } 30% { transform: translateY(-12px) scale(1.04) } 50% { transform: translateY(0) scale(0.96) } 70% { transform: translateY(-5px) scale(1.02) } 85% { transform: translateY(0) scale(0.98) } }
+
+/* 4. 渐变流动 — 背景色流动 */
+.b4 { background: linear-gradient(120deg, #f59e0b, #d97706, #f59e0b, #b45309); background-size: 300% 100%; animation: gradFlow 2.5s ease infinite; }
+@keyframes gradFlow { 0% { background-position: 0% 50% } 50% { background-position: 100% 50% } 100% { background-position: 0% 50% } }
+
+/* 5. 描边扩散 — 外光圈一收一放 */
+.b5 { box-shadow: 0 0 0 0 rgba(245,158,11,0.5); animation: ringPulse 2s ease-out infinite; }
+@keyframes ringPulse { 0% { box-shadow: 0 0 0 0 rgba(245,158,11,0.6) } 100% { box-shadow: 0 0 0 16px rgba(245,158,11,0) } }
+
+/* 6. 水波纹 — 多个同心圆向外扩散 */
+.b6-wrap { display: inline-block; position: relative; }
+.b6 { position: relative; z-index: 1; }
+.b6-wrap::before, .b6-wrap::after { content: ''; position: absolute; inset: -6px; border-radius: 26px; border: 2px solid rgba(245,158,11,0.6); animation: ripple 2s ease-out infinite; z-index: 0; }
+.b6-wrap::after { animation-delay: 1s; }
+@keyframes ripple { 0% { transform: scale(1); opacity: 1 } 100% { transform: scale(1.8); opacity: 0 } }
+
+/* 7. 翻转3D */
+.b7 { animation: flip3d 3s ease-in-out infinite; backface-visibility: visible; display: inline-block; }
+@keyframes flip3d { 0%,100% { transform: perspective(400px) rotateY(0deg) } 40% { transform: perspective(400px) rotateY(12deg) } 60% { transform: perspective(400px) rotateY(-12deg) } }
+
+/* 8. 字母逐个弹跳 */
+.b8 span { display: inline-block; animation: letterHop 1.5s ease-in-out infinite; }
+.b8 span:nth-child(1) { animation-delay: 0s } .b8 span:nth-child(2) { animation-delay: 0.1s } .b8 span:nth-child(3) { animation-delay: 0.2s } .b8 span:nth-child(4) { animation-delay: 0.3s } .b8 span:nth-child(5) { animation-delay: 0.4s } .b8 span:nth-child(6) { animation-delay: 0.5s } .b8 span:nth-child(7) { animation-delay: 0.6s } .b8 span:nth-child(8) { animation-delay: 0.7s }
+@keyframes letterHop { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+</style>
+</head>
+<body>
+<h1>Badge 动画效果 v2</h1>
+<p class="sub">上一批太素了，这批来点不一样的</p>
+
+<div class="grid">
+  <div class="item"><h3>1. 流光扫过</h3><span class="badge b1">大白话语法系列</span></div>
+  <div class="item"><h3>2. 边框跑马灯</h3><span class="b2-wrap"><span class="b2-inner">大白话语法系列</span></span></div>
+  <div class="item"><h3>3. 弹性弹跳</h3><span class="badge b3">大白话语法系列</span></div>
+  <div class="item"><h3>4. 渐变流动</h3><span class="badge b4">大白话语法系列</span></div>
+  <div class="item"><h3>5. 光环脉冲扩散</h3><span class="badge b5">大白话语法系列</span></div>
+  <div class="item"><h3>6. 水波纹扩散</h3><span class="b6-wrap"><span class="badge b6">大白话语法系列</span></span></div>
+  <div class="item"><h3>7. 3D翻转</h3><span class="badge b7">大白话语法系列</span></div>
+  <div class="item"><h3>8. 字母逐个弹跳</h3><span class="badge b8"><span>大</span><span>白</span><span>话</span><span>语</span><span>法</span><span>系</span><span>列</span></span></div>
+</div>
+</body>
+</html>

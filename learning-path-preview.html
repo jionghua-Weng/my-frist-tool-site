@@ -1,263 +1,361 @@
 <!DOCTYPE html>
-<html lang="zh-hans">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>学习路线 — 英语研习社</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习路径预览 — 英语研习社</title>
+<link rel="icon" type="image/png" href="favicon.svg">
 <style>
-:root{--navy:#39375b;--accent:#3498db;--accent-hover:#1464cc;--text-dark:#111827;--text-gray:#6b7280;--text-medium:#4b5563;--white:#ffffff;--bg-light:#f8f9fa;--font-heading:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;--font-body:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-body);font-size:18px;line-height:1.7;color:var(--text-medium);background:#fff;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+:root {
+    --navy: #39375b;
+    --hero-bg: #e4e9f5;
+    --accent: #3498db;
+    --accent-hover: #1464cc;
+    --text-dark: #111827;
+    --text-gray: #6b7280;
+    --text-medium: #4b5563;
+    --white: #ffffff;
+    --max-width: 1200px;
+    --font-heading: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-body: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-body); font-size: 18px; line-height: 1.7; color: var(--text-medium); background: #fff; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
 
-/* 顶部Hero */
-.hero{background:var(--navy);color:var(--white);text-align:center;padding:80px 20px 64px}
-.hero h1{font-family:var(--font-heading);font-size:42px;font-weight:700;margin-bottom:12px}
-.hero p{font-size:18px;color:#c0c0d0;max-width:600px;margin:0 auto;line-height:1.6}
+/* 导航 */
+.site-header { background: var(--navy); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+.logo a { display: flex; align-items: center; gap: 10px; color: var(--white); font-size: 21px; font-weight: 700; letter-spacing: 0.5px; text-decoration: none; }
+.logo-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.logo-icon svg { width: 100%; height: 100%; display: block; }
+.main-nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.main-nav a { color: var(--white); padding: 8px 13px; border-radius: 6px; font-size: 14.5px; font-weight: 500; white-space: nowrap; transition: background 0.2s; text-decoration: none; }
+.main-nav a:hover { background: rgba(255,255,255,0.12); }
+.main-nav a.nav-glow{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-weight:600;border-radius:6px;box-shadow:0 0 12px rgba(168,85,247,0.4);animation:glowPulse 1.6s ease-in-out infinite}
+.main-nav a.nav-glow:hover{animation:none;background:linear-gradient(135deg,#6d28d9,#9333ea);box-shadow:0 0 24px rgba(168,85,247,0.8)}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 8px rgba(168,85,247,0.3)}50%{box-shadow:0 0 18px rgba(168,85,247,0.6)}}
+.main-nav a.nav-path{background:rgba(255,255,255,0.15);color:#fff;font-weight:600}
 
-/* 路线图容器 */
-.roadmap{max-width:900px;margin:0 auto;padding:40px 20px 80px;position:relative}
+/* Hero */
+.hero { background: var(--hero-bg); padding: 40px 0 44px; text-align: center; }
+.hero .container { max-width: 700px; }
+.hero-faces { display: flex; align-items: flex-end; justify-content: center; gap: 0; margin-bottom: 8px; padding-right: 20px; }
+.hface{position:relative;flex-shrink:0}
+.hface-dad{width:100px;height:100px;margin-right:-15px;z-index:3}
+.hface-mom{width:80px;height:80px;margin-left:-15px;margin-right:-12px;z-index:2}
+.hface-kid{width:56px;height:56px;margin-left:-12px;z-index:1}
+.hero h1 { font-family: var(--font-heading); font-size: 38px; font-weight: 600; color: var(--text-dark); margin-bottom: 12px; }
+.hero p { font-size: 17px; color: var(--text-gray); line-height: 1.8; max-width: 560px; margin: 0 auto; }
 
-/* 中轴线 */
-.roadmap::before{content:'';position:absolute;left:80px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#e5e7eb,#3498db,#e5e7eb,#7c3aed,#e5e7eb)}
+/* 路径卡片 */
+.path-overview { padding: 48px 0 20px; }
+.section-title { text-align: center; margin-bottom: 32px; }
+.section-title h2 { font-family: var(--font-heading); font-size: 26px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.section-title p { font-size: 15px; color: var(--text-gray); }
+.path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.path-card { background: var(--white); border-radius: 12px; padding: 28px 24px 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); transition: box-shadow 0.3s, transform 0.25s; cursor: pointer; border: 1px solid #e5e7eb; position: relative; overflow: hidden; }
+.path-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.12); transform: translateY(-3px); }
+.path-card .pc-num { font-size: 52px; font-weight: 800; color: #e8ecf4; position: absolute; top: 4px; right: 16px; line-height: 1; pointer-events: none; }
+.path-card .pc-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+.path-card h3 { font-family: var(--font-heading); font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; position: relative; z-index: 1; }
+.path-card .pc-desc { font-size: 14px; color: var(--text-gray); line-height: 1.7; margin-bottom: 14px; position: relative; z-index: 1; }
+.path-card .pc-meta { font-size: 13px; color: var(--accent); font-weight: 600; position: relative; z-index: 1; }
+.path-card.path-dashed { border: 2px dashed #d1d5db; background: #fafbfc; }
+.path-card.path-dashed .pc-num { color: #d1d5db; }
 
-/* 阶段卡片 */
-.stage{position:relative;margin-bottom:60px;padding-left:140px}
-.stage:last-child{margin-bottom:0}
+/* 路径详情 */
+.path-detail { padding: 20px 0 48px; }
+.path-detail-section { margin-bottom: 48px; scroll-margin-top: 88px; }
+.pds-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #e5e7eb; }
+.pds-num { width: 42px; height: 42px; background: var(--navy); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 700; flex-shrink: 0; }
+.pds-header h3 { font-family: var(--font-heading); font-size: 22px; font-weight: 600; color: var(--text-dark); }
+.pds-header .pds-sub { font-size: 14px; color: var(--text-gray); margin-top: 2px; }
 
-/* 阶段节点 */
-.stage-node{position:absolute;left:80px;top:0;width:40px;height:40px;border-radius:50%;transform:translate(-18px,0);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:var(--white);z-index:1;box-shadow:0 0 0 8px rgba(52,152,219,0.15)}
-.s1 .stage-node{background:var(--accent)}
-.s2 .stage-node{background:#2980b9}
-.s3 .stage-node{background:#8e44ad}
-.s4 .stage-node{background:#e67e22}
-.s5 .stage-node{background:#27ae60}
+/* 步骤流 */
+.step-flow { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 32px; }
+.step-flow::before { content: ''; position: absolute; left: 15px; top: 8px; bottom: 8px; width: 2px; background: #d1d5db; border-radius: 1px; }
+.step-item { position: relative; padding: 12px 0 12px 28px; }
+.step-item::before { content: attr(data-step); position: absolute; left: -25px; top: 16px; width: 28px; height: 28px; background: var(--white); border: 2px solid var(--accent); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; z-index: 1; }
+.step-item:first-child::before { background: var(--accent); color: #fff; }
+.step-card { display: block; background: var(--white); border-radius: 8px; padding: 16px 20px; box-shadow: 0 1px 6px rgba(0,0,0,0.03); transition: box-shadow 0.25s, transform 0.2s; text-decoration: none; border: 1px solid #e5e7eb; }
+.step-card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.08); transform: translateX(3px); }
+.step-card h4 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 3px; line-height: 1.4; }
+.step-card .sc-desc { font-size: 13px; color: var(--text-gray); line-height: 1.6; }
 
-/* 阶段标题 */
-.stage-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
-.s1 .stage-label{color:var(--accent)}
-.s2 .stage-label{color:#2980b9}
-.s3 .stage-label{color:#8e44ad}
-.s4 .stage-label{color:#e67e22}
-.s5 .stage-label{color:#27ae60}
+/* CTA */
+.cta-section { text-align: center; padding: 32px 0 56px; }
+.cta-section p { font-size: 16px; color: var(--text-gray); margin-bottom: 16px; }
+.cta-btn { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: var(--accent); padding: 11px 27px; border-radius: 8px; border: 1.5px solid var(--accent); font-weight: 600; font-size: 15px; transition: background 0.25s, color 0.25s, gap 0.3s; text-decoration: none; }
+.cta-btn:hover { background: var(--accent); color: #fff; gap: 14px; }
 
-.stage-title{font-family:var(--font-heading);font-size:28px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
-.stage-desc{font-size:16px;color:var(--text-gray);margin-bottom:24px}
+/* 页脚 */
+.site-footer { background: var(--navy); color: #c0c0d0; text-align: center; padding: 30px 20px; font-size: 14px; }
+.site-footer a { color: #c0c0d0; }
 
-/* 文章列表 */
-.stage-articles{display:flex;flex-direction:column;gap:0}
-.stage-article{display:flex;align-items:center;gap:14px;padding:10px 16px;border-radius:8px;text-decoration:none;color:var(--text-medium);transition:all .15s;border-left:3px solid transparent}
-.stage-article:hover{background:var(--bg-light);border-left-color:var(--accent)}
-.stage-article:hover .sa-title{color:var(--accent)}
-.sa-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text-gray)}
-.stage-article:hover .sa-num{background:var(--accent);color:var(--white)}
-.sa-title{font-size:16px;font-weight:600;color:var(--text-dark);transition:color .15s}
-.sa-tag{font-size:11px;padding:2px 7px;border-radius:4px;font-weight:600;flex-shrink:0;margin-left:auto}
-.tag-mandian{background:#f3e8ff;color:#7c3aed}
-.tag-yufa{background:#dbeafe;color:#2563eb}
-.tag-cihui{background:#fff7ed;color:#c2410c}
-.tag-juxing{background:#fce7f3;color:#be185d}
-.tag-kouyu{background:#d1fae5;color:#059669}
+/* 预览标签 */
+.preview-badge { position: fixed; top: 80px; right: 16px; background: linear-gradient(135deg, #f09819, #ffd700); color: #7c5e00; padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; z-index: 90; box-shadow: 0 2px 8px rgba(240,152,25,0.3); }
 
-/* 子分类标签 */
-.stage-sub{font-size:13px;font-weight:700;color:var(--text-gray);margin:16px 0 8px;padding-left:16px;letter-spacing:1px}
+.back-to-top { position: fixed; bottom: 25px; right: 25px; width: 44px; height: 44px; background: var(--accent); color: #fff; border: none; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; }
 
-/* 统计栏 */
-.stats{max-width:900px;margin:0 auto;padding:0 20px 60px;display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
-.stat-card{background:var(--bg-light);border-radius:12px;padding:24px 32px;text-align:center;min-width:120px}
-.stat-card .sn{font-size:36px;font-weight:700;color:var(--navy);font-family:var(--font-heading)}
-.stat-card .sl{font-size:14px;color:var(--text-gray);margin-top:4px}
-
-/* footer */
-.site-footer{background:var(--navy);color:#c0c0d0;text-align:center;padding:30px 20px;font-size:14px}
-.site-footer a{color:#c0c0d0}
-
-@media(max-width:768px){
-  .hero h1{font-size:30px}
-  .hero{padding:50px 20px 40px}
-  .roadmap::before{left:32px}
-  .stage{padding-left:70px;margin-bottom:40px}
-  .stage-node{left:32px;transform:translate(-18px,0)}
-  .stage-title{font-size:22px}
+@media (max-width: 900px) { .path-grid { grid-template-columns: repeat(2, 1fr); } .hero h1 { font-size: 30px; } }
+@media (max-width: 640px) {
+    .main-nav { display: none; }
+    .header-inner { padding: 0 0; }
+    .path-grid { grid-template-columns: 1fr; }
+    .hero { padding: 32px 0 32px; }
+    .hero h1 { font-size: 26px; }
+    .hero p { font-size: 15px; }
+    .path-card { padding: 22px 18px 20px; }
+    .step-flow { padding-left: 24px; }
+    .step-flow::before { left: 11px; }
+    .step-item { padding: 8px 0 8px 22px; }
+    .step-item::before { left: -19px; width: 24px; height: 24px; font-size: 11px; }
+    .step-card { padding: 12px 14px; }
+    .step-card h4 { font-size: 14px; }
 }
 </style>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?2efc7dcf0f75f8ae13f0a486a1cf070a";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
 </head>
 <body>
 
-<div class="hero">
-  <h1>从零基础到流利表达</h1>
-  <p>一条清晰的攀登路线，把74篇文章串成体系。按顺序走，每一步都有支撑。</p>
-</div>
+<div class="preview-badge">预览版</div>
 
-<div class="roadmap">
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo">
+            <a href="index.html"><span class="logo-icon"><svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#39375b"/><path d="M16 16 Q20 12 22 16 Q24 20 20 22 Q14 24 12 18 Q10 12 16 8 Q24 6 26 14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="26" cy="20" r="1.5" fill="#3498db"/></svg></span>英语研习社</a>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html">首页</a>
+            <a href="grammar.html">语法精讲</a>
+            <a href="vocabulary.html">词汇辨析</a>
+            <a href="patterns.html">实用句型</a>
+            <a href="daily.html">场景口语</a>
+            <a href="pronunciation.html">发音诊所</a>
+            <a href="listening.html">听力训练</a>
+            <a href="handbook.html" class="nav-glow">语法魔典</a>
+            <a href="learning-path.html" class="nav-path">学习路径</a>
+            <a href="about.html">关于</a>
+        </nav>
+    </div>
+</header>
 
-  <!-- 阶段1 -->
-  <div class="stage s1">
-    <div class="stage-node">1</div>
-    <div class="stage-label">STAGE 1 · 零基础友好</div>
-    <div class="stage-title">启蒙：认识英语的"零件"</div>
-    <div class="stage-desc">先不碰句子，从词开始。搞清楚英语里每个词在干什么。</div>
+<section class="hero">
+    <div class="container">
+        <div class="hero-faces">
+            <div class="hface hface-dad">
+                <svg viewBox="0 0 100 100" width="100" height="100">
+                    <path d="M16 84 C18 58 22 34 26 22 C28 16 31 20 36 26 C39 32 42 35 48 35 C53 35 56 32 59 26 C64 20 67 16 69 22 C73 34 77 58 80 84 Z" fill="#f5c842" stroke="#d4a017" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="hface hface-mom">
+                <svg viewBox="0 0 100 100" width="80" height="80">
+                    <path d="M16 84 C18 58 22 34 26 22 C28 16 31 20 36 26 C39 32 42 35 48 35 C53 35 56 32 59 26 C64 20 67 16 69 22 C73 34 77 58 80 84 Z" fill="#f8c8d4" stroke="#d498a8" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="hface hface-kid">
+                <svg viewBox="0 0 100 100" width="56" height="56">
+                    <path d="M20 82 C21 60 24 38 28 26 C30 20 33 24 37 28 C40 32 42 34 48 34 C54 34 56 32 59 28 C63 24 66 20 68 26 C71 38 74 60 76 82 Z" fill="#ffeaa7" stroke="#e8b730" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <h1>从哪开始？跟着路径走</h1>
+        <p>不用纠结先学语法还是先练口语。五条路线按推荐顺序排好——选一条，从头走到尾就行。</p>
+    </div>
+</section>
 
-    <div class="stage-sub">语法魔典 · 词性入门</div>
-    <a class="stage-article" href="handbook-word-classes.html"><span class="sa-num">1</span><span class="sa-title">词性概览：十大词性总览</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-nouns.html"><span class="sa-num">2</span><span class="sa-title">名词：王国第一大族</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-determiners.html"><span class="sa-num">3</span><span class="sa-title">限定词：名词的"贴身侍卫"</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-pronouns.html"><span class="sa-num">4</span><span class="sa-title">代词：名词的"替身使者"</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-adjectives-adverbs.html"><span class="sa-num">5</span><span class="sa-title">形容词与副词：化妆师和解说员</span><span class="sa-tag tag-mandian">魔典</span></a>
+<section class="path-overview">
+    <div class="container">
+        <div class="section-title">
+            <h2>五条学习路线</h2>
+            <p>点击卡片跳到详情，每条路线里的文章由浅入深、一步一个脚印</p>
+        </div>
+        <div class="path-grid">
+            <a class="path-card" href="#path1">
+                <span class="pc-icon">&#x1F9F1;</span>
+                <span class="pc-num">1</span>
+                <h3>语法体系构建</h3>
+                <p class="pc-desc">先搭骨架再填血肉。从词类基础到时态、从句，一步一个脚印。</p>
+                <span class="pc-meta">8 篇文章 &middot; 约 2 周</span>
+            </a>
+            <a class="path-card" href="#path2">
+                <span class="pc-icon">&#x1F50A;</span>
+                <span class="pc-num">2</span>
+                <h3>发音纠正路线</h3>
+                <p class="pc-desc">从最容易纠正的音开始，攻克中文母语者最头疼的发音难点。</p>
+                <span class="pc-meta">7 篇文章 &middot; 约 1 周</span>
+            </a>
+            <a class="path-card" href="#path3">
+                <span class="pc-icon">&#x1F4AC;</span>
+                <span class="pc-num">3</span>
+                <h3>场景口语路线</h3>
+                <p class="pc-desc">从点咖啡到坐飞机，真实场景对话全覆盖，学完就能用。</p>
+                <span class="pc-meta">8 篇文章 &middot; 约 2 周</span>
+            </a>
+            <a class="path-card" href="#path4">
+                <span class="pc-icon">&#x1F4DD;</span>
+                <span class="pc-num">4</span>
+                <h3>词汇升级路线</h3>
+                <p class="pc-desc">告别"very good"，让词汇从基础到精准逐步升级。</p>
+                <span class="pc-meta">7 篇文章 &middot; 约 1 周</span>
+            </a>
+            <a class="path-card" href="#path5">
+                <span class="pc-icon">&#x2728;</span>
+                <span class="pc-num">5</span>
+                <h3>实用句型路线</h3>
+                <p class="pc-desc">掌握母语者最常用的表达框架，从"能懂"变成"自然"。</p>
+                <span class="pc-meta">7 篇文章 &middot; 约 1 周</span>
+            </a>
+            <a class="path-card path-dashed" href="listening.html">
+                <span class="pc-icon">&#x1F3A7;</span>
+                <span class="pc-num">6</span>
+                <h3>听力训练 &middot; 92课</h3>
+                <p class="pc-desc">逐句听写 + TTS 点读，从简单对话到长篇文章，循序渐进练耳朵。</p>
+                <span class="pc-meta">92 课时 &middot; 长期训练</span>
+            </a>
+        </div>
+    </div>
+</section>
 
-    <div class="stage-sub">语法精讲 · 入门夯实</div>
-    <a class="stage-article" href="grammar-articles.html"><span class="sa-num">6</span><span class="sa-title">冠词 a/an/the 一次搞懂</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-prepositions.html"><span class="sa-num">7</span><span class="sa-title">in/on/at 时间与空间规律</span><span class="sa-tag tag-yufa">语法</span></a>
-  </div>
+<section class="path-detail">
+    <div class="container">
 
-  <!-- 阶段2 -->
-  <div class="stage s2">
-    <div class="stage-node">2</div>
-    <div class="stage-label">STAGE 2 · 核心骨架</div>
-    <div class="stage-title">筑基：动词和句子的运转</div>
-    <div class="stage-desc">动词是句子的引擎。时态、语态、句子结构——英语语法最核心的地段。</div>
+        <div class="path-detail-section" id="path1">
+            <div class="pds-header">
+                <div class="pds-num">1</div>
+                <div>
+                    <h3>语法体系构建</h3>
+                    <div class="pds-sub">先搭骨架，再填血肉。从词类基础到时态、从句。</div>
+                </div>
+            </div>
+            <div class="step-flow">
+                <div class="step-item" data-step="1"><a class="step-card" href="handbook-word-classes.html"><h4>词类基础：英语的十种词</h4><div class="sc-desc">先认识英语的基本"零件"，后面所有语法都建立在这个基础上。</div></a></div>
+                <div class="step-item" data-step="2"><a class="step-card" href="handbook-nouns.html"><h4>名词：可数不可数、单复数变化</h4><div class="sc-desc">英语名词两大核心概念：可数 vs 不可数，以及复数变化规则。</div></a></div>
+                <div class="step-item" data-step="3"><a class="step-card" href="handbook-pronouns.html"><h4>代词：我你他她它，以及所有格</h4><div class="sc-desc">人称代词、物主代词、反身代词——一张表理清。</div></a></div>
+                <div class="step-item" data-step="4"><a class="step-card" href="handbook-tenses-1.html"><h4>时态（上）：现在、过去、将来</h4><div class="sc-desc">从时间轴出发理解时态，不再死记硬背公式。</div></a></div>
+                <div class="step-item" data-step="5"><a class="step-card" href="handbook-tenses-2.html"><h4>时态（下）：进行、完成、完成进行</h4><div class="sc-desc">进阶时态——搞清楚"动作的状态"比记住公式更重要。</div></a></div>
+                <div class="step-item" data-step="6"><a class="step-card" href="grammar-tenses.html"><h4>英语时态到底怎么用？一张图讲清楚</h4><div class="sc-desc">用最直观的方式回顾所有时态，建立完整的时态框架感。</div></a></div>
+                <div class="step-item" data-step="7"><a class="step-card" href="grammar-modals.html"><h4>情态动词：can/could/may/might/must/should</h4><div class="sc-desc">每个情态动词的核心含义和真实场景用法，附带区分对比表格。</div></a></div>
+                <div class="step-item" data-step="8"><a class="step-card" href="handbook-clauses-1.html"><h4>从句（上）：名词性从句与定语从句</h4><div class="sc-desc">从简单句到复合句的关键一步。</div></a></div>
+            </div>
+        </div>
 
-    <div class="stage-sub">语法魔典 · 动词与时态</div>
-    <a class="stage-article" href="handbook-tenses-1.html"><span class="sa-num">1</span><span class="sa-title">动词时态（上）：过去·现在·将来</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-tenses-2.html"><span class="sa-num">2</span><span class="sa-title">动词时态（下）：完成与进行</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-passive-voice.html"><span class="sa-num">3</span><span class="sa-title">被动语态：把"谁做的"藏起来</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-sentence-patterns.html"><span class="sa-num">4</span><span class="sa-title">句子成分与五大句型</span><span class="sa-tag tag-mandian">魔典</span></a>
+        <div class="path-detail-section" id="path2">
+            <div class="pds-header">
+                <div class="pds-num">2</div>
+                <div>
+                    <h3>发音纠正路线</h3>
+                    <div class="pds-sub">从最容易纠正的音开始，逐步攻克中文母语者最头疼的发音难点。</div>
+                </div>
+            </div>
+            <div class="step-flow">
+                <div class="step-item" data-step="1"><a class="step-card" href="pronunciation-sheep-ship.html"><h4>长音 /i&#720;/ vs 短音 /&#618;/：sheep 不是 ship</h4><div class="sc-desc">英语最基础也最容易混淆的一组元音。</div></a></div>
+                <div class="step-item" data-step="2"><a class="step-card" href="pronunciation-ed.html"><h4>-ed 词尾到底怎么读？/t/ /d/ /&#618;d/ 一次分清</h4><div class="sc-desc">规则动词过去式的三种发音，一条规则覆盖99%的情况。</div></a></div>
+                <div class="step-item" data-step="3"><a class="step-card" href="pronunciation-vw.html"><h4>/v/ vs /w/：very 不是 wery</h4><div class="sc-desc">上齿咬下唇 vs 双唇收圆——两个中文里没有的音。</div></a></div>
+                <div class="step-item" data-step="4"><a class="step-card" href="pronunciation-th-sound.html"><h4>/&#952;/ 和 /&#240;/：咬舌音的终极指南</h4><div class="sc-desc">think 和 this 的那个"咬舌音"，从不敢开口到自然发出。</div></a></div>
+                <div class="step-item" data-step="5"><a class="step-card" href="pronunciation-rl.html"><h4>/r/ vs /l/：right 不是 light</h4><div class="sc-desc">中文方言里不分的 r 和 l，在英语里可是截然不同的两个音。</div></a></div>
+                <div class="step-item" data-step="6"><a class="step-card" href="pronunciation-nasal.html"><h4>鼻音 /m/ /n/ /&#331;/：sing 不是 sin</h4><div class="sc-desc">三个鼻音的区别与练习，特别是词尾 -ing 的正确发音。</div></a></div>
+                <div class="step-item" data-step="7"><a class="step-card" href="pronunciation-phonics.html"><h4>音标拼读三步法：看到生词就能读</h4><div class="sc-desc">学完所有音标后，用三步法把音标知识转化为实际拼读能力。</div></a></div>
+            </div>
+        </div>
 
-    <div class="stage-sub">语法精讲 · 时态语态强化</div>
-    <a class="stage-article" href="grammar-tenses.html"><span class="sa-num">5</span><span class="sa-title">英语时态一张图讲清楚</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-present-perfect-vs-past.html"><span class="sa-num">6</span><span class="sa-title">现在完成时 vs 一般过去时</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-passive-voice.html"><span class="sa-num">7</span><span class="sa-title">被动语态：不止是"被"字那么简单</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-modals.html"><span class="sa-num">8</span><span class="sa-title">情态动词 can/could/may/must 一次搞懂</span><span class="sa-tag tag-yufa">语法</span></a>
-  </div>
+        <div class="path-detail-section" id="path3">
+            <div class="pds-header">
+                <div class="pds-num">3</div>
+                <div>
+                    <h3>场景口语路线</h3>
+                    <div class="pds-sub">从日常高频场景开始，逐步覆盖出行、消费、社交等真实对话需求。</div>
+                </div>
+            </div>
+            <div class="step-flow">
+                <div class="step-item" data-step="1"><a class="step-card" href="daily-coffee.html"><h4>用英文点咖啡：不只是"Coffee, please"</h4><div class="sc-desc">卡布奇诺、半糖、去冰——所有表达一次掌握。</div></a></div>
+                <div class="step-item" data-step="2"><a class="step-card" href="daily-restaurant.html"><h4>餐厅英语全流程：从预订到结账</h4><div class="sc-desc">预订、入座、点菜、结账——覆盖西餐厅、快餐店和咖啡馆。</div></a></div>
+                <div class="step-item" data-step="3"><a class="step-card" href="daily-shopping.html"><h4>购物英语：试穿、砍价、退货，一篇全覆盖</h4><div class="sc-desc">询价试穿、讨价还价、付款退税、退换货——出国购物不怯场。</div></a></div>
+                <div class="step-item" data-step="4"><a class="step-card" href="daily-small-talk.html"><h4>聚会闲聊：从"吃了吗"到"最近忙啥"的英文版</h4><div class="sc-desc">学会用英文聊天气、聊爱好、聊周末。</div></a></div>
+                <div class="step-item" data-step="5"><a class="step-card" href="daily-transport.html"><h4>公共交通英语：地铁、公交、火车出行必备</h4><div class="sc-desc">问路、买票、换乘——在国外坐公共交通不迷路。</div></a></div>
+                <div class="step-item" data-step="6"><a class="step-card" href="daily-taxi.html"><h4>打车英语：从叫车到下车，全程不卡壳</h4><div class="sc-desc">Uber、出租车、网约车——告诉司机去哪、怎么走。</div></a></div>
+                <div class="step-item" data-step="7"><a class="step-card" href="daily-hotel.html"><h4>酒店入住英语：从预订到退房</h4><div class="sc-desc">预订房间、办理入住、提出需求、投诉问题、退房结账。</div></a></div>
+                <div class="step-item" data-step="8"><a class="step-card" href="daily-airport.html"><h4>机场和登机必备英语：从值机到落地</h4><div class="sc-desc">值机、安检、登机广播到行李提取——出国旅行不再慌。</div></a></div>
+            </div>
+        </div>
 
-  <!-- 阶段3 -->
-  <div class="stage s3">
-    <div class="stage-node">3</div>
-    <div class="stage-label">STAGE 3 · 复杂表达</div>
-    <div class="stage-title">精进：从句和非谓语</div>
-    <div class="stage-desc">告别简单句。从句、非谓语、特殊句式——让你的表达有层次、有逻辑。</div>
+        <div class="path-detail-section" id="path4">
+            <div class="pds-header">
+                <div class="pds-num">4</div>
+                <div>
+                    <h3>词汇升级路线</h3>
+                    <div class="pds-sub">告别"very good"级别的表达，让词汇从基础到精准，逐步升级。</div>
+                </div>
+            </div>
+            <div class="step-flow">
+                <div class="step-item" data-step="1"><a class="step-card" href="vocabulary-upgrade-expressions.html"><h4>别再说"very good"了：升级你的表达词汇库</h4><div class="sc-desc">30个更精准、更地道的替换词汇，告别'very + 形容词'。</div></a></div>
+                <div class="step-item" data-step="2"><a class="step-card" href="vocabulary-good-bad.html"><h4>"好"和"坏"的高级替换：别再说 good 和 bad 了</h4><div class="sc-desc">excellent、fantastic、terrible、awful——精确表达好坏的程度。</div></a></div>
+                <div class="step-item" data-step="3"><a class="step-card" href="vocabulary-big-small.html"><h4>"大"和"小"的高级说法：别只会说 big 和 small</h4><div class="sc-desc">large、huge、enormous、tiny、miniature——尺寸精准词汇库。</div></a></div>
+                <div class="step-item" data-step="4"><a class="step-card" href="vocabulary-emotions.html"><h4>精准表达情绪的20个词：不止是happy和sad</h4><div class="sc-desc">从微恼到暴怒、从开心到狂喜——分级情绪词汇。</div></a></div>
+                <div class="step-item" data-step="5"><a class="step-card" href="vocabulary-say-tell-speak-talk.html"><h4>四个"说"到底怎么分？say / tell / speak / talk</h4><div class="sc-desc">深度解析四个'说'的核心区别。</div></a></div>
+                <div class="step-item" data-step="6"><a class="step-card" href="vocabulary-see-look-watch.html"><h4>"看"的十种英文说法：see、look、watch 怎么分？</h4><div class="sc-desc">stare、glance、gaze、peek、glare——十个"看"的精确用法。</div></a></div>
+                <div class="step-item" data-step="7"><a class="step-card" href="vocabulary-phrasal-verbs.html"><h4>高频动词短语20个：让你的英语瞬间地道</h4><div class="sc-desc">get up、take off、put off、run into——掌握这些短语动词。</div></a></div>
+            </div>
+        </div>
 
-    <div class="stage-sub">语法魔典 · 进阶篇</div>
-    <a class="stage-article" href="handbook-nonfinite-1.html"><span class="sa-num">1</span><span class="sa-title">非谓语（上）：不定式与动名词</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-nonfinite-2.html"><span class="sa-num">2</span><span class="sa-title">非谓语（下）：分词与独立主格</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-clauses-1.html"><span class="sa-num">3</span><span class="sa-title">从句体系（上）：名词性从句</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-clauses-2.html"><span class="sa-num">4</span><span class="sa-title">从句体系（中）：定语从句</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-clauses-3.html"><span class="sa-num">5</span><span class="sa-title">从句体系（下）：状语从句</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-special-1.html"><span class="sa-num">6</span><span class="sa-title">特殊句式（上）：倒装与强调</span><span class="sa-tag tag-mandian">魔典</span></a>
-    <a class="stage-article" href="handbook-special-2.html"><span class="sa-num">7</span><span class="sa-title">特殊句式（下）：省略与虚拟语气</span><span class="sa-tag tag-mandian">魔典</span></a>
+        <div class="path-detail-section" id="path5">
+            <div class="pds-header">
+                <div class="pds-num">5</div>
+                <div>
+                    <h3>实用句型路线</h3>
+                    <div class="pds-sub">掌握母语者最常用的表达框架，让你的英语从"能懂"变成"自然"。</div>
+                </div>
+            </div>
+            <div class="step-flow">
+                <div class="step-item" data-step="1"><a class="step-card" href="patterns-polite.html"><h4>让沟通更委婉的三个句型</h4><div class="sc-desc">Would you mind...? / I was hoping... / Could you possibly...</div></a></div>
+                <div class="step-item" data-step="2"><a class="step-card" href="patterns-wondering-if.html"><h4>"I was wondering if…"：比"Can I…"更礼貌的请求</h4><div class="sc-desc">学会用 I was wondering if 取代 Can I 和 Could you。</div></a></div>
+                <div class="step-item" data-step="3"><a class="step-card" href="patterns-the-thing-is.html"><h4>"The thing is…"：开口就自然的万能过渡句</h4><div class="sc-desc">解释原因、委婉拒绝、引出重点——母语者最爱的过渡句。</div></a></div>
+                <div class="step-item" data-step="4"><a class="step-card" href="patterns-would-rather.html"><h4>"I'd rather…" / "I'd prefer…"：表达偏好的高级说法</h4><div class="sc-desc">掌握偏好表达的多种句型，让选择表达更自然地道。</div></a></div>
+                <div class="step-item" data-step="5"><a class="step-card" href="patterns-i-wish.html"><h4>I wish / If only：用英语表达愿望和遗憾</h4><div class="sc-desc">三个时态公式覆盖所有场景——愿望、遗憾、后悔。</div></a></div>
+                <div class="step-item" data-step="6"><a class="step-card" href="patterns-not-only-but-also.html"><h4>"Not only… but also…"：强调句型的正确用法</h4><div class="sc-desc">倒装结构、平行结构要求——彻底掌握这个经典强调句型。</div></a></div>
+                <div class="step-item" data-step="7"><a class="step-card" href="patterns-not-that-just-that.html"><h4>"It's not that… it's just that…"：委婉否定</h4><div class="sc-desc">高情商句型——表达不同意见的同时不伤害对方。</div></a></div>
+            </div>
+        </div>
 
-    <div class="stage-sub">语法精讲 · 进阶突破</div>
-    <a class="stage-article" href="grammar-conditionals.html"><span class="sa-num">8</span><span class="sa-title">条件句的三个层级</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-subjunctive.html"><span class="sa-num">9</span><span class="sa-title">虚拟语气：if I were 还是 if I was？</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-relative-clauses.html"><span class="sa-num">10</span><span class="sa-title">定语从句：who/which/that 选哪个？</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-inversion.html"><span class="sa-num">11</span><span class="sa-title">倒装句：Not only 放句首怎么接？</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-reported-speech.html"><span class="sa-num">12</span><span class="sa-title">间接引语：别人的话怎么"搬"？</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-emphatic-sentences.html"><span class="sa-num">13</span><span class="sa-title">强调句：It is...that 让你的表达有重点</span><span class="sa-tag tag-yufa">语法</span></a>
-    <a class="stage-article" href="grammar-comparatives.html"><span class="sa-num">14</span><span class="sa-title">比较级和最高级：规则只有三条</span><span class="sa-tag tag-yufa">语法</span></a>
-  </div>
+    </div>
+</section>
 
-  <!-- 阶段4 -->
-  <div class="stage s4">
-    <div class="stage-node">4</div>
-    <div class="stage-label">STAGE 4 · 词汇升级</div>
-    <div class="stage-title">充实：告别"小学生词汇"</div>
-    <div class="stage-desc">语法通了，词汇决定了你表达的上限。近义词怎么分、地道说法怎么说。</div>
-
-    <div class="stage-sub">核心动词系列</div>
-    <a class="stage-article" href="vocabulary-phrasal-verbs.html"><span class="sa-num">1</span><span class="sa-title">高频动词短语20个</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-say-tell-speak-talk.html"><span class="sa-num">2</span><span class="sa-title">四个"说"：say/tell/speak/talk</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-see-look-watch.html"><span class="sa-num">3</span><span class="sa-title">"看"的十种英文说法</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-hear-listen.html"><span class="sa-num">4</span><span class="sa-title">"听"怎么分：hear和听觉家族</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-walk.html"><span class="sa-num">5</span><span class="sa-title">"走"的各种姿态</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-think-believe.html"><span class="sa-num">6</span><span class="sa-title">think/believe/suppose/assume 怎么分？</span><span class="sa-tag tag-cihui">词汇</span></a>
-
-    <div class="stage-sub">形容词升级</div>
-    <a class="stage-article" href="vocabulary-upgrade-expressions.html"><span class="sa-num">7</span><span class="sa-title">别再说"very good"了：升级词汇库</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-good-bad.html"><span class="sa-num">8</span><span class="sa-title">"好"和"坏"的高级替换</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-big-small.html"><span class="sa-num">9</span><span class="sa-title">"大"和"小"的高级说法</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-important.html"><span class="sa-num">10</span><span class="sa-title">"重要"的高阶替换</span><span class="sa-tag tag-cihui">词汇</span></a>
-
-    <div class="stage-sub">场景词汇与易混辨析</div>
-    <a class="stage-article" href="vocabulary-like-love.html"><span class="sa-num">11</span><span class="sa-title">"喜欢"的8个层次</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-emotions.html"><span class="sa-num">12</span><span class="sa-title">精准表达情绪的20个词</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-email.html"><span class="sa-num">13</span><span class="sa-title">职场邮件必备表达</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-confusing-pairs.html"><span class="sa-num">14</span><span class="sa-title">最容易用错的五组近义词</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-used-to.html"><span class="sa-num">15</span><span class="sa-title">used to / be used to / get used to</span><span class="sa-tag tag-cihui">词汇</span></a>
-    <a class="stage-article" href="vocabulary-body-idioms.html"><span class="sa-num">16</span><span class="sa-title">身体部位的习惯用语</span><span class="sa-tag tag-cihui">词汇</span></a>
-  </div>
-
-  <!-- 阶段5 -->
-  <div class="stage s5">
-    <div class="stage-node">5</div>
-    <div class="stage-label">STAGE 5 · 真实应用</div>
-    <div class="stage-title">实战：把它说出口</div>
-    <div class="stage-desc">知识要变成反应。句型模板 + 场景模拟——让英语成为本能。</div>
-
-    <div class="stage-sub">实用句型模板</div>
-    <a class="stage-article" href="patterns-polite.html"><span class="sa-num">1</span><span class="sa-title">让沟通更委婉的三个句型</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-wondering-if.html"><span class="sa-num">2</span><span class="sa-title">"I was wondering if…" 更礼貌的请求</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-the-thing-is.html"><span class="sa-num">3</span><span class="sa-title">"The thing is…" 万能过渡句</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-would-rather.html"><span class="sa-num">4</span><span class="sa-title">"I'd rather…" 表达偏好</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-not-that-just-that.html"><span class="sa-num">5</span><span class="sa-title">"It's not that… it's just that…" 委婉否定</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-i-wish.html"><span class="sa-num">6</span><span class="sa-title">"I wish / If only" 表达愿望和遗憾</span><span class="sa-tag tag-juxing">句型</span></a>
-    <a class="stage-article" href="patterns-not-only-but-also.html"><span class="sa-num">7</span><span class="sa-title">"Not only… but also…" 强调句型</span><span class="sa-tag tag-juxing">句型</span></a>
-
-    <div class="stage-sub">场景实战口语</div>
-    <a class="stage-article" href="daily-coffee.html"><span class="sa-num">8</span><span class="sa-title">用英文点咖啡</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-restaurant.html"><span class="sa-num">9</span><span class="sa-title">餐厅英语全流程</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-shopping.html"><span class="sa-num">10</span><span class="sa-title">购物英语：试穿、砍价、退货</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-hotel.html"><span class="sa-num">11</span><span class="sa-title">酒店入住英语</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-airport.html"><span class="sa-num">12</span><span class="sa-title">机场和登机必备英语</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-phone-calls.html"><span class="sa-num">13</span><span class="sa-title">接电话不再慌：职场电话英语</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-doctor.html"><span class="sa-num">14</span><span class="sa-title">看病就医英语</span><span class="sa-tag tag-kouyu">口语</span></a>
-    <a class="stage-article" href="daily-expressing-anger.html"><span class="sa-num">15</span><span class="sa-title">用英文表达"不爽"的分级指南</span><span class="sa-tag tag-kouyu">口语</span></a>
-
-    <div class="stage-sub">收尾</div>
-    <a class="stage-article" href="handbook-glossary.html"><span class="sa-num">16</span><span class="sa-title">语法术语中英对照（附录）</span><span class="sa-tag tag-mandian">魔典</span></a>
-  </div>
-
-</div>
-
-<!-- 统计栏 -->
-<div class="stats">
-  <div class="stat-card"><div class="sn">5</div><div class="sl">学习阶段</div></div>
-  <div class="stat-card"><div class="sn">60</div><div class="sl">篇推荐路线</div></div>
-  <div class="stat-card"><div class="sn">74</div><div class="sl">全站文章</div></div>
-  <div class="stat-card"><div class="sn">0</div><div class="sl">零基础起步</div></div>
-</div>
+<section class="cta-section">
+    <p>不确定从哪开始？从路线一语法体系开始，打好基础再往上走。</p>
+    <a class="cta-btn" href="handbook-word-classes.html">从第一课开始 <span style="font-size:18px;">&#8594;</span></a>
+</section>
 
 <footer class="site-footer">
-  <div style="margin-bottom:8px">零基础 → 体系化 → 能实战</div>
-  <div>Copyright &copy; 2026 英语研习社</div>
+    <div style="margin-bottom:12px">
+        <a href="about.html">关于我们</a> &nbsp;|&nbsp;
+        <a href="privacy.html">隐私政策</a> &nbsp;|&nbsp;
+        <a href="contact.html">联系方式</a>
+    </div>
+    <div>Copyright &copy; 2026 英语研习社 — All Rights Reserved</div>
+    <div style="margin-top:8px"><a href="https://beian.miit.gov.cn" target="_blank" rel="noreferrer">粤ICP备2026079891号-1</a></div>
+    <div style="margin-top:4px"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=44522402000185" target="_blank" rel="noreferrer"><svg width="16" height="16" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:3px;"><defs><linearGradient id="bsg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2b7ec9"/><stop offset="100%" stop-color="#1a5fa0"/></linearGradient></defs><path d="M10 1L2 5v5.5c0 4.5 3.2 8 8 8.5 4.8-.5 8-4 8-8.5V5L10 1z" fill="url(#bsg2)" stroke="#0d4580" stroke-width="0.8"/><path d="M6.5 10l2.5 2.5 5-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>粤公网安备44522402000185号</a></div>
 </footer>
 
+<button class="back-to-top" id="backToTop" aria-label="回到顶部">&#9650;</button>
+
 <script>
-// 滚动渐显
-(function(){
-var stages=document.querySelectorAll('.stage');
-var observer=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting){
-      e.target.style.opacity='1';
-      e.target.style.transform='translateY(0)';
-    }
-  });
-},{threshold:0.15});
-stages.forEach(function(s){
-  s.style.opacity='0';
-  s.style.transform='translateY(30px)';
-  s.style.transition='opacity .5s,transform .5s';
-  observer.observe(s);
+var btt = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) btt.classList.add('visible');
+    else btt.classList.remove('visible');
 });
-})();
+btt.addEventListener('click', function() { window.scrollTo({top:0, behavior:'smooth'}); });
+
+document.querySelectorAll('.path-card[href^="#"]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
 </script>
 
 </body>
