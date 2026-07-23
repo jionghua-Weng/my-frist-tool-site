@@ -255,6 +255,20 @@ body{
   .closing .related-links a{width:100%;text-align:center}
   .key-note{font-size:13.5px}
 }
+/* 右下角小黄人 */
+.floating-face{position:fixed;bottom:16px;right:80px;width:64px;height:64px;z-index:97;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.floating-face:active{transform:scale(.9)}
+.floating-face .f-face-bg{position:absolute;inset:-1px;width:66px;height:66px;z-index:0;pointer-events:none}
+.floating-face .f-eye{position:absolute;width:14px;height:16px;display:flex;align-items:center;justify-content:center;z-index:1}
+.floating-face .f-eye.left{top:20px;left:16px}
+.floating-face .f-eye.right{top:20px;right:16px}
+.floating-face .f-eye .f-eye-bg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.floating-face .f-pupil{width:5px;height:5px;background:#111;border-radius:44% 48% 42% 46%;z-index:1;position:relative}
+.floating-face .f-mouth{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:1}
+.floating-face .f-mouth svg{display:block}
+.floating-pop{position:fixed;pointer-events:none;font-size:28px;z-index:200;animation:fUp 1.2s ease-out forwards}
+@keyframes fUp{0%{opacity:1;transform:translateY(0)scale(.5)rotate(0deg)}30%{opacity:1;transform:translateY(-30px)scale(1.2)rotate(-10deg)}100%{opacity:0;transform:translateY(-140px)scale(.8)rotate(15deg)}}
+@media(max-width:640px){.floating-face{bottom:72px;right:16px;width:52px;height:52px}.floating-face .f-face-bg{width:54px;height:54px}.floating-face .f-eye{width:11px;height:13px}.floating-face .f-eye.left{top:16px;left:13px}.floating-face .f-eye.right{top:16px;right:13px}.floating-face .f-pupil{width:4px;height:4px}.floating-face .f-mouth{bottom:13px}}
 </style>
 </head>
 <body>
@@ -500,6 +514,7 @@ body{
   <div style="margin-top:4px"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=44522402000185" target="_blank" rel="noreferrer"><svg width="16" height="16" viewBox="0 0 20 20" style="vertical-align:middle;margin-right:3px"><defs><linearGradient id="bsg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2b7ec9"/><stop offset="100%" stop-color="#1a5fa0"/></linearGradient></defs><path d="M10 1L2 5v5.5c0 4.5 3.2 8 8 8.5 4.8-.5 8-4 8-8.5V5L10 1z" fill="url(#bsg)" stroke="#0d4580" stroke-width="0.8"/><path d="M6.5 10l2.5 2.5 5-5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>粤公网安备44522402000185号</a></div>
 </footer>
 
+<div class="floating-face" id="floatingFace"><svg class="f-face-bg" viewBox="0 0 64 64"><path d="M10 50C11 36 14 22 17 15C19 12 22 16 26 20C28 22 30 24 32 24C34 24 36 22 38 20C42 16 45 12 47 15C50 22 53 36 55 50Z" fill="#f5c842" stroke="#d4a017" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 48C10 34 13 20 16 13C18 10 21 14 25 18C27 20 29 22 32 22C35 22 37 20 39 18C43 14 46 10 48 13C51 20 54 34 56 48Z" fill="none" stroke="#c8950a" stroke-width="0.5" stroke-linejoin="round" opacity="0.4"/></svg><div class="f-eye left"><svg class="f-eye-bg" viewBox="0 0 14 16"><ellipse cx="7" cy="8" rx="5.5" ry="6.5" fill="#fff" stroke="#d4a017" stroke-width="0.6" transform="rotate(-3 7 8)"/></svg><div class="f-pupil" id="fpL"></div></div><div class="f-eye right"><svg class="f-eye-bg" viewBox="0 0 14 16"><ellipse cx="7" cy="8" rx="4.5" ry="5.5" fill="#fff" stroke="#d4a017" stroke-width="0.6" transform="rotate(3 7 8)"/></svg><div class="f-pupil" id="fpR"></div></div><div class="f-mouth"><svg width="24" height="10" viewBox="0 0 24 10"><path d="M3 3Q12 9 21 3" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
 <button class="back-to-top" id="backToTop" aria-label="回到顶部"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></button>
 
 <script>
@@ -546,6 +561,43 @@ function mkBtn(txt,el){
   el.appendChild(btn);
 }
 document.querySelectorAll('.pair-en .en-text').forEach(function(el){mkBtn(el.textContent.trim(),el)});
+})();
+// 右下角小黄人 — 眼睛跟鼠标
+(function(){
+var face=document.getElementById("floatingFace");
+var pL=document.getElementById("fpL");
+var pR=document.getElementById("fpR");
+if(!face||!pL||!pR)return;
+var maxShift=5;
+document.addEventListener("mousemove",function(e){
+var r=face.getBoundingClientRect();
+var cx=r.left+r.width/2;
+var cy=r.top+r.height/2;
+var dx=e.clientX-cx;
+var dy=e.clientY-cy;
+var dist=Math.sqrt(dx*dx+dy*dy);
+var maxDist=180;
+var ratio=Math.min(dist/maxDist,1);
+var sx=(dx/(dist||1))*ratio*maxShift;
+var sy=(dy/(dist||1))*ratio*maxShift;
+pL.style.transform="translate("+sx+"px,"+sy+"px)";
+pR.style.transform="translate("+sx+"px,"+sy+"px)";
+});
+var pops=["❤️","💋","💕","😘","💖","💗"];
+face.addEventListener("click",function(e){
+e.stopPropagation();
+for(var i=0;i<4;i++){(function(){
+var el=document.createElement("span");
+el.className="floating-pop";
+el.textContent=pops[Math.floor(Math.random()*pops.length)];
+el.style.left=(e.clientX+(Math.random()-0.5)*60)+"px";
+el.style.top=(e.clientY+(Math.random()-0.5)*30)+"px";
+el.style.animationDuration=(0.7+Math.random()*0.8)+"s";
+el.style.fontSize=(20+Math.random()*20)+"px";
+document.body.appendChild(el);
+setTimeout(function(){el.remove()},1300);
+})()}
+});
 })();
 </script>
 
