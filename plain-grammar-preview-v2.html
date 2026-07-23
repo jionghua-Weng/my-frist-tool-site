@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>时态不用背：你兜里早就有四把中文钥匙 — 大白话语法（预览V2） | 英语研习社</title>
+<meta name="description" content="不背时态术语：「每天」对应s，「了」对应-ed，「会」对应will，「不/没」对应don't/didn't。四把中文钥匙，开英语时态四把锁。">
+<style>
+/* ===== 基础变量 ===== */
+:root{
+  --navy:#39375b;
+  --white:#ffffff;
+  --bg:#fafafa;
+  --text:#1e293b;
+  --text-secondary:#64748b;
+  --max-width:1200px;
+  --content-width:860px;
+  --font-heading:'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;
+  --font-body:'PingFang SC','Microsoft YaHei','Segoe UI',sans-serif;
+
+  /* 四把钥匙色 */
+  --key1:#059669; /* 每天→s 绿 */
+  --key1-bg:#ecfdf5;
+  --key1-border:#a7f3d0;
+  --key2:#d97706; /* 了→-ed 橙 */
+  --key2-bg:#fffbeb;
+  --key2-border:#fde68a;
+  --key3:#2563eb; /* 会→will 蓝 */
+  --key3-bg:#eff6ff;
+  --key3-border:#bfdbfe;
+  --key4:#e11d48; /* 不/没 玫红 */
+  --key4-bg:#fff1f2;
+  --key4-border:#fecdd3;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-body);
+  font-size:17px;
+  line-height:1.75;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ===== 导航（复用全站样式） ===== */
+.site-header{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:var(--max-width);margin:0 auto;padding:0 20px}
+.logo a{display:flex;align-items:center;gap:10px;color:var(--white);font-size:21px;font-weight:700;letter-spacing:.5px;text-decoration:none}
+.logo-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:100%;height:100%;display:block}
+.main-nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.main-nav a{color:var(--white);padding:8px 13px;border-radius:6px;font-size:14.5px;font-weight:500;white-space:nowrap;transition:background .2s;text-decoration:none}
+.main-nav a:hover{background:rgba(255,255,255,0.12)}
+/* 语法魔典 — 保留紫色发光动画 */
+.main-nav a.nav-purple{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;font-weight:600;border-radius:6px;box-shadow:0 0 12px rgba(168,85,247,0.4);animation:glowPulse 1.6s ease-in-out infinite}
+.main-nav a.nav-purple:hover{animation:none;background:linear-gradient(135deg,#6d28d9,#9333ea);box-shadow:0 0 24px rgba(168,85,247,0.8)}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 8px rgba(168,85,247,0.3)}50%{box-shadow:0 0 14px rgba(168,85,247,0.5),0 0 36px rgba(124,58,237,0.35)}}
+/* 大白话 — 纯文字金色加粗 */
+.main-nav a.nav-gold{color:#fbbf24;font-weight:700}
+.main-nav a.nav-gold:hover{color:#fde68a;background:rgba(255,255,255,0.08)}.hamburger{display:none;background:none;border:none;cursor:pointer;padding:0;flex-direction:column;gap:6px;min-width:44px;height:44px;justify-content:center;align-items:center}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200}
+.mobile-panel{display:none;position:fixed;top:0;right:0;width:280px;bottom:0;background:var(--navy);z-index:201;padding:20px;overflow-y:auto}
+.mobile-panel.active,.mobile-overlay.active{display:block}
+.mobile-panel .close-btn{background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;float:right;padding:4px 8px}
+.mobile-panel a{display:block;color:#e0e0e0;padding:14px 16px;font-size:17px;border-bottom:1px solid rgba(255,255,255,0.08);text-decoration:none;clear:both}
+
+/* ===== Hero 区 ===== */
+.hero{
+  max-width:var(--content-width);
+  margin:0 auto;
+  padding:60px 20px 40px;
+  text-align:center;
+}
+.hero .badge{
+  display:inline-block;
+  background:linear-gradient(135deg,#f59e0b,#d97706);
+  color:#fff;
+  font-size:13px;
+  font-weight:700;
+  padding:4px 16px;
+  border-radius:20px;
+  letter-spacing:1px;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-family:var(--font-heading);
+  font-size:40px;
+  font-weight:800;
+  color:#0f172a;
+  line-height:1.3;
+  margin-bottom:12px;
+  letter-spacing:.5px;
+}
+.hero .subtitle{
+  font-size:18px;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+}
+
+/* ===== 四钥匙总览 ===== */
+.key-overview{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  max-width:var(--content-width);
+  margin:0 auto 50px;
+  padding:0 20px;
+}
+.key-card{
+  background:#fff;
+  border-radius:16px;
+  padding:28px 16px 22px;
+  text-align:center;
+  box-shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 12px rgba(0,0,0,0.04);
+  transition:transform .2s,box-shadow .2s;
+  position:relative;
+  overflow:hidden;
+}
+.key-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+}
+.key-card:nth-child(1)::before{background:var(--key1)}
+.key-card:nth-child(2)::before{background:var(--key2)}
+.key-card:nth-child(3)::before{background:var(--key3)}
+.key-card:nth-child(4)::before{background:var(--key4)}
+.key-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08),0 8px 24px rgba(0,0,0,0.04)}
+.key-card .key-char{
+  display:block;
+  font-size:42px;
+  font-weight:900;
+  line-height:1;
+  margin-bottom:6px;
+}
+.key-card:nth-child(1) .key-char{color:var(--key1)}
+.key-card:nth-child(2) .key-char{color:var(--key2)}
+.key-card:nth-child(3) .key-char{color:var(--key3)}
+.key-card:nth-child(4) .key-char{color:var(--key4)}
+.key-card .key-arrow{
+  display:block;
+  font-size:13px;
+  color:var(--text-secondary);
+  margin-bottom:6px;
+}
+.key-card .key-to{
+  display:block;
+  font-size:26px;
+  font-weight:800;
+  color:#0f172a;
+  font-family:'SF Mono','Consolas','Monaco',monospace;
+  margin-bottom:6px;
+}
+.key-card .key-label{
+  display:block;
+  font-size:13px;
+  color:var(--text-secondary);
+}
+
+/* ===== 正文区 ===== */
+.content{
+  max-width:var(--content-width);
+  margin:0 auto;
+  padding:0 20px 40px;
+}
+
+/* 引子 */
+.intro{
+  font-size:18px;
+  color:#334155;
+  margin-bottom:50px;
+  text-align:center;
+  line-height:1.9;
+}
+.intro strong{color:#0f172a}
+
+/* ===== 每把钥匙的section ===== */
+.key-section{
+  background:#fff;
+  border-radius:20px;
+  padding:40px 36px;
+  margin-bottom:32px;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04);
+  position:relative;
+}
+.key-section .section-number{
+  position:absolute;
+  top:-18px;
+  left:32px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:800;
+  color:#fff;
+}
+.key-section:nth-of-type(1) .section-number{background:var(--key1)}
+.key-section:nth-of-type(2) .section-number{background:var(--key2)}
+.key-section:nth-of-type(3) .section-number{background:var(--key3)}
+.key-section:nth-of-type(4) .section-number{background:var(--key4)}
+
+.key-section h2{
+  font-family:var(--font-heading);
+  font-size:28px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:6px;
+  margin-top:4px;
+}
+.key-section .section-desc{
+  font-size:16px;
+  color:var(--text-secondary);
+  margin-bottom:24px;
+}
+
+/* ===== 中英对照卡片 ===== */
+.pair-list{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+.pair-row{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #e2e8f0;
+}
+.pair-cn,.pair-en{
+  flex:1;
+  padding:18px 22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.pair-cn{background:#f8fafc}
+.pair-en{background:#fff}
+.pair-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  flex-shrink:0;
+  font-size:22px;
+  color:#94a3b8;
+  background:linear-gradient(90deg,#f8fafc,#fff);
+}
+.pair-cn .cn-text{font-size:18px;color:#334155;font-weight:500}
+.pair-cn .cn-hint{font-size:13px;color:#94a3b8;margin-top:2px}
+.pair-en .en-text{font-size:20px;color:#0f172a;font-weight:600;font-family:'SF Mono','Consolas','Monaco',monospace;letter-spacing:.3px}
+.pair-en .en-note{font-size:13px;color:#94a3b8;margin-top:2px}
+.pair-cn .key-word,.pair-en .key-word{font-weight:800}
+.pair-en .audio-btn-wrap{display:inline-flex;align-items:center}
+
+/* 每把钥匙的关键提示 */
+.key-note{
+  padding:18px 22px;
+  border-radius:12px;
+  font-size:15px;
+  line-height:1.7;
+}
+.key-note strong{display:block;margin-bottom:4px;font-size:16px}
+.key-section:nth-of-type(1) .key-note{background:var(--key1-bg);border:1px solid var(--key1-border);color:#065f46}
+.key-section:nth-of-type(1) .key-note strong{color:#065f46}
+.key-section:nth-of-type(2) .key-note{background:var(--key2-bg);border:1px solid var(--key2-border);color:#92400e}
+.key-section:nth-of-type(2) .key-note strong{color:#92400e}
+.key-section:nth-of-type(3) .key-note{background:var(--key3-bg);border:1px solid var(--key3-border);color:#1e40af}
+.key-section:nth-of-type(3) .key-note strong{color:#1e40af}
+.key-section:nth-of-type(4) .key-note{background:var(--key4-bg);border:1px solid var(--key4-border);color:#9f1239}
+.key-section:nth-of-type(4) .key-note strong{color:#9f1239}
+
+/* 不规则动词表（钥匙二专属） */
+.irregular-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:16px;border-radius:12px;overflow:hidden;border:1px solid var(--key2-border)}
+.irregular-table th{background:var(--key2);color:#fff;padding:12px 16px;text-align:left;font-weight:600;font-size:14px}
+.irregular-table td{padding:10px 16px;border-bottom:1px solid #fef3c7}
+.irregular-table tr:nth-child(even) td{background:var(--key2-bg)}
+.irregular-table tr:nth-child(odd) td{background:#fff}
+.irregular-table .cn-ref{color:var(--key2);font-weight:600}
+
+/* ===== 翻转自测题 ===== */
+.quiz-section{
+  max-width:var(--content-width);
+  margin:0 auto 60px;
+  padding:0 20px;
+}
+.quiz-section h2{
+  font-family:var(--font-heading);
+  font-size:28px;
+  font-weight:700;
+  color:#0f172a;
+  text-align:center;
+  margin-bottom:8px;
+}
+.quiz-section .quiz-subtitle{text-align:center;color:var(--text-secondary);font-size:16px;margin-bottom:28px}
+.quiz-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.quiz-card{
+  perspective:600px;
+  height:180px;
+  cursor:pointer;
+}
+.quiz-card.flipped .quiz-inner{transform:rotateY(180deg)}
+.quiz-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transition:transform .5s;
+  transform-style:preserve-3d;
+}
+.quiz-front,.quiz-back{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.quiz-front{
+  background:#fff;
+  border:2px dashed #cbd5e1;
+  color:#334155;
+  font-size:17px;
+  font-weight:600;
+  text-align:center;
+}
+.quiz-front .tap-hint{font-size:12px;color:#94a3b8;margin-top:6px}
+.quiz-back{
+  background:#0f172a;
+  color:#e2e8f0;
+  transform:rotateY(180deg);
+  font-size:16px;
+  font-weight:500;
+  text-align:center;
+  font-family:'SF Mono','Consolas','Monaco',monospace;
+}
+.quiz-back .quiz-note{font-size:12px;color:#94a3b8;margin-top:6px;font-family:var(--font-body)}
+
+/* ===== 收尾 ===== */
+.closing{
+  max-width:var(--content-width);
+  margin:0 auto 60px;
+  padding:0 20px;
+}
+.closing h2{
+  font-family:var(--font-heading);
+  font-size:24px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:12px;
+}
+.closing p{font-size:17px;color:#475569;line-height:1.9;margin-bottom:14px}
+.closing a{color:var(--key3);font-weight:500}
+.closing .related-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.closing .related-links a{
+  display:inline-block;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  padding:12px 20px;
+  font-size:15px;
+  color:var(--text);
+  text-decoration:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.closing .related-links a:hover{border-color:#94a3b8;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+
+/* ===== 页脚 ===== */
+.site-footer{background:var(--navy);color:#c0c0d0;text-align:center;padding:30px 20px;font-size:14px}
+.site-footer a{color:#c0c0d0}
+.preview-banner{background:#fef3c7;border:1px solid #fbbf24;border-radius:0;padding:10px 16px;text-align:center;font-size:14px;color:#92400e}
+
+/* ===== 响应式 ===== */
+@media(max-width:959px){
+  .header-inner{padding:0 0}
+  .main-nav{display:none}
+  .hamburger{display:flex;margin-left:auto}
+  .hero h1{font-size:30px}
+  .key-overview{grid-template-columns:repeat(2,1fr)}
+  .key-section{padding:32px 20px}
+  .key-section .section-number{left:16px;top:-16px;width:34px;height:34px;font-size:16px}
+  .quiz-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .hero{padding:40px 16px 28px}
+  .hero h1{font-size:24px}
+  .hero .subtitle{font-size:15px}
+  .key-overview{grid-template-columns:1fr 1fr;gap:10px;padding:0 16px}
+  .key-card{padding:20px 10px 16px}
+  .key-card .key-char{font-size:32px}
+  .key-card .key-to{font-size:22px}
+  .content{padding:0 16px 30px}
+  .key-section{padding:28px 16px;margin-bottom:24px;border-radius:14px}
+  .key-section h2{font-size:22px}
+  .pair-cn,.pair-en{padding:14px 16px}
+  .pair-cn .cn-text{font-size:16px}
+  .pair-en .en-text{font-size:17px}
+  .pair-arrow{width:32px;font-size:18px}
+  .quiz-grid{grid-template-columns:1fr}
+  .quiz-card{height:150px}
+  .closing .related-links a{width:100%;text-align:center}
+}
+
+/* ===== 音频按钮 ===== */
+.audio-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;margin-left:8px;background:#e2e8f0;color:#64748b;border:none;border-radius:50%;cursor:pointer;font-size:14px;flex-shrink:0;vertical-align:middle;transition:background .2s,transform .15s}
+.audio-btn:hover{background:#cbd5e1;transform:scale(1.1)}
+.audio-btn.playing{background:#e74c3c;color:#fff;animation:audioPulse .8s infinite}
+@keyframes audioPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.audio-highlight{background:#fef08a;border-radius:3px;padding:1px 0;transition:background .3s}
+
+/* ===== 回到顶部 & 进度条 ===== */
+.back-to-top{position:fixed;bottom:25px;right:20px;width:44px;height:44px;background:#e2e8f0;color:#64748b;border:none;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,background .2s;z-index:50}
+.back-to-top.visible{opacity:1;visibility:visible}
+.back-to-top:hover{background:var(--navy);color:var(--white)}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--key1),var(--key2),var(--key3),var(--key4));z-index:999;width:0;transition:width .1s}
+
+/* ===== 暗色模式 ===== */
+[data-theme="dark"] body{background:#0f172a;color:#cbd5e1}
+[data-theme="dark"] .hero h1,[data-theme="dark"] .key-section h2,[data-theme="dark"] .quiz-section h2,[data-theme="dark"] .closing h2{color:#e2e8f0}
+[data-theme="dark"] .hero .subtitle,[data-theme="dark"] .intro,[data-theme="dark"] .closing p{color:#94a3b8}
+[data-theme="dark"] .intro strong{color:#e2e8f0}
+[data-theme="dark"] .key-card{background:#1e293b}
+[data-theme="dark"] .key-card .key-to{color:#e2e8f0}
+[data-theme="dark"] .key-section{background:#1e293b}
+[data-theme="dark"] .pair-cn{background:#1a2332}
+[data-theme="dark"] .pair-en{background:#1e293b}
+[data-theme="dark"] .pair-arrow{background:linear-gradient(90deg,#1a2332,#1e293b);color:#64748b}
+[data-theme="dark"] .pair-cn .cn-text{color:#cbd5e1}
+[data-theme="dark"] .pair-en .en-text{color:#e2e8f0}
+[data-theme="dark"] .pair-row{border-color:#334155}
+[data-theme="dark"] .quiz-front{background:#1e293b;border-color:#475569;color:#cbd5e1}
+[data-theme="dark"] .quiz-back{background:#e2e8f0;color:#0f172a}
+[data-theme="dark"] .closing .related-links a{background:#1e293b;border-color:#334155;color:#cbd5e1}
+[data-theme="dark"] .closing .related-links a:hover{border-color:#64748b}
+[data-theme="dark"] .irregular-table{border-color:#78350f}
+[data-theme="dark"] .irregular-table tr:nth-child(even) td{background:#2d1a0e}
+[data-theme="dark"] .irregular-table tr:nth-child(odd) td{background:#1e293b;color:#cbd5e1}
+[data-theme="dark"] .key-section:nth-of-type(1) .key-note{background:#022c22;border-color:#065f46;color:#6ee7b7}
+[data-theme="dark"] .key-section:nth-of-type(2) .key-note{background:#2d1a0e;border-color:#92400e;color:#fcd34d}
+[data-theme="dark"] .key-section:nth-of-type(3) .key-note{background:#0c1929;border-color:#1e40af;color:#93c5fd}
+[data-theme="dark"] .key-section:nth-of-type(4) .key-note{background:#2d0e1a;border-color:#9f1239;color:#fda4af}
+[data-theme="dark"] .preview-banner{background:#3d3520;border-color:#92400e;color:#fbbf24}
+[data-theme="dark"] .back-to-top{background:#334155;color:#94a3b8}
+[data-theme="dark"] .back-to-top:hover{background:#64748b;color:#fff}
+.theme-toggle{background:none;border:none;cursor:pointer;padding:0;color:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;min-width:44px;height:44px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo"><a href="index.html"><span class="logo-icon"><svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#39375b"/><path d="M16 16 Q20 12 22 16 Q24 20 20 22 Q14 24 12 18 Q10 12 16 8 Q24 6 26 14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="26" cy="20" r="1.5" fill="#3498db"/></svg></span>英语研习社</a></div>
+    <nav class="main-nav">
+      <a href="index.html">首页</a>
+      <a href="grammar.html">语法精讲</a>
+      <a href="vocabulary.html">词汇辨析</a>
+      <a href="patterns.html">实用句型</a>
+      <a href="daily.html">场景口语</a>
+      <a href="pronunciation.html">发音诊所</a>
+      <a href="listening.html">听力训练</a>
+      <a href="handbook.html" class="nav-purple">语法魔典</a>
+      <a href="about.html">关于</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="菜单"><span></span><span></span><span></span></button>
+    <button class="theme-toggle" id="themeToggle" aria-label="暗色模式"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-panel" id="mobilePanel">
+  <button class="close-btn" id="closeMobileMenu">&times;</button>
+  <div style="padding-top:20px"><a href="index.html">首页</a><a href="grammar.html">语法精讲</a><a href="vocabulary.html">词汇辨析</a><a href="patterns.html">实用句型</a><a href="daily.html">场景口语</a><a href="pronunciation.html">发音诊所</a><a href="listening.html">听力训练</a><a href="handbook.html" class="nav-purple">语法魔典</a><a href="about.html">关于</a></div>
+</div>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="preview-banner">⚠ 预览版 V2 — 四色钥匙系统 + 中英对照卡片，未上线、未进导航。风格 OK 再定去留。</div>
+
+<!-- ====== Hero ====== -->
+<section class="hero">
+  <div class="badge">大白话语法 · 第1篇</div>
+  <h1>时态不用背<br>你兜里早就有四把中文钥匙</h1>
+  <p class="subtitle">适合：零基础 / 被术语劝退过的人</p>
+</section>
+
+<!-- ====== 四钥匙总览 ====== -->
+<div class="key-overview">
+  <div class="key-card">
+    <span class="key-char">每天</span>
+    <span class="key-arrow">中文说习惯 → 英文贴</span>
+    <span class="key-to">s</span>
+    <span class="key-label">钥匙一 · 习惯/常态</span>
+  </div>
+  <div class="key-card">
+    <span class="key-char">了</span>
+    <span class="key-arrow">中文说做完 → 英文贴</span>
+    <span class="key-to">-ed</span>
+    <span class="key-label">钥匙二 · 过去/完成</span>
+  </div>
+  <div class="key-card">
+    <span class="key-char">会</span>
+    <span class="key-arrow">中文说将来 → 英文放</span>
+    <span class="key-to">will</span>
+    <span class="key-label">钥匙三 · 将来/意愿</span>
+  </div>
+  <div class="key-card">
+    <span class="key-char">不/没</span>
+    <span class="key-arrow">中文分两派 → 英文分</span>
+    <span class="key-to">don't / didn't</span>
+    <span class="key-label">钥匙四 · 否定/时间</span>
+  </div>
+</div>
+
+<!-- ====== 正文 ====== -->
+<div class="content">
+
+  <p class="intro">
+    你说中文的时候，从来不会想「我现在该用什么时态」。想说昨天的事，加个<strong>「了」</strong>；想说以后的事，加个<strong>「会」</strong>；想说天天如此的事，加个<strong>「每天」</strong>。说完了，全对。<br><br>
+    英文干的是同一件事，只是把「加字」换成了「给动词变形」。所以这篇不讲「一般现在时第三人称单数」这种名词。你兜里早就揣着四把中文钥匙——<strong>「每天」「了」「会」「没」</strong>，每把钥匙对应英文的一把锁。下面一把一把开。
+  </p>
+
+  <!-- ===== 钥匙一：每天 → s ===== -->
+  <section class="key-section" id="k1">
+    <div class="section-number">1</div>
+    <h2>「每天」→ 动词贴 s</h2>
+    <p class="section-desc">说习惯、说天天发生的事、说「世界本来就这样」的事。中文靠「每天、平常、总是」撑场面，动词不动。英文反过来：主语是一个人/一个东西（我、你除外）时，动词屁股后面贴个 s。</p>
+
+    <div class="pair-list">
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我<span class="key-word" style="color:var(--key1)">每天</span>喝茶</span><span class="cn-hint">主语是「我」→ 动词不变</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key1)">drink</span> tea every day.</span><span class="en-note">drink 保持原形</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">他<span class="key-word" style="color:var(--key1)">每天</span>喝茶</span><span class="cn-hint">主语是「他」一个人 → 动词贴 s</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">He <span class="key-word" style="color:var(--key1)">drinks</span> tea every day.</span><span class="en-note">drink 贴上 s</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">鸟<span class="key-word" style="color:var(--key1)">会</span>飞</span><span class="cn-hint">birds 是一群 → 不贴 s</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">Birds <span class="key-word" style="color:var(--key1)">fly</span>.</span><span class="en-note">复数主语，动词不变</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">这只鸟<span class="key-word" style="color:var(--key1)">会</span>飞</span><span class="cn-hint">就这一只 → 要贴，fly 变 flies</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">This bird <span class="key-word" style="color:var(--key1)">flies</span>.</span><span class="en-note">y 结尾，变 ies</span></div>
+      </div>
+    </div>
+
+    <div class="key-note"><strong>贴 s 的三种写法（看结尾，不用背规则名）</strong>大多数直接 +s：drinks、eats、runs。结尾是 s / sh / ch / x / o 的 +es：watches、goes。结尾是「辅音字母+y」的，y 变 ies：fly → flies、study → studies。写错了母语者也听得懂，先敢写，再写对。</div>
+  </section>
+
+  <!-- ===== 钥匙二：了 → -ed ===== -->
+  <section class="key-section" id="k2">
+    <div class="section-number">2</div>
+    <h2>「了」→ 动词贴 -ed</h2>
+    <p class="section-desc">事情做完了、发生在过去，中文在句尾加「了」，英文在动词尾巴贴 -ed。</p>
+
+    <div class="pair-list">
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我昨天打扫房间<span class="key-word" style="color:var(--key2)">了</span></span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key2)">cleaned</span> my room yesterday.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">她昨晚玩游戏<span class="key-word" style="color:var(--key2)">了</span></span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">She <span class="key-word" style="color:var(--key2)">played</span> games last night.</span></div>
+      </div>
+    </div>
+
+    <p style="margin:20px 0 8px;font-size:16px;color:#475569">有一批老资格动词不肯贴 -ed，非要换一副长相。别慌，中文里也有一模一样的事：发票上写<span style="color:var(--key2);font-weight:700">「壹佰元」不写「一百元」</span>——壹就是一，历史留下来的另一种写法，你认得就行，从来没觉得难。went 之于 go，就是壹之于一：</p>
+
+    <table class="irregular-table">
+      <tr><th>原形（做）</th><th>过去形（做了）</th><th>中文对照</th></tr>
+      <tr><td>go 去</td><td>went</td><td class="cn-ref">去<b>了</b></td></tr>
+      <tr><td>eat 吃</td><td>ate</td><td class="cn-ref">吃<b>了</b></td></tr>
+      <tr><td>take 拿</td><td>took</td><td class="cn-ref">拿<b>了</b></td></tr>
+      <tr><td>see 看见</td><td>saw</td><td class="cn-ref">看见<b>了</b></td></tr>
+      <tr><td>buy 买</td><td>bought</td><td class="cn-ref">买<b>了</b></td></tr>
+    </table>
+
+    <div class="key-note"><strong>小心：不是每个「了」都指过去</strong>「我明天吃了饭再走」——这个「了」说的是明天。判断标准不是有没有「了」字，而是<span style="font-weight:700">这件事是不是已经发生完了</span>。已经发生完 → 动词贴 -ed（或换「壹」式写法）。</div>
+  </section>
+
+  <!-- ===== 钥匙三：会 → will ===== -->
+  <section class="key-section" id="k3">
+    <div class="section-number">3</div>
+    <h2>「会」→ will</h2>
+    <p class="section-desc">以后才发生的事，中文说「会、要、将要」，英文在动词前面放一个 will。注意：will 后面的动词永远用原形，s 也不贴、-ed 也不贴——一把锁，一次只插一把钥匙。</p>
+
+    <div class="pair-list">
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我明天<span class="key-word" style="color:var(--key3)">会</span>给你打电话</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key3)">will</span> call you tomorrow.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">他下周<span class="key-word" style="color:var(--key3)">会</span>回来</span><span class="cn-hint">will 在场，come 保持原形</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">He <span class="key-word" style="color:var(--key3)">will</span> come back next week.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">你<span class="key-word" style="color:var(--key3)">会</span>帮我吗？</span><span class="cn-hint">will 挪到句首就是提问</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text"><span class="key-word" style="color:var(--key3)">Will</span> you help me?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 钥匙四：不 vs 没 ===== -->
+  <section class="key-section" id="k4">
+    <div class="section-number">4</div>
+    <h2>「不」vs「没」</h2>
+    <p class="section-desc">先掰一个旧观念：老师常说「中文没有时态，所以中国学生学时态难」。准确讲，中文确实不给动词变形，但<span style="color:var(--key4);font-weight:700">「不」和「没」早就把时间分得清清楚楚</span>——你不缺时态感，缺的只是没人把这两个字跟英文接上。</p>
+
+    <div class="pair-list">
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我<span class="key-word" style="color:var(--key4)">不</span>喝酒</span><span class="cn-hint">平常就不喝 — 管现在/习惯</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key4)">don't</span> drink.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">他周日<span class="key-word" style="color:var(--key4)">不</span>上班</span><span class="cn-hint">主语是「他」，don't 也贴 s</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">He <span class="key-word" style="color:var(--key4)">doesn't</span> work on Sundays.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我昨天<span class="key-word" style="color:var(--key4)">没</span>吃早饭</span><span class="cn-hint">过去那一顿 — 管过去</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key4)">didn't</span> eat breakfast yesterday.</span></div>
+      </div>
+      <div class="pair-row">
+        <div class="pair-cn"><span class="cn-text">我<span class="key-word" style="color:var(--key4)">还没</span>吃饭</span><span class="cn-hint">到现在还空着肚子 — 牵扯现在</span></div>
+        <div class="pair-arrow">→</div>
+        <div class="pair-en"><span class="en-text">I <span class="key-word" style="color:var(--key4)">haven't</span> eaten yet.</span></div>
+      </div>
+    </div>
+
+    <div class="key-note"><strong>didn't 和 haven't 一句话分清</strong>话说完就翻篇的，用 didn't：I didn't eat.（昨天没吃，昨天的事了）。话说完还牵扯现在的，用 haven't：I haven't eaten.（还没吃，言下之意——现在饿着，快请我吃饭）。</div>
+  </section>
+
+</div>
+
+<!-- ====== 自测题 ====== -->
+<section class="quiz-section">
+  <h2>四把钥匙一起试</h2>
+  <p class="quiz-subtitle">点击卡片翻转看答案，每句只考今天的四把钥匙</p>
+  <div class="quiz-grid">
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">1. 他昨天打篮球了<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">He played basketball yesterday.<span class="quiz-note">「了」→ -ed，play + ed</span></div>
+      </div>
+    </div>
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">2. 我明天会陪你<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">I will stay with you tomorrow.<span class="quiz-note">「会」→ will，stay 原形</span></div>
+      </div>
+    </div>
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">3. 我平常不吃辣<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">I don't eat spicy food.<span class="quiz-note">「不」+平常 → don't</span></div>
+      </div>
+    </div>
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">4. 她每天喝咖啡<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">She drinks coffee every day.<span class="quiz-note">平常事+她一个人 → s</span></div>
+      </div>
+    </div>
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">5. 我昨天没吃早饭<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">I didn't eat breakfast yesterday.<span class="quiz-note">「没」→ didn't，eat 回原形</span></div>
+      </div>
+    </div>
+    <div class="quiz-card" onclick="this.classList.toggle('flipped')">
+      <div class="quiz-inner">
+        <div class="quiz-front">6. 这只鸟不会飞<span class="tap-hint">点击翻转</span></div>
+        <div class="quiz-back">This bird doesn't fly.<span class="quiz-note">doesn't 已变形，fly 不用再变</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 收尾 ====== -->
+<section class="closing">
+  <h2>这套方法的边界，说清楚</h2>
+  <p>四把钥匙能覆盖你日常表达八成的场景，但它是「上手最快的路」，不是「全部的路」。进行时（正在做）、完成时的细节、考试里的辨析题，还是需要体系化的补课——那部分活儿，<a href="handbook-tenses-1.html">语法魔典·时态篇</a>和<a href="grammar-tenses.html">时态一张图</a>替你准备好了。</p>
+  <p>最后留个作业：每把钥匙，用你自己的生活造 3 个句子。写「我妈每天六点起床」，别写「Tom plays football」——写跟自己有关的句子，才记得住。</p>
+  <div class="related-links">
+    <a href="grammar-tenses.html">英语时态到底怎么用？一张图讲清楚</a>
+    <a href="grammar-present-perfect-vs-past.html">现在完成时 vs 一般过去时</a>
+    <a href="handbook-tenses-1.html">语法魔典 · 时态篇（上）</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div style="margin-bottom:12px"><a href="about.html">关于我们</a> &nbsp;|&nbsp; <a href="privacy.html">隐私政策</a> &nbsp;|&nbsp; <a href="contact.html">联系方式</a></div>
+  <div>Copyright &copy; 2026 英语研习社 — All Rights Reserved</div>
+  <div style="margin-top:8px"><a href="https://beian.miit.gov.cn" target="_blank" rel="noreferrer">粤ICP备2026079891号-1</a></div>
+  <div style="margin-top:4px"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=44522402000185" target="_blank" rel="noreferrer">粤公网安备44522402000185号</a></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="回到顶部"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<script>
+// 移动端菜单
+(function(){var o=document.getElementById('mobileOverlay'),p=document.getElementById('mobilePanel');function op(){o.classList.add('active');p.classList.add('active');document.body.style.overflow='hidden'}function cl(){o.classList.remove('active');p.classList.remove('active');document.body.style.overflow=''}document.getElementById('hamburgerBtn').addEventListener('click',op);document.getElementById('closeMobileMenu').addEventListener('click',cl);o.addEventListener('click',cl)})();
+// 暗色模式
+(function(){var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme:dark)").matches)){document.documentElement.setAttribute("data-theme","dark")}var b=document.getElementById("themeToggle");if(b){b.addEventListener("click",function(){var c=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",c);localStorage.setItem("theme",c)})}})();
+// 阅读进度条
+(function(){var p=document.getElementById("progressBar");if(p){window.addEventListener("scroll",function(){var h=document.documentElement.scrollHeight-window.innerHeight;p.style.width=(h>0?(window.scrollY/h)*100:0)+"%"})}})();
+// 回到顶部
+(function(){var b=document.getElementById("backToTop");if(b){window.addEventListener("scroll",function(){b.classList.toggle("visible",window.scrollY>300)});b.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})})}})();
+// 例句点读
+(function(){
+var s=document.createElement('style');
+s.textContent='.audio-btn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;margin-left:6px;background:#e2e8f0;color:#64748b;border:none;border-radius:50%;cursor:pointer;font-size:13px;flex-shrink:0;vertical-align:middle;transition:background .2s,transform .15s}.audio-btn:hover{background:#cbd5e1;transform:scale(1.1)}.audio-btn.playing{background:#e74c3c;color:#fff;animation:audioPulse .8s infinite}@keyframes audioPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}.audio-highlight{background:#fef08a;border-radius:3px;padding:1px 0;transition:background .3s}[data-theme="dark"] .audio-highlight{background:#3d3520}';
+document.head.appendChild(s);
+var curHL=null;
+function speak(t,b,el){
+  if(curHL){curHL.classList.remove('audio-highlight');curHL=null}
+  t=t.replace(/\s?\/[^\/]*[^\x00-\x7F][^\/]*\/\s?/g,' ').replace(/\s+/g,' ').trim();
+  b.classList.add('playing');
+  if(el){el.classList.add('audio-highlight');curHL=el}
+  function done(){b.classList.remove('playing');if(el){el.classList.remove('audio-highlight');curHL=null}}
+  var isLocal=location.protocol==='file:'||location.hostname==='localhost'||location.hostname==='127.0.0.1';
+  if(isLocal){
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(t);
+    u.lang='en-US';u.rate=0.85;
+    u.onend=done;u.onerror=done;
+    window.speechSynthesis.speak(u);
+    return;
+  }
+  var a=new Audio();
+  a.src='/tts.php?q='+encodeURIComponent(t);
+  a.onended=done;a.onerror=done;
+  a.play();
+}
+var svg='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>';
+function mkBtn(txt,el){
+  var btn=document.createElement('button');
+  btn.className='audio-btn';btn.innerHTML=svg;btn.title='点击听发音';
+  btn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();speak(txt,btn,el)});
+  el.appendChild(btn);
+}
+document.querySelectorAll('.pair-en .en-text').forEach(function(el){mkBtn(el.textContent.trim(),el)});
+})();
+</script>
+</body>
+</html>
